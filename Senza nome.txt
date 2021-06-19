@@ -1,0 +1,10 @@
+DA FARE:
+
+- finire slide OOP Java
+- git
+- maven
+- api football org
+- spring
+- uml
+- junit
+- javadoc
