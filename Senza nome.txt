@@ -1,7 +1,7 @@
 DA FARE:
 
 - finire slide OOP Java
-- git
+- git		
 - maven
 - api football org
 - spring
@@ -10,3 +10,5 @@ DA FARE:
 - javadoc
 
 Canscnaslkcalknlkadncda c
+
+afiosjofiasdifsd
