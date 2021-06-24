@@ -7,5 +7,40 @@ public class League {
 	private String startDate;
 	private String endDate;
 	private Team[] teams;
-	
+	public int getNumSquadre() {
+		return numSquadre;
+	}
+	public void setNumSquadre(int numSquadre) {
+		this.numSquadre = numSquadre;
+	}
+	public String getAreaName() {
+		return areaName;
+	}
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
+	}
+	public String getLeagueName() {
+		return leagueName;
+	}
+	public void setLeagueName(String leagueName) {
+		this.leagueName = leagueName;
+	}
+	public String getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+	public String getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+	public Team[] getTeams() {
+		return teams;
+	}
+	public void setTeams(Team[] teams) {
+		this.teams = teams;
+	}
 }

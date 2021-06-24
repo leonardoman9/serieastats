@@ -25,5 +25,6 @@ public class Dataset {
 		in.close();
 		con.disconnect();
 		System.out.println(json);
+		JsonParser.JsonParser(json);
 	}
 }
