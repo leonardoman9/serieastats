@@ -5,25 +5,72 @@ public class Team {
 	private String shortName;
 	private String tla;
 	private String crestUrl;
+	private String phone;
+	private String website;
+	private String email;
 	private String address;
 	private int founded;
+	private String clubColors;
 	private String venue;
 	
-	public Team(String teamName,
-				String shortName,
-				String tla,
-				String crestUrl,
-				String address,
-				int founded,
-				String venue) {
+	
+	
+
+public Team(String teamName, String shortName, String tla, String crestUrl, String phone, String website,
+			String email, String address, int founded, String clubColors, String venue) {
+		super();
 		this.teamName = teamName;
 		this.shortName = shortName;
 		this.tla = tla;
 		this.crestUrl = crestUrl;
+		this.phone = phone;
+		this.website = website;
+		this.email = email;
+		this.address = address;
 		this.founded = founded;
+		this.clubColors = clubColors;
 		this.venue = venue;
 	}
 
+
+public Team() {
+	// TODO Auto-generated constructor stub
+}
+
+	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getClubColors() {
+		return clubColors;
+	}
+
+	public void setClubColors(String clubColors) {
+		this.clubColors = clubColors;
+	}
+
+	
 	public String getTeamName() {
 		return teamName;
 	}

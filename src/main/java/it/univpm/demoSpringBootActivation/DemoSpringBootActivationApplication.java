@@ -16,7 +16,8 @@ import it.univpm.demoSpringBootActivation.model.Dataset;
 @RestController
 public class DemoSpringBootActivationApplication {
 public static void main(String[] args) throws IOException {
-	//Dataset.download("https://api.football-data.org/v2/team", 30);
+	String teamId = "1";
+	Dataset.download("https://api.football-data.org/v2/teams/"+teamId);
 	SpringApplication.run(DemoSpringBootActivationApplication.class, args);
 }
 

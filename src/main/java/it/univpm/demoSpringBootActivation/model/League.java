@@ -1,59 +1,46 @@
 package it.univpm.demoSpringBootActivation.model;
 
 public class League {
-	private int numSquadre;
-	private String areaName;
-	private String leagueName;
-	private String startDate;
-	private String endDate;
-	private Team[] teams;
-	
-	public League(int numSquadre,
-				  String areaName,
-				  String leagueName,
-				  String startDate,
-				  String endDate,
-				  Team[] teams) {
-		this.areaName=areaName;
-		this.leagueName=leagueName;
-		this.startDate=startDate;
-		this.endDate=endDate;
-		this.teams=teams;
+	private int year;
+	private String nation;
+	private String name;
+	private String emblemUrl;
+	private Team winner;
+	public League(int year, String nation, String name, String emblemUrl, Team winner) {
+		this.year = year;
+		this.nation = nation;
+		this.name = name;
+		this.emblemUrl = emblemUrl;
+		this.winner = winner;
 	}
-	public int getNumSquadre() {
-		return numSquadre;
+	public int getYear() {
+		return year;
 	}
-	public void setNumSquadre(int numSquadre) {
-		this.numSquadre = numSquadre;
+	public void setYear(int year) {
+		this.year = year;
 	}
-	public String getAreaName() {
-		return areaName;
+	public String getNation() {
+		return nation;
 	}
-	public void setAreaName(String areaName) {
-		this.areaName = areaName;
+	public void setNation(String nation) {
+		this.nation = nation;
 	}
-	public String getLeagueName() {
-		return leagueName;
+	public String getName() {
+		return name;
 	}
-	public void setLeagueName(String leagueName) {
-		this.leagueName = leagueName;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getStartDate() {
-		return startDate;
+	public String getEmblemUrl() {
+		return emblemUrl;
 	}
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
+	public void setEmblemUrl(String emblemUrl) {
+		this.emblemUrl = emblemUrl;
 	}
-	public String getEndDate() {
-		return endDate;
+	public Team getWinner() {
+		return winner;
 	}
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
-	}
-	public Team[] getTeams() {
-		return teams;
-	}
-	public void setTeams(Team[] teams) {
-		this.teams = teams;
+	public void setWinner(Team winner) {
+		this.winner = winner;
 	}
 }

@@ -3,12 +3,10 @@ package it.univpm.demoSpringBootActivation.model;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.ProtocolException;
-import java.net.URL;
 
+import org.json.JSONObject;
 public class Dataset {
-	static public void download(String url) throws IOException {
+	static public String download(String url) throws IOException {
 		UrlConnection urlc = new UrlConnection(url);
 		BufferedReader in = new BufferedReader(new InputStreamReader(urlc.con.getInputStream()));
 				String line = in.readLine();
@@ -20,6 +18,6 @@ public class Dataset {
 				}
 		in.close();
 		urlc.con.disconnect();
-		JsonParser Parse = new JsonParser(json);
+		return json;
 	}
 }

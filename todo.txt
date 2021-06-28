@@ -3,4 +3,5 @@
 	- serie a in generale
 	- tutte le squadre insieme
 	- una singola squadra a scelta dell’utente
-3) altro
+3) fare le stats
+4) altro

@@ -19,7 +19,6 @@ public class UrlConnection {
 					con.setRequestMethod("GET");
 			//int status = con.getResponseCode();
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ProtocolException e) {
 			e.printStackTrace();
