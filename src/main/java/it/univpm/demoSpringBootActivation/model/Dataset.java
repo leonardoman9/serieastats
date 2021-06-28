@@ -8,13 +8,9 @@ import java.net.ProtocolException;
 import java.net.URL;
 
 public class Dataset {
-	static public void download() throws IOException {
-		URL url = new URL("http://api.football-data.org/v2/competitions/SA/teams");
-		HttpURLConnection con = (HttpURLConnection) url.openConnection();
-		con.setRequestProperty("X-Auth-Token", "85f94a3f96e1441aa9702acaeea4e1df");
-		con.setRequestMethod("GET");
-		int status = con.getResponseCode();
-		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+	static public void download(String url) throws IOException {
+		UrlConnection urlc = new UrlConnection(url);
+		BufferedReader in = new BufferedReader(new InputStreamReader(urlc.con.getInputStream()));
 				String line = in.readLine();
 				String json = "";
 				while (line != null) {
@@ -23,8 +19,7 @@ public class Dataset {
 				    line = in.readLine();
 				}
 		in.close();
-		con.disconnect();
-		System.out.println(json);
-		JsonParser.JsonParser(json);
+		urlc.con.disconnect();
+		JsonParser Parse = new JsonParser(json);
 	}
 }

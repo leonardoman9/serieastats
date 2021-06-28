@@ -8,6 +8,21 @@ public class Team {
 	private String address;
 	private int founded;
 	private String venue;
+	
+	public Team(String teamName,
+				String shortName,
+				String tla,
+				String crestUrl,
+				String address,
+				int founded,
+				String venue) {
+		this.teamName = teamName;
+		this.shortName = shortName;
+		this.tla = tla;
+		this.crestUrl = crestUrl;
+		this.founded = founded;
+		this.venue = venue;
+	}
 
 	public String getTeamName() {
 		return teamName;

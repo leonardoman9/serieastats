@@ -7,6 +7,19 @@ public class League {
 	private String startDate;
 	private String endDate;
 	private Team[] teams;
+	
+	public League(int numSquadre,
+				  String areaName,
+				  String leagueName,
+				  String startDate,
+				  String endDate,
+				  Team[] teams) {
+		this.areaName=areaName;
+		this.leagueName=leagueName;
+		this.startDate=startDate;
+		this.endDate=endDate;
+		this.teams=teams;
+	}
 	public int getNumSquadre() {
 		return numSquadre;
 	}

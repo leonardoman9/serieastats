@@ -6,17 +6,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.univpm.demoSpringBootActivation.model.ClasseDiProva;
+import it.univpm.demoSpringBootActivation.model.Team;
+import it.univpm.demoSpringBootActivation.model.League;
+
 
 @RestController
 public class SimpleRestController {
-	@GetMapping("/prova")
-	public ClasseDiProva metodoEsempio(@RequestParam(name="param1", defaultValue="ciao") String param1){
-		return new ClasseDiProva("Prova1", "Prova2");
-	}
-	@PostMapping("/prova")
-	public ClasseDiProva metodoEsempio2(@RequestBody ClasseDiProva body) {
-		return body;
+	@GetMapping("/teams")
+	public Team returnTeams(@RequestParam(name = "id", defaultValue = "0") String teamId) {
+		return new Team("Questa", "E'", "Prova", "Con", "Teams", 12, "tu");
+	}	
+	
+	@GetMapping("/team")
+	public Team returnTeam(@RequestParam(name = "id", defaultValue = "0") String teamId) {
+		return new Team("Questaltra", "prova", "con", "solo", "Team a scelta dell'utente", 12, "tu");
+	}	
+	@GetMapping("/league")
+	public League returnLeague(@RequestParam(name="id", defaultValue="0") String leagueID) {
+		return new League(20, "Italia", "Serie A", "Settembre 2020", "Giugno 2021", null);
 	}
 	
 }
