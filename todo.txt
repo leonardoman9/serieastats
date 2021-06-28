@@ -1,7 +1,9 @@
-1) scrivere jsonparser
-2) scrivere richiesta per 
+ scrivere jsonparser
+ scrivere richiesta per 
+
+ trovare span di id di squadre italiane
 	- serie a in generale
 	- tutte le squadre insieme
 	- una singola squadra a scelta dell’utente
-3) fare le stats
-4) altro
+ fare le stats
+ altro

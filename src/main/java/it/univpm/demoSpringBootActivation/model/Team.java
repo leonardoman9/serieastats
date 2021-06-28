@@ -11,10 +11,7 @@ public class Team {
 	private String address;
 	private int founded;
 	private String clubColors;
-	private String venue;
-	
-	
-	
+	private String venue;	
 
 public Team(String teamName, String shortName, String tla, String crestUrl, String phone, String website,
 			String email, String address, int founded, String clubColors, String venue) {

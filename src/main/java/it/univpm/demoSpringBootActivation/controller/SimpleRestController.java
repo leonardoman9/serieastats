@@ -1,13 +1,10 @@
 package it.univpm.demoSpringBootActivation.controller;
 
 import java.io.IOException;
+import java.util.Scanner;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.web.bind.annotation.*;
 import it.univpm.demoSpringBootActivation.model.Dataset;
 import it.univpm.demoSpringBootActivation.model.JsonParser;
 import it.univpm.demoSpringBootActivation.model.League;
@@ -19,27 +16,50 @@ public class SimpleRestController {
 	
 	/*
 	 * 
-	 * /v2/competitions/teams/{id}
+	 * prova esempio
+	 * localhost:8080/home?=abc
 	 */
+	@GetMapping("/home")
+	@ResponseBody
+	public String getHome(@RequestParam String id) {
+		return "ID : " + id;
+	}
 	
-	@GetMapping("/team")
-	public Team returnTeams(@RequestParam(name = "id", defaultValue = "1") String teamId) throws IOException {
-		String result = Dataset.download("https://api.football-data.org/v2/teams/"+"1");
+	/*
+	 *  localhost:8080/teams?={id}
+	 *  List all teams for a particular competition.
+	 */
+	@GetMapping("/teams")
+	@ResponseBody
+	public Team returnTeams(@RequestParam(name = "id", defaultValue = "SA") String leagueId) throws IOException {
+		String result = Dataset.download("https://api.football-data.org/v2/competitions/"+leagueId+"/teams");
 		Team newTeam = new Team();
 		newTeam = JsonParser.parseTeam(result);
 		return newTeam;
 	}	
+	/*
+	 *  localhost:8080/league?={id}
+	 */
 	@GetMapping("/league")
+	@ResponseBody
 	public League returnLeague(@RequestParam(name="id", defaultValue="0") String leagueID) throws IOException {
 		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA");
 		League newLeague = new League();
 		newLeague = JsonParser.parseLeague(result);
 		return newLeague;
 	}
-	
-	@GetMapping("/teams")
-	public Team returnTeam(@RequestParam(name = "id", defaultValue = "0") String teamId) {
-		return new Team();
+	/*
+	 *  localhost:8080/teams?={id}
+	 *  List all teams for a particular competition.
+	 *  Range per squadre italiane: [TODO] 
+	 */
+	@GetMapping("/team")
+	@ResponseBody
+	public  Team returnTeam(@RequestParam(name = "id", defaultValue = "15") String teamId) throws IOException {
+		String result = Dataset.download("https://api.football-data.org/v2/teams/" + teamId);
+		Team newTeam = new Team();
+		newTeam = JsonParser.parseTeam(result);
+		return newTeam;
 	}	
 	
 }
