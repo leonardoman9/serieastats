@@ -39,7 +39,7 @@ public class SimpleRestController {
 	
 	@GetMapping("/teams")
 	public Team returnTeam(@RequestParam(name = "id", defaultValue = "0") String teamId) {
-		return new Team("Questaltra", "prova", "con", "solo", "Team a scelta dell'utente", 12, "tu");
+		return new Team();
 	}	
 	
 }

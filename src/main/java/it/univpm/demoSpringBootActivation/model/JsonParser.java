@@ -22,17 +22,13 @@ public class JsonParser {
 		return newTeam;
 	}
 	public static League parseLeague(String jsonObj) {
-		JSONObject json = new JSONObject(
-				json.getInt("id"),
-				json.getString("name");
-				json.getString("name");
-				)
-				
-				
-				
-				
-				
-		
+		JSONObject json = new JSONObject(jsonObj);
+				League newLeague = new League(
+				json.getJSONObject("area").getInt("id"),
+				json.getJSONObject("area").getString("name"),
+				json.getString("name"),
+				json.getString("emblemUrl"),
+				json.getJSONObject("currentSeason").getJSONObject("winner").getString("name")
 				);
 		System.out.println(newLeague);
 		return newLeague;

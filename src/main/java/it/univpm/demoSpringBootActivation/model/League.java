@@ -5,13 +5,17 @@ public class League {
 	private String nation;
 	private String name;
 	private String emblemUrl;
-	private Team winner;
-	public League(int year, String nation, String name, String emblemUrl, Team winner) {
+	private String winnerName;
+	
+	public League(int year, String nation, String name, String emblemUrl, String winnerName) {
 		this.year = year;
 		this.nation = nation;
 		this.name = name;
 		this.emblemUrl = emblemUrl;
-		this.winner = winner;
+		this.winnerName = winnerName;
+	}
+	public League() {
+		// TODO Auto-generated constructor stub
 	}
 	public int getYear() {
 		return year;
@@ -37,10 +41,10 @@ public class League {
 	public void setEmblemUrl(String emblemUrl) {
 		this.emblemUrl = emblemUrl;
 	}
-	public Team getWinner() {
-		return winner;
+	public String getWinnerName() {
+		return winnerName;
 	}
-	public void setWinner(Team winner) {
-		this.winner = winner;
+	public void setWinnerName(String winnerName) {
+		this.winnerName = winnerName;
 	}
 }
