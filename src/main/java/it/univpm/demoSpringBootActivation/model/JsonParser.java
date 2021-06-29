@@ -36,7 +36,9 @@ public class JsonParser {
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		newLeague = objectMapper.readValue(jsonObj, League.class);
-		System.out.println(newLeague.toString());
 		return newLeague;
 	}
+	
+	@JsonIgnoreProperties
+	public static Team parseLeague
 }

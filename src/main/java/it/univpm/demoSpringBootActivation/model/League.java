@@ -22,12 +22,12 @@ public class League {
 				"Competition Area: " + this.competition.getArea().getName() + "\n" +
 				"Competition Name: " + this.competition.getName() + "\n" + 
 				"Competition Code: " + this.competition.getCode() + "\n" +
-				"Competition grade: " + this.competition.getCode() + "\n" + 
+				"Competition Plan: " + this.competition.getPlan() + "\n" + 
 				"Start date: " + this.season.getStartDate() + "\n" +
 				"End date: " + this.season.getEndDate() + "\n" +
 				"Winner: " + this.season.getWinner().getName() + "\n" + 
-				this.season.getWinner().toString() + "\n";
-		
+				"TLA: " + this.season.getWinner().getTla() + "\n" +
+				"Crest Url: " + this.season.getWinner().getCrestUrl() + "\n";
 		for(Team i : Teams) {
 			System.out.println(i.toString());
 			System.out.println("\n");

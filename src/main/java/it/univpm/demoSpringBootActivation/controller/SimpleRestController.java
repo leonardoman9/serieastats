@@ -51,6 +51,7 @@ public class SimpleRestController {
 		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/teams");
 		League newLeague = new League();
 		newLeague = JsonParser.parseLeague(result);
+		System.out.println(newLeague);
 		return newLeague;
 	}
 	/*
@@ -60,10 +61,11 @@ public class SimpleRestController {
 	 */
 	@GetMapping("/team")
 	@ResponseBody
-	public  Team returnTeam(@RequestParam(name = "id", defaultValue = "15") String teamId) throws IOException {
+	public  Team returnTeam(@RequestParam(name = "id", defaultValue = "100") String teamId) throws IOException {
 		String result = Dataset.download("https://api.football-data.org/v2/teams/" + teamId);
 		Team newTeam = new Team();
 		newTeam = JsonParser.parseTeam(result);
+		System.out.println(newTeam);
 		return newTeam;
 	}	
 	

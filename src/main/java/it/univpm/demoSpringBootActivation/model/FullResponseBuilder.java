@@ -1,4 +1,4 @@
-package it.univpm.demoSpringBootActivation.model;
+/*package it.univpm.demoSpringBootActivation.model;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -9,3 +9,4 @@ public class FullResponseBuilder {
         return fullResponseBuilder.toString();
     }
 }
+*/
