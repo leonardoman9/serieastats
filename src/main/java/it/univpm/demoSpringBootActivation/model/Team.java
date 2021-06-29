@@ -1,7 +1,7 @@
 package it.univpm.demoSpringBootActivation.model;
 
 public class Team {
-	private String teamName;
+	private String name;
 	private String shortName;
 	private String tla;
 	private String crestUrl;
@@ -13,10 +13,10 @@ public class Team {
 	private String clubColors;
 	private String venue;	
 
-public Team(String teamName, String shortName, String tla, String crestUrl, String phone, String website,
+public Team(String name, String shortName, String tla, String crestUrl, String phone, String website,
 			String email, String address, int founded, String clubColors, String venue) {
 		super();
-		this.teamName = teamName;
+		this.name = name;
 		this.shortName = shortName;
 		this.tla = tla;
 		this.crestUrl = crestUrl;
@@ -68,11 +68,11 @@ public Team() {
 	}
 
 	
-	public String getTeamName() {
-		return teamName;
+	public String getName() {
+		return name;
 	}
-	public void setTeamName(String teamName) {
-		this.teamName = teamName;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getShortName() {
 		return shortName;
@@ -113,7 +113,7 @@ public Team() {
 	
 	public String toString() {
 		String result;
-		result = "Team Name = " + this.getTeamName() + "\n" +
+		result = "Team Name = " + this.getName() + "\n" +
 				"Short Name = " + this.getShortName() + "\n" +
 				"Tla = " + this.getTla() + "\n" +
 				"CrestUrl = " + this.getCrestUrl() + "\n" +

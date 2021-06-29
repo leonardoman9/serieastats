@@ -31,7 +31,7 @@ public class JsonParser {
 	
 	@JsonIgnoreProperties
 	public static League parseLeague(String jsonObj) throws JsonMappingException, JsonProcessingException {
-		JSONObject json = new JSONObject(jsonObj);
+		// JSONObject json = new JSONObject(jsonObj);
 		League newLeague = new League();
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

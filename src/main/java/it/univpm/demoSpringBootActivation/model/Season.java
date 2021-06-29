@@ -6,6 +6,7 @@ public class Season {
 	private int currentMatchday;
 	private WinnerTeam winner;
 	
+	public Season() {}
 	public String getStartDate() {
 		return startDate;
 	}
