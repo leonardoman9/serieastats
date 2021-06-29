@@ -5,6 +5,10 @@ import java.util.Scanner;
 
 
 import org.springframework.web.bind.annotation.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import it.univpm.demoSpringBootActivation.model.Dataset;
 import it.univpm.demoSpringBootActivation.model.JsonParser;
 import it.univpm.demoSpringBootActivation.model.League;
@@ -42,8 +46,9 @@ public class SimpleRestController {
 	 */
 	@GetMapping("/league")
 	@ResponseBody
+	@JsonIgnoreProperties
 	public League returnLeague(@RequestParam(name="id", defaultValue="0") String leagueID) throws IOException {
-		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA");
+		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/teams");
 		League newLeague = new League();
 		newLeague = JsonParser.parseLeague(result);
 		return newLeague;

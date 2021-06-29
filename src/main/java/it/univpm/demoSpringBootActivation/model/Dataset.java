@@ -1,9 +1,7 @@
 package it.univpm.demoSpringBootActivation.model;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
 import org.json.JSONObject;
 public class Dataset {
 	static public String download(String url) throws IOException {
@@ -18,6 +16,7 @@ public class Dataset {
 				}
 		in.close();
 		urlc.con.disconnect();
+		//System.out.println(json);
 		return json;
 	}
 }

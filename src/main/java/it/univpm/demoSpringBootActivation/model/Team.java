@@ -62,7 +62,7 @@ public Team() {
 	public String getClubColors() {
 		return clubColors;
 	}
-
+	
 	public void setClubColors(String clubColors) {
 		this.clubColors = clubColors;
 	}
@@ -109,5 +109,23 @@ public Team() {
 	}
 	public void setVenue(String venue) {
 		this.venue = venue;
+	}
+	
+	public String toString() {
+		String result;
+		result = "Team Name = " + this.getTeamName() + "\n" +
+				"Short Name = " + this.getShortName() + "\n" +
+				"Tla = " + this.getTla() + "\n" +
+				"CrestUrl = " + this.getCrestUrl() + "\n" +
+				"Phone = " + this.getPhone() + "\n" +
+				"Website = " + this.getWebsite() + "\n" +
+				"Email = " + this.getEmail() + "\n" +
+				"Address = " + this.getAddress() + "\n" +
+				"Founded = " + (this.getFounded()) + "\n" +
+				"Club Colours = " + this.getClubColors() + "\n" +
+				"Venue = " + this.getVenue();
+		return result;
+				
+		
 	}
 }
