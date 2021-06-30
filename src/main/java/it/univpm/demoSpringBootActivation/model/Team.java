@@ -1,6 +1,7 @@
 package it.univpm.demoSpringBootActivation.model;
 
 public class Team {
+	private int teamId;
 	private String name;
 	private String shortName;
 	private String tla;
@@ -13,9 +14,10 @@ public class Team {
 	private String clubColors;
 	private String venue;	
 
-public Team(String name, String shortName, String tla, String crestUrl, String phone, String website,
+public Team(int teamId, String name, String shortName, String tla, String crestUrl, String phone, String website,
 			String email, String address, int founded, String clubColors, String venue) {
 		super();
+		this.teamId = teamId;
 		this.name = name;
 		this.shortName = shortName;
 		this.tla = tla;
@@ -30,11 +32,19 @@ public Team(String name, String shortName, String tla, String crestUrl, String p
 	}
 
 
-public Team() {
-	// TODO Auto-generated constructor stub
-}
+	public Team() {
+		// TODO Auto-generated constructor stub
+	}
 
-	
+	public int getteamId() {
+		return teamId;
+	}
+
+
+	public void setId(int teamId) {
+		this.teamId = teamId;
+	}
+
 	public String getPhone() {
 		return phone;
 	}
@@ -113,7 +123,8 @@ public Team() {
 	
 	public String toString() {
 		String result;
-		result = "Team Name = " + this.getName() + "\n" +
+		result = "Teamid = "+this.getteamId()+"\n"+
+				"Team Name = " + this.getName() + "\n" +
 				"Short Name = " + this.getShortName() + "\n" +
 				"Tla = " + this.getTla() + "\n" +
 				"CrestUrl = " + this.getCrestUrl() + "\n" +

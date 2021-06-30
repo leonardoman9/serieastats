@@ -30,18 +30,6 @@ public class SimpleRestController {
 	}
 	
 	/*
-	 *  localhost:8080/teams?={id}
-	 *  List all teams for a particular competition.
-	 */
-	@GetMapping("/teams")
-	@ResponseBody
-	public Team returnTeams(@RequestParam(name = "id", defaultValue = "SA") String leagueId) throws IOException {
-		String result = Dataset.download("https://api.football-data.org/v2/competitions/"+leagueId+"/teams");
-		Team newTeam = new Team();
-		newTeam = JsonParser.parseTeam(result);
-		return newTeam;
-	}	
-	/*
 	 *  localhost:8080/league?={id}
 	 */
 	@GetMapping("/league")
@@ -62,6 +50,7 @@ public class SimpleRestController {
 	@GetMapping("/team")
 	@ResponseBody
 	public  Team returnTeam(@RequestParam(name = "id", defaultValue = "100") String teamId) throws IOException {
+		
 		String result = Dataset.download("https://api.football-data.org/v2/teams/" + teamId);
 		Team newTeam = new Team();
 		newTeam = JsonParser.parseTeam(result);

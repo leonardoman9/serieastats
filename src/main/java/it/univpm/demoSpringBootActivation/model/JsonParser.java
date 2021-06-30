@@ -10,25 +10,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 public class JsonParser {
-/*	
-	public static Team parseTeam(String jsonObj) {
-		JSONObject json = new JSONObject(jsonObj);
-		Team newTeam = new Team(
-				json.getString("name"),
-				json.getString("shortName"),
-				json.getString("tla"),
-				json.getString("crestUrl"),
-				json.getString("phone"),
-				json.getString("website"),
-				json.getString("email"),
-				json.getString("address"),
-				json.getInt("founded"),
-				json.getString("clubColors"),
-				json.getString("venue")
-				);
-		return newTeam;
-	}
-	*/
+
 	@JsonIgnoreProperties
 	public static Team parseTeam(String jsonObj) throws JsonMappingException, JsonProcessingException {
 		// JSONObject json = new JSONObject(jsonObj);

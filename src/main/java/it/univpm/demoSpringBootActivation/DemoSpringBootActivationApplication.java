@@ -12,11 +12,7 @@ import it.univpm.demoSpringBootActivation.model.Dataset;
 @RestController
 public class DemoSpringBootActivationApplication {
 public static void main(String[] args) throws IOException { 
-<<<<<<< Updated upstream
-=======
-	//String teamId = "1";
-	//Dataset.download("https://api.football-data.org/v2/teams/"+teamId);
->>>>>>> Stashed changes
+
 	SpringApplication.run(DemoSpringBootActivationApplication.class, args);
 }
 
