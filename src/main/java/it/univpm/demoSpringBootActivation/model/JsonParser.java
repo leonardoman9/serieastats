@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 public class JsonParser {
-	
+/*	
 	public static Team parseTeam(String jsonObj) {
 		JSONObject json = new JSONObject(jsonObj);
 		Team newTeam = new Team(
@@ -28,7 +28,16 @@ public class JsonParser {
 				);
 		return newTeam;
 	}
-	
+	*/
+	@JsonIgnoreProperties
+	public static Team parseTeam(String jsonObj) throws JsonMappingException, JsonProcessingException {
+		// JSONObject json = new JSONObject(jsonObj);
+		Team newTeam = new Team();
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		newTeam = objectMapper.readValue(jsonObj, Team.class);
+		return newTeam;
+	}
 	@JsonIgnoreProperties
 	public static League parseLeague(String jsonObj) throws JsonMappingException, JsonProcessingException {
 		// JSONObject json = new JSONObject(jsonObj);
@@ -39,6 +48,4 @@ public class JsonParser {
 		return newLeague;
 	}
 	
-	@JsonIgnoreProperties
-	public static Team parseLeague
 }
