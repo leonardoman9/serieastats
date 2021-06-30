@@ -11,6 +11,30 @@ public class League {
 	private int count = 0;
 	@JsonProperty("competition")
 	private Competition competition;
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public Competition getCompetition() {
+		return competition;
+	}
+	public void setCompetition(Competition competition) {
+		this.competition = competition;
+	}
+	public Season getSeason() {
+		return season;
+	}
+	public void setSeason(Season season) {
+		this.season = season;
+	}
+	public Team[] getTeams() {
+		return Teams;
+	}
+	public void setTeams(Team[] teams) {
+		Teams = teams;
+	}
 	@JsonProperty("season")
 	private Season season;
 	@JsonProperty("teams")

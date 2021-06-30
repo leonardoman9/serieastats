@@ -72,6 +72,23 @@ public class SimpleRestController {
 		return newTeam;
 	}	
 	
+	@GetMapping("/foundedAfter")
+	@ResponseBody
+	@JsonIgnoreProperties
+	public void returnFoundedAfter(@RequestParam(name = "year", defaultValue = "1902") String yearFounded) throws IOException {
+		int yearFoundedInt = Integer.parseInt(yearFounded);
+		Team[] Teams;
+		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/teams");
+		League newLeague = JsonParser.parseLeague(result);
+		Teams = newLeague.getTeams();
+		for (Team i : Teams) {
+			if (i.getFounded() > yearFoundedInt) {
+				System.out.println(i.getName()+ ": " + i.getFounded());
+			}
+		}
+		
+	}
+	
 }
 	
 
