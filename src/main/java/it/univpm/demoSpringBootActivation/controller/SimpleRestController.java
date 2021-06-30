@@ -18,16 +18,6 @@ import it.univpm.demoSpringBootActivation.exceptions.*;
 @RestController
 public class SimpleRestController {
 	
-	/*
-	 * 
-	 * prova esempio
-	 * localhost:8080/home?=abc
-	 */
-	@GetMapping("/home")
-	@ResponseBody
-	public String getHome(@RequestParam String id) {
-		return "ID : " + id;
-	}
 	
 	/*
 	 *  localhost:8080/league?={id}
@@ -68,7 +58,7 @@ public class SimpleRestController {
 		String result = Dataset.download("https://api.football-data.org/v2/teams/" + teamId);
 		Team newTeam = new Team();
 		newTeam = JsonParser.parseTeam(result);
-		System.out.println(newTeam);
+		System.out.println(newTeam+"\n");
 		return newTeam;
 	}	
 	
