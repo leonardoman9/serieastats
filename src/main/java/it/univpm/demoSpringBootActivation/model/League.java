@@ -1,5 +1,7 @@
 package it.univpm.demoSpringBootActivation.model;
 
+import java.util.HashSet;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -40,6 +42,14 @@ public class League {
 			if(t.getShortName().equals(shortName)) return t.getteamId();
 		}
 		return -1;
+	}
+	public String countVenues() {
+		HashSet venues = new HashSet();
+		for(Team t : Teams) {
+			venues.add(t.getVenue());
+		}
+		int size = venues.size();
+		return "There are "+size+" different venues: "+venues;
 	}
 	
 }

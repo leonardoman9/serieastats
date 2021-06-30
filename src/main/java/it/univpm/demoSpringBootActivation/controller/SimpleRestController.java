@@ -42,7 +42,15 @@ public class SimpleRestController {
 		System.out.println(newLeague);
 		return newLeague;
 	}
-	
+	@GetMapping("/venues")
+	@ResponseBody
+	@JsonIgnoreProperties
+	public void returnVenues() throws IOException {
+		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/teams");
+		League newLeague = new League();
+		newLeague = JsonParser.parseLeague(result);
+		System.out.println(newLeague.countVenues());
+	}
 	/*
 	 *  localhost:8080/teams?={id}
 	 *  List all teams for a particular competition.
@@ -54,10 +62,9 @@ public class SimpleRestController {
 		String result1 = Dataset.download("https://api.football-data.org/v2/competitions/SA/teams");
 		League newLeague = new League();
 		newLeague = JsonParser.parseLeague(result1);
-		
 		int teamId = newLeague.lookFor(nomeTeam);
-		//if(teamId==-1)
-		//	{throw new MissingTeamException(nomeTeam+" does not exist. \n");}
+		if(teamId==-1)
+			{throw new MissingTeamException(nomeTeam+" does not exist. \n");}
 		String result = Dataset.download("https://api.football-data.org/v2/teams/" + teamId);
 		Team newTeam = new Team();
 		newTeam = JsonParser.parseTeam(result);
