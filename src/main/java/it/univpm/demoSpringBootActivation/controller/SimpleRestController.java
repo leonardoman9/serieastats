@@ -13,7 +13,7 @@ import it.univpm.demoSpringBootActivation.model.Dataset;
 import it.univpm.demoSpringBootActivation.model.JsonParser;
 import it.univpm.demoSpringBootActivation.model.League;
 import it.univpm.demoSpringBootActivation.model.Team;
-
+import it.univpm.demoSpringBootActivation.exceptions.*;
 
 @RestController
 public class SimpleRestController {
@@ -35,13 +35,14 @@ public class SimpleRestController {
 	@GetMapping("/league")
 	@ResponseBody
 	@JsonIgnoreProperties
-	public League returnLeague(@RequestParam(name="id", defaultValue="0") String leagueID) throws IOException {
+	public League returnLeague() throws IOException {
 		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/teams");
 		League newLeague = new League();
 		newLeague = JsonParser.parseLeague(result);
 		System.out.println(newLeague);
 		return newLeague;
 	}
+	
 	/*
 	 *  localhost:8080/teams?={id}
 	 *  List all teams for a particular competition.
@@ -49,8 +50,14 @@ public class SimpleRestController {
 	 */
 	@GetMapping("/team")
 	@ResponseBody
-	public  Team returnTeam(@RequestParam(name = "id", defaultValue = "100") String teamId) throws IOException {
+	public  Team returnTeam(@RequestParam(name = "id", defaultValue = "100") String nomeTeam) throws IOException, MissingTeamException {
+		String result1 = Dataset.download("https://api.football-data.org/v2/competitions/SA/teams");
+		League newLeague = new League();
+		newLeague = JsonParser.parseLeague(result1);
 		
+		int teamId = newLeague.lookFor(nomeTeam);
+		//if(teamId==-1)
+		//	{throw new MissingTeamException(nomeTeam+" does not exist. \n");}
 		String result = Dataset.download("https://api.football-data.org/v2/teams/" + teamId);
 		Team newTeam = new Team();
 		newTeam = JsonParser.parseTeam(result);

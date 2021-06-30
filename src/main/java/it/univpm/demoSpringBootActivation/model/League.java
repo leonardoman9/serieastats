@@ -34,11 +34,12 @@ public class League {
 		}
 		return result;
 	}
-	/*
-	public int lookFor(String shortName, String result) {
+	
+	public int lookFor(String shortName) {
 		for(Team t : Teams) {
-			if(t.getShortName()==shortName) return i.get
+			if(t.getShortName().equals(shortName)) return t.getteamId();
 		}
+		return -1;
 	}
-	*/
+	
 }
