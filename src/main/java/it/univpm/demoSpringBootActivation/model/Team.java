@@ -9,32 +9,26 @@ public class Team {
 	private String longName;
 	@JsonProperty("shortName")
 	private String shortName;
+	@JsonProperty("tla")
 	private String tla;
+	@JsonProperty("crestUrl")
 	private String crestUrl;
+	@JsonProperty("phone")
 	private String phone;
+	@JsonProperty("website")
 	private String website;
+	@JsonProperty("email")
 	private String email;
+	@JsonProperty("address")
 	private String address;
+	@JsonProperty("founded")
 	private int founded;
+	@JsonProperty("clubColors")
 	private String clubColors;
+	@JsonProperty("venue")
 	private String venue;	
-
-public Team(int teamId, String name) {
-	this.teamId = teamId;
-	this.shortName= name;
-	this.longName=null;
-	this.tla=null;
-	this.crestUrl=null;
-	this.phone=null;
-	this.website=null;
-	this.email=null;
-	this.address=null;
-	this.founded=-1;
-	this.clubColors=null;
-	this.venue=null;
-}
 public Team(int teamId, 
-			String name, 
+			String longName, 
 			String shortName, 
 			String tla, 
 			String crestUrl, 
@@ -47,7 +41,7 @@ public Team(int teamId,
 			String venue) {
 		super();
 		this.teamId = teamId;
-		this.longName = name;
+		this.longName = longName;
 		this.shortName = shortName;
 		this.tla = tla;
 		this.crestUrl = crestUrl;

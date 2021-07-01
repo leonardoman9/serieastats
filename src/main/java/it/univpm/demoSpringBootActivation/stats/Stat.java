@@ -1,14 +1,13 @@
 package it.univpm.demoSpringBootActivation.stats;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import it.univpm.demoSpringBootActivation.model.Dataset;
 import it.univpm.demoSpringBootActivation.model.JsonParser;
 import it.univpm.demoSpringBootActivation.model.League;
+import it.univpm.demoSpringBootActivation.model.Scorer;
 import it.univpm.demoSpringBootActivation.model.Scorers;
 import it.univpm.demoSpringBootActivation.model.Team;
-import it.univpm.demoSpringBootActivation.model.Venues;
 
 public class Stat {
 	public static String returnFoundedAfter(String yearFounded) throws IOException {
@@ -35,9 +34,23 @@ public class Stat {
 		System.out.println(newLeague.countVenues());
 		return newLeague.countVenues();
 	}
-	public static String returnTeamsVenues() throws IOException {
 	
-		return "hi";
+	public static String returnTeamScorers(String longName) throws IOException {
+		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/scorers?limit=100");
+		Scorers scorers = new Scorers();
+		scorers = JsonParser.parseScorers(result);
+		result = longName + ":\n";
+		for (Scorer i : scorers.getScorers()) {
+			if (i.getTeam().getlongName().equals(longName)) result += i.getPlayer().getName() + ": " + i.getNumberOfGoals()+ "\n"; //TODO non funziona, i.getName() è sempre null (?)
+		}
+		System.out.println(result);
+		return result;
+	}
+	
+	public static String returnTeamsVenues() throws IOException {
+		
+		
+		return null;
 	}
 
 	

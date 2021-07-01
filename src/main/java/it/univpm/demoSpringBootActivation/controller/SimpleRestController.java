@@ -55,7 +55,7 @@ public class SimpleRestController {
 	@GetMapping("/foundedAfter")
 	@ResponseBody
 	@JsonIgnoreProperties
-	public String returnFoundedAfter(@RequestParam(name = "year", defaultValue = "1902") String yearFounded) throws IOException {
+	public String returnFoundedAfter(@RequestParam(name = "year", defaultValue = "1800") String yearFounded) throws IOException {
 		return Stat.returnFoundedAfter(yearFounded);
 	}
 	/*
@@ -74,16 +74,22 @@ public class SimpleRestController {
 	 */
 	/*  localhost:8080/leagueScorers
 	 *  Show all first 100 Serie A scorers ordered.
-	 
+	 * T
 	 */
 	@GetMapping("/leagueScorers")
 	@ResponseBody
-	public  Scorers returnLeagueScorers() throws IOException, MissingTeamException {
+	public Scorers returnLeagueScorers() throws IOException, MissingTeamException {
 		return Requests.returnLeagueScorers();
 	}
-	/*  localhost:8080/teamScorers?name={teamName}
-	 *  Show scorers from a particular Team
+	/*  localhost:8080/teamScorers?name={longTeamName}
+	 *  Show scorers from a particular Team.
+	 *  Only works with Long Team Name, because the scorers request returns a Team object with only a Long Name attribute.
 	 *  */
+	@GetMapping("/teamScorers")
+	@ResponseBody
+	public String returnteamScorers(@RequestParam(name = "teamName", defaultValue = "FC Internazionale Milano") String longName) throws IOException, MissingTeamException {
+		return Stat.returnTeamScorers(longName);
+	}
 }
 	
 

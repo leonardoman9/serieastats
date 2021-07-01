@@ -8,6 +8,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 public class JsonParser {
 
+	//TODO COSTRUIRE UN SOLO METODO CHE RESTITUISCE DIVERSI PARAMETRI A SECONDA DELL'OGGETTO
+	
 	@JsonIgnoreProperties
 	public static Team parseTeam(String jsonObj) throws JsonMappingException, JsonProcessingException {
 		// JSONObject json = new JSONObject(jsonObj);
@@ -29,9 +31,7 @@ public class JsonParser {
 	public static Scorers parseScorers(String jsonObj) throws JsonMappingException, JsonProcessingException {
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		Scorers scorers;
-		scorers = objectMapper.readValue(jsonObj, Scorers.class);
-		System.out.println(scorers);
+		Scorers scorers = objectMapper.readValue(jsonObj, Scorers.class);
 		return scorers;
 		
 	}

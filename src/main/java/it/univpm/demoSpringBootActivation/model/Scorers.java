@@ -48,7 +48,7 @@ public class Scorers {
 	public String toString() {
 		String result = "";
 		for (Scorer i : scorers) {
-			result+= i.getPlayer().getName() + ": " + i.getNumberOfGoals() + " goals\n";
+			result+= i.getPlayer().getName() + ": " + i.getNumberOfGoals() + " goals" + " (" + i.getTeam().getlongName()+")\n";
 		}
 		return result;
 	}

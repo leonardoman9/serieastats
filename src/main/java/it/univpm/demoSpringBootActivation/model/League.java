@@ -61,15 +61,15 @@ public class League extends Competition{
 	public String toStringNoTeams() {
 		String result = "";
 		result = "Number of Teams: \t" + count + "\n" +
-				"Competition Area: \t" + this.competition.getArea().getName() + "\n" +
+				"Competition Area: \t " + this.competition.getArea().getName() + "\n" +
 				"Competition Name: \t" + this.competition.getName() + "\n" + 
 				"Competition Code: \t" + this.competition.getCode() + "\n" +
 				"Competition Plan: \t" + this.competition.getPlan() + "\n" + 
-				"Start date: \t" + this.season.getStartDate() + "\n" +
-				"End date: \t" + this.season.getEndDate() + "\n" +
-				"Winner: \t" + this.season.getWinner().getlongName() + "\n" + 
-				"TLA: \t" + this.season.getWinner().getTla() + "\n" +
-				"Crest Url: \t" + this.season.getWinner().getCrestUrl() + "\n";
+				"Start date: \t\t" + this.season.getStartDate() + "\n" +
+				"End date: \t\t" + this.season.getEndDate() + "\n" +
+				"Winner: \t\t" + this.season.getWinner().getlongName() + "\n" + 
+				"TLA: \t\t\t" + this.season.getWinner().getTla() + "\n" +
+				"Crest Url: \t\t" + this.season.getWinner().getCrestUrl() + "\n";
 		return result;
 	}
 	

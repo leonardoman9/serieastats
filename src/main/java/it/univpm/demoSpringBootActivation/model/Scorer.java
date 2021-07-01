@@ -5,6 +5,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Scorer extends Player{
 	
 	private int numberOfGoals;
+
+	@JsonProperty("player")
+	private Player player;
+	@JsonProperty("team")
+	private Team team;
+	
 	public Scorer () {
 		super();
 	}
@@ -26,13 +32,14 @@ public class Scorer extends Player{
 	public void setTeam(Team team) {
 		this.team = team;
 	}
-	private Player player;
-	@JsonProperty("team")
-	private Team team;
 	public int getNumberOfGoals() {
 		return numberOfGoals;
 	}
 	public void setNumberOfGoals(int numberOfGoals) {
 		this.numberOfGoals = numberOfGoals;
+	}
+	
+	public String toString() {
+		return this.getName() + ": " + this.numberOfGoals + " goals";
 	}
 }
