@@ -46,10 +46,19 @@ public class Stat {
 		System.out.println(result);
 		return result;
 	}
-	
+	public static String returnTeamNationalities(String longName) throws IOException {
+		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/scorers?limit=100");
+		Scorers scorers = new Scorers();
+		scorers = JsonParser.parseScorers(result);
+		result = longName + ":\n";
+		
+		for (Scorer i : scorers.getScorers()) {
+			if (i.getTeam().getlongName().equals(longName)) result+= i.getPlayer().getNationality().toString()+"\n";
+	}
+		System.out.println(result+"\n");
+		return result;
+	}
 	public static String returnTeamsVenues() throws IOException {
-		
-		
 		return null;
 	}
 

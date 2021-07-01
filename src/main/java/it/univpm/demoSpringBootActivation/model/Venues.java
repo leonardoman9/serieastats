@@ -15,6 +15,6 @@ public class Venues<String> extends HashSet<String>{
 			result+=(i+"\n");
 			
 		}
-		return "There are "+ numberOfVenues()+" different venues: "+ "\n" + result;
+		return "There are "+ numberOfVenues() +" different venues: "+ "\n" + result;
 	}
 }

@@ -52,4 +52,12 @@ public class Scorers {
 		}
 		return result;
 	}
+	public String countNationalities() {
+		Nationalities<String> Nationalities = new Nationalities<String>();
+		for(Scorer s : scorers) {
+			Nationalities.add(s.getPlayer().getNationality());
+		}
+		return  Nationalities.toString();
+	}		
 }
+

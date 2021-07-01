@@ -14,7 +14,7 @@ public class Player {
 	@JsonProperty("dateOfBirth")
 	private String dateOfBirth;
 	@JsonProperty("nationality")
-	private String nationality;
+	private Nationality nationality;
 	@JsonProperty("position")
 	private String position;
 	@JsonProperty("shirtNumber")
@@ -24,7 +24,7 @@ public class Player {
 	public Player() {
 		
 	}
-	public Player(int id, String name, String firstName, String lastName, String dateOfBirth, String nationality,
+	public Player(int id, String name, String firstName, String lastName, String dateOfBirth, Nationality nationality,
 			String position, String shirtNumber, String lastUpdated) {
 		super();
 		this.id = id;
@@ -68,9 +68,9 @@ public class Player {
 		this.dateOfBirth = dateOfBirth;
 	}
 	public String getNationality() {
-		return nationality;
+		return nationality.toString();
 	}
-	public void setNationality(String nationality) {
+	public void setNationality(Nationality nationality) {
 		this.nationality = nationality;
 	}
 	public String getPosition() {

@@ -68,10 +68,7 @@ public class SimpleRestController {
 	public String returnTeamsVenues() throws IOException {
 		return Stat.returnTeamsVenues();
 	}
-	/*
-	 *  localhost:8080/teamsForEachVenue
-	 *  Shows all teams in every venue
-	 */
+
 	/*  localhost:8080/leagueScorers
 	 *  Show all first 100 Serie A scorers ordered.
 	 * T
@@ -87,8 +84,17 @@ public class SimpleRestController {
 	 *  */
 	@GetMapping("/teamScorers")
 	@ResponseBody
-	public String returnteamScorers(@RequestParam(name = "teamName", defaultValue = "FC Internazionale Milano") String longName) throws IOException, MissingTeamException {
+	public String returnteamScorers(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName) throws IOException, MissingTeamException {
 		return Stat.returnTeamScorers(longName);
+	}
+	/*  localhost:8080/teamNationalities?teamName={teamName}
+	 *  Show scorers from a particular Team.
+	 *  Only works with Long Team Name, because the scorers request returns a Team object with only a Long Name attribute.
+	 *  */
+	@GetMapping("/teamNationalities")
+	@ResponseBody
+	public String returnteamNationalities(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName) throws IOException, MissingTeamException {
+		return Stat.returnTeamNationalities(longName);
 	}
 }
 	
