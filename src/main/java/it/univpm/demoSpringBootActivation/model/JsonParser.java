@@ -1,5 +1,6 @@
 package it.univpm.demoSpringBootActivation.model;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -9,6 +10,7 @@ public class JsonParser {
 
 	@JsonIgnoreProperties
 	public static Team parseTeam(String jsonObj) throws JsonMappingException, JsonProcessingException {
+		// JSONObject json = new JSONObject(jsonObj);
 		Team newTeam = new Team();
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -17,6 +19,7 @@ public class JsonParser {
 	}
 	@JsonIgnoreProperties
 	public static League parseLeague(String jsonObj) throws JsonMappingException, JsonProcessingException {
+		// JSONObject json = new JSONObject(jsonObj);
 		League newLeague = new League();
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

@@ -14,8 +14,18 @@ public class Team {
 	private String clubColors;
 	private String venue;	
 
-public Team(int teamId, String name, String shortName, String tla, String crestUrl, String phone, String website,
-			String email, String address, int founded, String clubColors, String venue) {
+public Team(int teamId, 
+			String name, 
+			String shortName, 
+			String tla, 
+			String crestUrl, 
+			String phone, 
+			String website,
+			String email, 
+			String address, 
+			int founded, 
+			String clubColors, 
+			String venue) {
 		super();
 		this.teamId = teamId;
 		this.name = name;

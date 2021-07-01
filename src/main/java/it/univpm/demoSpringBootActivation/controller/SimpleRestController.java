@@ -57,6 +57,16 @@ public class SimpleRestController {
 	public String returnFoundedAfter(@RequestParam(name = "year", defaultValue = "1902") String yearFounded) throws IOException {
 		return Stat.returnFoundedAfter(yearFounded);
 	}
+	/*
+	 *  localhost:8080/teamsForEachVenue
+	 *  Shows all teams in every venue
+	 */
+	@GetMapping("/teamsForEachVenue")
+	@ResponseBody
+	@JsonIgnoreProperties
+	public String returnTeamsVenues() throws IOException {
+		return Stat.returnTeamsVenues();
+	}
 }
 	
 

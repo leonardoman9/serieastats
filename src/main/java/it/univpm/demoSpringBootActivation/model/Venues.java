@@ -4,6 +4,8 @@ import java.util.HashSet;
 
 @SuppressWarnings({ "hiding", "serial" })
 public class Venues<String> extends HashSet<String>{
+	private String[] venues;
+	
 	public int numberOfVenues() {
 		return this.size();
 	}
@@ -13,6 +15,6 @@ public class Venues<String> extends HashSet<String>{
 			result+=(i+"\n");
 			
 		}
-		return result;
+		return "There are "+ numberOfVenues()+" different venues: "+ "\n" + result;
 	}
 }

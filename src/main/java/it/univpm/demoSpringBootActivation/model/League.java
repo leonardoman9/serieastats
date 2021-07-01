@@ -84,7 +84,7 @@ public class League extends Competition{
 		for(Team t : this.Teams) {
 			Venues.add(t.getVenue());
 		}
-		return "There are "+Venues.numberOfVenues()+" different venues: "+ "\n" + Venues.toString();
+		return  Venues.toString();
 	}
 	
 	

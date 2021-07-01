@@ -1,11 +1,13 @@
 package it.univpm.demoSpringBootActivation.stats;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import it.univpm.demoSpringBootActivation.model.Dataset;
 import it.univpm.demoSpringBootActivation.model.JsonParser;
 import it.univpm.demoSpringBootActivation.model.League;
 import it.univpm.demoSpringBootActivation.model.Team;
+import it.univpm.demoSpringBootActivation.model.Venues;
 
 public class Stat {
 	public static String returnFoundedAfter(String yearFounded) throws IOException {
@@ -31,5 +33,9 @@ public class Stat {
 		newLeague = JsonParser.parseLeague(result);
 		System.out.println(newLeague.countVenues());
 		return newLeague.countVenues();
+	}
+	public static String returnTeamsVenues() throws IOException {
+	
+		return "hi";
 	}
 }
