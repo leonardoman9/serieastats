@@ -1,12 +1,10 @@
 package it.univpm.demoSpringBootActivation.model;
 
-import java.util.HashSet;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties
-public class League {
+public class League extends Competition{
 	@JsonProperty("count")
 	private int count = 0;
 	@JsonProperty("competition")
@@ -44,20 +42,34 @@ public class League {
 	@Override
 	public String toString() {
 		String result = "";
-		result = "Number of Teams: " + count + "\n" +
-				"Competition Area: " + this.competition.getArea().getName() + "\n" +
-				"Competition Name: " + this.competition.getName() + "\n" + 
-				"Competition Code: " + this.competition.getCode() + "\n" +
-				"Competition Plan: " + this.competition.getPlan() + "\n" + 
-				"Start date: " + this.season.getStartDate() + "\n" +
-				"End date: " + this.season.getEndDate() + "\n" +
-				"Winner: " + this.season.getWinner().getName() + "\n" + 
-				"TLA: " + this.season.getWinner().getTla() + "\n" +
-				"Crest Url: " + this.season.getWinner().getCrestUrl() + "\n";
+		result = "Number of Teams: \t" + count + "\n" +
+				"Competition Area: \t " + this.competition.getArea().getName() + "\n" +
+				"Competition Name: \t" + this.competition.getName() + "\n" + 
+				"Competition Code: \t" + this.competition.getCode() + "\n" +
+				"Competition Plan: \t" + this.competition.getPlan() + "\n" + 
+				"Start date: \t\t" + this.season.getStartDate() + "\n" +
+				"End date: \t\t" + this.season.getEndDate() + "\n" +
+				"Winner: \t\t" + this.season.getWinner().getName() + "\n" + 
+				"TLA: \t\t\t" + this.season.getWinner().getTla() + "\n" +
+				"Crest Url: \t\t" + this.season.getWinner().getCrestUrl() + "\n";
 		for(Team i : Teams) {
 			System.out.println(i.toString());
 			System.out.println("\n");
 		}
+		return result;
+	}
+	public String toStringNoTeams() {
+		String result = "";
+		result = "Number of Teams: \t" + count + "\n" +
+				"Competition Area: \t" + this.competition.getArea().getName() + "\n" +
+				"Competition Name: \t" + this.competition.getName() + "\n" + 
+				"Competition Code: \t" + this.competition.getCode() + "\n" +
+				"Competition Plan: \t" + this.competition.getPlan() + "\n" + 
+				"Start date: \t" + this.season.getStartDate() + "\n" +
+				"End date: \t" + this.season.getEndDate() + "\n" +
+				"Winner: \t" + this.season.getWinner().getName() + "\n" + 
+				"TLA: \t" + this.season.getWinner().getTla() + "\n" +
+				"Crest Url: \t" + this.season.getWinner().getCrestUrl() + "\n";
 		return result;
 	}
 	
@@ -68,12 +80,12 @@ public class League {
 		return -1;
 	}
 	public String countVenues() {
-		HashSet venues = new HashSet();
-		for(Team t : Teams) {
-			venues.add(t.getVenue());
+		Venues<String> Venues = new Venues<String>();
+		for(Team t : this.Teams) {
+			Venues.add(t.getVenue());
 		}
-		int size = venues.size();
-		return "There are "+size+" different venues: "+venues;
+		return "There are "+Venues.numberOfVenues()+" different venues: "+ "\n" + Venues.toString();
 	}
+	
 	
 }

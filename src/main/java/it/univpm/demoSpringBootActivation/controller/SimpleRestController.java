@@ -1,84 +1,62 @@
 package it.univpm.demoSpringBootActivation.controller;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 
 import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import it.univpm.demoSpringBootActivation.model.Dataset;
-import it.univpm.demoSpringBootActivation.model.JsonParser;
 import it.univpm.demoSpringBootActivation.model.League;
 import it.univpm.demoSpringBootActivation.model.Team;
+import it.univpm.demoSpringBootActivation.stats.Requests;
+import it.univpm.demoSpringBootActivation.stats.Stat;
 import it.univpm.demoSpringBootActivation.exceptions.*;
 
 @RestController
 public class SimpleRestController {
-	
-	
 	/*
-	 *  localhost:8080/league?={id}
+	 *  localhost:8080/league
+	 *  Shows informations about the league and all teams in the league
+	 *  localhost:8080/league?showTeams=false
+	 *  Shows informations about the league 
 	 */
 	@GetMapping("/league")
 	@ResponseBody
 	@JsonIgnoreProperties
-	public League returnLeague() throws IOException {
-		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/teams");
-		League newLeague = new League();
-		newLeague = JsonParser.parseLeague(result);
-		System.out.println(newLeague);
-		return newLeague;
+	public League returnLeague(@RequestParam(name = "showTeams", defaultValue = "true") String showTeams) throws IOException {
+		return Requests.returnLeague(Boolean.parseBoolean(showTeams));
 	}
-	@GetMapping("/venues")
-	@ResponseBody
-	@JsonIgnoreProperties
-	public void returnVenues() throws IOException {
-		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/teams");
-		League newLeague = new League();
-		newLeague = JsonParser.parseLeague(result);
-		System.out.println(newLeague.countVenues());
-	}
+	
 	/*
-	 *  localhost:8080/teams?={id}
-	 *  List all teams for a particular competition.
-	 *  Range per squadre italiane: [TODO] 
+	 *  localhost:8080/team?name={teamName}
+	 *  Show a particular Team
 	 */
 	@GetMapping("/team")
 	@ResponseBody
-	public  Team returnTeam(@RequestParam(name = "id", defaultValue = "100") String nomeTeam) throws IOException, MissingTeamException {
-		String result1 = Dataset.download("https://api.football-data.org/v2/competitions/SA/teams");
-		League newLeague = new League();
-		newLeague = JsonParser.parseLeague(result1);
-		int teamId = newLeague.lookFor(nomeTeam);
-		if(teamId==-1)
-			{throw new MissingTeamException(nomeTeam+" does not exist. \n");}
-		String result = Dataset.download("https://api.football-data.org/v2/teams/" + teamId);
-		Team newTeam = new Team();
-		newTeam = JsonParser.parseTeam(result);
-		System.out.println(newTeam+"\n");
-		return newTeam;
-	}	
+	public  Team returnTeam(@RequestParam(name = "name", defaultValue = "Roma") String nomeTeam) throws IOException, MissingTeamException {
+		return Requests.returnTeam(nomeTeam);
+	}
+	/*
+	 *  localhost:8080/venues
+	 *  Shows all venues of Serie A.
+	 */
+	@GetMapping("/venues")
+	@ResponseBody
+	@JsonIgnoreProperties
+	public String returnVenues() throws IOException {
+		return Stat.returnVenues();
+	}
 	
+	/*
+	 *  localhost:8080/foundedAfter?year={year}
+	 *  Shows all teams founded after a certain year
+	 */
 	@GetMapping("/foundedAfter")
 	@ResponseBody
 	@JsonIgnoreProperties
-	public void returnFoundedAfter(@RequestParam(name = "year", defaultValue = "1902") String yearFounded) throws IOException {
-		int yearFoundedInt = Integer.parseInt(yearFounded);
-		Team[] Teams;
-		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/teams");
-		League newLeague = JsonParser.parseLeague(result);
-		Teams = newLeague.getTeams();
-		for (Team i : Teams) {
-			if (i.getFounded() > yearFoundedInt) {
-				System.out.println(i.getName()+ ": " + i.getFounded());
-			}
-		}
-		
+	public String returnFoundedAfter(@RequestParam(name = "year", defaultValue = "1902") String yearFounded) throws IOException {
+		return Stat.returnFoundedAfter(yearFounded);
 	}
-	
 }
 	
 

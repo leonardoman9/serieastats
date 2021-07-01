@@ -123,18 +123,18 @@ public Team(int teamId, String name, String shortName, String tla, String crestU
 	
 	public String toString() {
 		String result;
-		result = "Teamid = "+this.getteamId()+"\n"+
-				"Team Name = " + this.getName() + "\n" +
-				"Short Name = " + this.getShortName() + "\n" +
-				"Tla = " + this.getTla() + "\n" +
-				"CrestUrl = " + this.getCrestUrl() + "\n" +
-				"Phone = " + this.getPhone() + "\n" +
-				"Website = " + this.getWebsite() + "\n" +
-				"Email = " + this.getEmail() + "\n" +
-				"Address = " + this.getAddress() + "\n" +
-				"Founded = " + (this.getFounded()) + "\n" +
-				"Club Colours = " + this.getClubColors() + "\n" +
-				"Venue = " + this.getVenue();
+		result = "Teamid: \t"+this.getteamId()+"\n"+
+				"Team Name: \t" + this.getName() + "\n" +
+				"Short Name: \t" + this.getShortName() + "\n" +
+				"Abbreviation: \t" + this.getTla() + "\n" +
+				"CrestUrl: \t" + this.getCrestUrl() + "\n" +
+				"Phone: \t\t" + this.getPhone() + "\n" +
+				"Website: \t" + this.getWebsite() + "\n" +
+				"Email: \t\t" + this.getEmail() + "\n" +
+				"Address: \t" + this.getAddress() + "\n" +
+				"Founded: \t" + (this.getFounded()) + "\n" +
+				"Club Colours: \t" + this.getClubColors() + "\n" +
+				"Venue: \t\t" + this.getVenue();
 		return result;
 				
 		
