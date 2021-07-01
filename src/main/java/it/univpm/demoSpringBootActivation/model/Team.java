@@ -1,8 +1,13 @@
 package it.univpm.demoSpringBootActivation.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Team {
+	@JsonProperty("id")
 	private int teamId;
-	private String name;
+	@JsonProperty("name")
+	private String longName;
+	@JsonProperty("shortName")
 	private String shortName;
 	private String tla;
 	private String crestUrl;
@@ -14,6 +19,20 @@ public class Team {
 	private String clubColors;
 	private String venue;	
 
+public Team(int teamId, String name) {
+	this.teamId = teamId;
+	this.shortName= name;
+	this.longName=null;
+	this.tla=null;
+	this.crestUrl=null;
+	this.phone=null;
+	this.website=null;
+	this.email=null;
+	this.address=null;
+	this.founded=-1;
+	this.clubColors=null;
+	this.venue=null;
+}
 public Team(int teamId, 
 			String name, 
 			String shortName, 
@@ -28,7 +47,7 @@ public Team(int teamId,
 			String venue) {
 		super();
 		this.teamId = teamId;
-		this.name = name;
+		this.longName = name;
 		this.shortName = shortName;
 		this.tla = tla;
 		this.crestUrl = crestUrl;
@@ -88,11 +107,11 @@ public Team(int teamId,
 	}
 
 	
-	public String getName() {
-		return name;
+	public String getlongName() {
+		return longName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setlongName(String longName) {
+		this.longName = longName;
 	}
 	public String getShortName() {
 		return shortName;
@@ -134,7 +153,7 @@ public Team(int teamId,
 	public String toString() {
 		String result;
 		result = "Teamid: \t"+this.getteamId()+"\n"+
-				"Team Name: \t" + this.getName() + "\n" +
+				"Team Name: \t" + this.getlongName() + "\n" +
 				"Short Name: \t" + this.getShortName() + "\n" +
 				"Abbreviation: \t" + this.getTla() + "\n" +
 				"CrestUrl: \t" + this.getCrestUrl() + "\n" +
@@ -145,8 +164,6 @@ public Team(int teamId,
 				"Founded: \t" + (this.getFounded()) + "\n" +
 				"Club Colours: \t" + this.getClubColors() + "\n" +
 				"Venue: \t\t" + this.getVenue();
-		return result;
-				
-		
+		return result;	
 	}
 }

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import it.univpm.demoSpringBootActivation.model.Dataset;
 import it.univpm.demoSpringBootActivation.model.JsonParser;
 import it.univpm.demoSpringBootActivation.model.League;
+import it.univpm.demoSpringBootActivation.model.Scorers;
 import it.univpm.demoSpringBootActivation.model.Team;
 import it.univpm.demoSpringBootActivation.model.Venues;
 
@@ -38,4 +39,6 @@ public class Stat {
 	
 		return "hi";
 	}
+
+	
 }

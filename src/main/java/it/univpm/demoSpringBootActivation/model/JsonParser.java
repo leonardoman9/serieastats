@@ -26,5 +26,14 @@ public class JsonParser {
 		newLeague = objectMapper.readValue(jsonObj, League.class);
 		return newLeague;
 	}
+	public static Scorers parseScorers(String jsonObj) throws JsonMappingException, JsonProcessingException {
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		Scorers scorers;
+		scorers = objectMapper.readValue(jsonObj, Scorers.class);
+		System.out.println(scorers);
+		return scorers;
+		
+	}
 	
 }

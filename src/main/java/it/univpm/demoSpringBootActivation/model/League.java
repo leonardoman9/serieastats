@@ -49,7 +49,7 @@ public class League extends Competition{
 				"Competition Plan: \t" + this.competition.getPlan() + "\n" + 
 				"Start date: \t\t" + this.season.getStartDate() + "\n" +
 				"End date: \t\t" + this.season.getEndDate() + "\n" +
-				"Winner: \t\t" + this.season.getWinner().getName() + "\n" + 
+				"Winner: \t\t" + this.season.getWinner().getlongName() + "\n" + 
 				"TLA: \t\t\t" + this.season.getWinner().getTla() + "\n" +
 				"Crest Url: \t\t" + this.season.getWinner().getCrestUrl() + "\n";
 		for(Team i : Teams) {
@@ -67,13 +67,13 @@ public class League extends Competition{
 				"Competition Plan: \t" + this.competition.getPlan() + "\n" + 
 				"Start date: \t" + this.season.getStartDate() + "\n" +
 				"End date: \t" + this.season.getEndDate() + "\n" +
-				"Winner: \t" + this.season.getWinner().getName() + "\n" + 
+				"Winner: \t" + this.season.getWinner().getlongName() + "\n" + 
 				"TLA: \t" + this.season.getWinner().getTla() + "\n" +
 				"Crest Url: \t" + this.season.getWinner().getCrestUrl() + "\n";
 		return result;
 	}
 	
-	public int lookFor(String shortName) {
+	public int lookForId(String shortName) {
 		for(Team t : Teams) {
 			if(t.getShortName().equals(shortName)) return t.getteamId();
 		}

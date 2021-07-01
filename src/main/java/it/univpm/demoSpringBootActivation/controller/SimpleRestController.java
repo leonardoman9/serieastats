@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import it.univpm.demoSpringBootActivation.model.League;
+import it.univpm.demoSpringBootActivation.model.Scorers;
 import it.univpm.demoSpringBootActivation.model.Team;
 import it.univpm.demoSpringBootActivation.stats.Requests;
 import it.univpm.demoSpringBootActivation.stats.Stat;
@@ -67,6 +68,22 @@ public class SimpleRestController {
 	public String returnTeamsVenues() throws IOException {
 		return Stat.returnTeamsVenues();
 	}
+	/*
+	 *  localhost:8080/teamsForEachVenue
+	 *  Shows all teams in every venue
+	 */
+	/*  localhost:8080/leagueScorers
+	 *  Show all first 100 Serie A scorers ordered.
+	 
+	 */
+	@GetMapping("/leagueScorers")
+	@ResponseBody
+	public  Scorers returnLeagueScorers() throws IOException, MissingTeamException {
+		return Requests.returnLeagueScorers();
+	}
+	/*  localhost:8080/teamScorers?name={teamName}
+	 *  Show scorers from a particular Team
+	 *  */
 }
 	
 

@@ -6,6 +6,7 @@ import it.univpm.demoSpringBootActivation.exceptions.MissingTeamException;
 import it.univpm.demoSpringBootActivation.model.Dataset;
 import it.univpm.demoSpringBootActivation.model.JsonParser;
 import it.univpm.demoSpringBootActivation.model.League;
+import it.univpm.demoSpringBootActivation.model.Scorers;
 import it.univpm.demoSpringBootActivation.model.Team;
 
 public class Requests {
@@ -21,13 +22,20 @@ public class Requests {
 	    String firstResult = Dataset.download("https://api.football-data.org/v2/competitions/SA/teams");
 		League newLeague = new League();
 		newLeague = JsonParser.parseLeague(firstResult);
-		int teamId = newLeague.lookFor(nomeTeam);
-		if(teamId==-1)
-			{throw new MissingTeamException(nomeTeam);}
+		int teamId = newLeague.lookForId(nomeTeam);
+		//if(teamId==-1)
+		//	{throw new MissingTeamException(nomeTeam);}
 		String result = Dataset.download("https://api.football-data.org/v2/teams/" + teamId);
 		Team newTeam = new Team();
 		newTeam = JsonParser.parseTeam(result);
 		System.out.println(newTeam+"\n");
 		return newTeam;		
+	}
+	public static Scorers returnLeagueScorers() throws IOException {
+		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/scorers?limit=100");
+		Scorers scorers = new Scorers();
+		scorers = JsonParser.parseScorers(result);
+		System.out.println(scorers);
+		return scorers;
 	}
 }
