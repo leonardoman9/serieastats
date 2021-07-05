@@ -6,9 +6,12 @@ import java.io.IOException;
 import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import ch.qos.logback.core.filter.Filter;
 import it.univpm.demoSpringBootActivation.model.League;
 import it.univpm.demoSpringBootActivation.model.Scorers;
 import it.univpm.demoSpringBootActivation.model.Team;
+import it.univpm.demoSpringBootActivation.requests.Filters;
 import it.univpm.demoSpringBootActivation.requests.Requests;
 import it.univpm.demoSpringBootActivation.requests.Stat;
 import it.univpm.demoSpringBootActivation.exceptions.*;
@@ -46,6 +49,7 @@ public class SimpleRestController {
 	/**
 	 * Mostra informazioni riguardanti una squadra a scelta dell'utente
 	 * localhost:8080/team?name={shortname}
+	 * Funziona con lo shortname
 	 * @param nomeTeam
 	 * @return
 	 * @throws IOException
@@ -92,7 +96,7 @@ public class SimpleRestController {
 		return Stat.returnTeamsVenues();
 	}
 
-	@GetMapping("/leagueScorers")
+	@GetMapping("/leagueScorers")   //TODO: non ritorna una stringa fatta bene
 	@ResponseBody
 	/**
 	 *  Mostra i primi 100 marcatori della Serie A, ordinati per numero di gol
@@ -110,7 +114,7 @@ public class SimpleRestController {
 	/**
 	 * Mostra i marcatori di una specifica squadra, a scelta dell'utente.
 	 * 	localhost:8080/teamScorers?name={longTeamName}
-	 *  Inserire %20 al posto di uno spazio nel Nome lungo del team
+	 *  Inserire %20 al posto di uno spazio nel Nome del team
 	 * @param longName
 	 * @return
 	 * @throws IOException
@@ -127,7 +131,7 @@ public class SimpleRestController {
 	 *  Show scorers from a particular Team.
 	 *  Only works with Long Team Name, because the scorers request returns a Team object with only a Long Name attribute.
 	 *  localhost:8080/teamNationalities?team={teamName}
-	 *  Inserire %20 al posto di uno spazio nel Nome lungo del team
+	 *  Inserire %20 al posto di uno spazio nel Nome del team
 	 * @param longName
 	 * @return
 	 * @throws IOException
@@ -140,6 +144,8 @@ public class SimpleRestController {
 	@ResponseBody
 	/**
 	 * Mostra tutti i marcatori di una squadra con età minore a 28 anni
+	 * localhost:8080/youngScorers?team={longName}
+	 * Inserire %20 al posto di uno spazio nel Nome lungo del team
 	 * @param longName
 	 * @return
 	 * @throws IOException
@@ -148,6 +154,28 @@ public class SimpleRestController {
 	public String returnYoungScorers(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName) throws IOException, MissingTeamException {
 		return Stat.youngScorers(longName);
 	}
+	
+	/**
+	 * Mostra tutte le squadre il cui nome inizia con una certa lettera
+	 * localhost:8080/startsWith?letter={c}
+	 * @param letter
+	 * @return
+	 * @throws IOException
+	 */
+	@GetMapping("/startsWith")
+	@ResponseBody
+	@JsonIgnoreProperties
+	public String returnStartsWith(@RequestParam(name = "letter", defaultValue = "F") String letter) throws IOException {
+		return Filters.startsWith(letter);
+	}
+	
+	@GetMapping("/getPosition")
+	@ResponseBody
+	@JsonIgnoreProperties
+	public String returnPosition(@RequestParam(name = "position", defaultValue = "Midfielder") String position, @RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String team) throws IOException {
+		return Filters.positionFilter(position, team);
+	}
+	
 }
 	
 

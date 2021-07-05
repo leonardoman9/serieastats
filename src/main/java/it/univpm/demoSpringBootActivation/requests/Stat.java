@@ -2,12 +2,13 @@ package it.univpm.demoSpringBootActivation.requests;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import it.univpm.demoSpringBootActivation.model.*;
 import it.univpm.demoSpringBootActivation.utilities.*;
 /**
- * Classe contenente tutti metodi statici per effettuare statistiche
+ * Classe contenente  metodi statici per effettuare statistiche
  * @author leonardomannini
  *
  */
@@ -76,10 +77,13 @@ public class Stat {
 		Scorers scorers = new Scorers();
 		scorers = JsonParser.parseScorers(result);
 		result = longName + ":\n";
+		HashMap nationalityCounter = new HashMap();
 		
 		for (Scorer i : scorers.getScorers()) {
-			if (i.getTeam().getlongName().equals(longName)) result+= i.getPlayer().getNationality().toString()+"\n";
-	}
+			if (i.getTeam().getlongName().equals(longName)) {
+				result+= i.getPlayer().getNationality().toString()+"\n";
+			}
+	}	
 		System.out.println(result+"\n");
 		return result;
 	}
@@ -109,7 +113,6 @@ public class Stat {
 			}
 			
 		}
-		System.out.println();
 		return result;
 	}
 	/**
