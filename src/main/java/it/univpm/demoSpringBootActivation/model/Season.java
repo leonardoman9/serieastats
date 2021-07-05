@@ -1,5 +1,11 @@
 package it.univpm.demoSpringBootActivation.model;
 
+/**
+ * Classe che rappresenta una stagione,
+ * ovvero il periodo di durata di una Competizione
+ * @author leonardomannini
+ *
+ */
 public class Season {
 	private String startDate;
 	private String endDate;

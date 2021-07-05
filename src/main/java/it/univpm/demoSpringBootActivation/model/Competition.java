@@ -1,7 +1,11 @@
 package it.univpm.demoSpringBootActivation.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+/**
+ * Oggetto che rappresenta una Competizione, nel modo più generico possibile (Campionati, Coppe, ...)
+ * @author leonardomannini
+ *
+ */
 public class Competition {
 	@JsonProperty("count")
 	private int id;

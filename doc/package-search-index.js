@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"it.univpm.demoSpringBootActivation.controller"},{"l":"it.univpm.demoSpringBootActivation.exceptions"},{"l":"it.univpm.demoSpringBootActivation.model"},{"l":"it.univpm.demoSpringBootActivation.stats"}];updateSearchResults();

@@ -1,5 +1,9 @@
 package it.univpm.demoSpringBootActivation.model;
-
+/**
+ * Classe che rappresenta uno Stadio
+ * @author leonardomannini
+ *
+ */
 public class Venue {
 	private String venueName;
 

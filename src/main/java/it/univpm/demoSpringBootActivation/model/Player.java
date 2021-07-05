@@ -1,7 +1,11 @@
 package it.univpm.demoSpringBootActivation.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+/**
+ * Classe che rappresenta un giocatore.
+ * @author leonardomannini
+ *
+ */
 public class Player {
 	@JsonProperty("id")
 	private int id;

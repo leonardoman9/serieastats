@@ -1,9 +1,12 @@
 package it.univpm.demoSpringBootActivation.model;
+/**
+ * Classe che rappresenta il concetto di Nazionalità
+ * @author leonardomannini
+ *
+ */
 public class Nationality {
 	private String nationalityName;
-
 	public Nationality(String nationalityName) {
-		super();
 		this.nationalityName = nationalityName;
 	}
 

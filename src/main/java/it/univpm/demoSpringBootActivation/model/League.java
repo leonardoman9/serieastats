@@ -2,7 +2,12 @@ package it.univpm.demoSpringBootActivation.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+/**
+ * Caso particolare della classe Competizione, 
+ * ovvero classe che rappresenta una Competizione di tipo Campionato (League)
+ * @author leonardomannini
+ *
+ */
 @JsonIgnoreProperties
 public class League extends Competition{
 	@JsonProperty("count")
@@ -40,6 +45,9 @@ public class League extends Competition{
 	public League() {
 	}
 	@Override
+	/**
+	 * Funzione che stampa in modo ordinato informazioni riguardanti il campionato di Serie A.
+	 */
 	public String toString() {
 		String result = "";
 		result = "Number of Teams: \t" + count + "\n" +
@@ -52,6 +60,9 @@ public class League extends Competition{
 				"Winner: \t\t" + this.season.getWinner().getlongName() + "\n" + 
 				"TLA: \t\t\t" + this.season.getWinner().getTla() + "\n" +
 				"Crest Url: \t\t" + this.season.getWinner().getCrestUrl() + "\n";
+		/**
+		 * Stampa informazioni per ogni Squadra del campionato
+		 */
 		for(Team i : Teams) {
 			System.out.println(i.toString());
 			System.out.println("\n");
@@ -72,13 +83,21 @@ public class League extends Competition{
 				"Crest Url: \t\t" + this.season.getWinner().getCrestUrl() + "\n";
 		return result;
 	}
-	
+	/**
+	 * Funzione che, a partire dal nome della squadra, restituisce il corrispondente ID.
+	 * @param shortName Nome abbrevviato della squadra per effettuare la ricerca.
+	 * @return teamId se la ricerca è andata a buon fine, -1 altrimenti
+	 */
 	public int lookForId(String shortName) {
 		for(Team t : Teams) {
 			if(t.getShortName().equals(shortName)) return t.getteamId();
 		}
 		return -1;
 	}
+	/**
+	 * Funzione che stampa gli stadi del campionato, utilizzata nella statistica riguardante gli stadi.
+	 * @return Stringa composta dagli stadi in sequenza ordinata.
+	 */
 	public String countVenues() {
 		Venues<String> Venues = new Venues<String>();
 		for(Team t : this.Teams) {

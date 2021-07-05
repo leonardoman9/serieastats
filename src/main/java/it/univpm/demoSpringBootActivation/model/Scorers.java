@@ -1,7 +1,13 @@
 package it.univpm.demoSpringBootActivation.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+/**
+ * Classe che rappresenta tutti i marcatori di una competizione.
+ * @author leonardomannini
+ *
+ */
 public class Scorers {
 	@JsonProperty("count")
 	private int count;
@@ -10,11 +16,11 @@ public class Scorers {
 	@JsonProperty("season")
 	private League league;
 	@JsonProperty("scorers")
-	private Scorer[] scorers;
+	private ArrayList<Scorer> scorers;
 	public Scorers() {
 		
 	}
-	public Scorers(int count, Competition competition, League league, Scorer[] scorers) {
+	public Scorers(int count, Competition competition, League league, ArrayList<Scorer> scorers) {
 		super();
 		this.count = count;
 		this.competition = competition;
@@ -39,10 +45,10 @@ public class Scorers {
 	public void setLeague(League league) {
 		this.league = league;
 	}
-	public Scorer[] getScorers() {
+	public ArrayList<Scorer> getScorers() {
 		return scorers;
 	}
-	public void setScorers(Scorer[] scorers) {
+	public void setScorers(ArrayList<Scorer> scorers) {
 		this.scorers = scorers;
 	}
 	public String toString() {
@@ -52,12 +58,17 @@ public class Scorers {
 		}
 		return result;
 	}
+	/**
+	 * Funzione che popola un HashSet Nationalities per rappresentare tutti i diversi possibili di nazionalità,
+	 * per poi stamparli senza ripetizioni
+	 * @return
+	 */
 	public String countNationalities() {
 		Nationalities<String> Nationalities = new Nationalities<String>();
 		for(Scorer s : scorers) {
 			Nationalities.add(s.getPlayer().getNationality());
 		}
 		return  Nationalities.toString();
-	}		
+	}
 }
 

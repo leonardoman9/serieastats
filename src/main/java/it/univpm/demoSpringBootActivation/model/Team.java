@@ -1,30 +1,71 @@
 package it.univpm.demoSpringBootActivation.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+/**
+ * 
+ * Classe che rappresenta una squadra, composta da caratteristiche principali e un vettore di giocatori
+ * @author leonardomannini
+ *
+ */
 public class Team {
+	/**
+	 * ID della squadra, per come mappata dalle API football-data.org
+	 */
 	@JsonProperty("id")
 	private int teamId;
+	/**
+	 * Nome intero della squadra
+	 */
 	@JsonProperty("name")
 	private String longName;
+	/**
+	 * Nome abbreviato della squadra
+	 */
 	@JsonProperty("shortName")
 	private String shortName;
+	/**
+	 * Nome abbreviato a 3 caratteri
+	 */
 	@JsonProperty("tla")
 	private String tla;
+	/**
+	 * Url al logo societario della squadra
+	 */
 	@JsonProperty("crestUrl")
 	private String crestUrl;
+	/**
+	 * Numero di telefono di contatto della società
+	 */
 	@JsonProperty("phone")
 	private String phone;
+	/**
+	 * Sito del club
+	 */
 	@JsonProperty("website")
 	private String website;
+	/**
+	 * Indirizzo email di contatto della società
+	 */
 	@JsonProperty("email")
 	private String email;
+	/**
+	 * Indirizzo fisico della sede della società
+	 */
 	@JsonProperty("address")
 	private String address;
+	/**
+	 * Anno di fondazione della squadra
+	 */
 	@JsonProperty("founded")
 	private int founded;
+	/**
+	 * Colori societari della squadra
+	 */
 	@JsonProperty("clubColors")
 	private String clubColors;
+	/**
+	 * Nome dello stadio per le partite in casa della squadra
+	 */
 	@JsonProperty("venue")
 	private String venue;	
 public Team(int teamId, 
@@ -39,7 +80,6 @@ public Team(int teamId,
 			int founded, 
 			String clubColors, 
 			String venue) {
-		super();
 		this.teamId = teamId;
 		this.longName = longName;
 		this.shortName = shortName;
@@ -56,9 +96,8 @@ public Team(int teamId,
 
 
 	public Team() {
-		// TODO Auto-generated constructor stub
 	}
-
+	
 	public int getteamId() {
 		return teamId;
 	}

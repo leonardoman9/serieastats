@@ -3,6 +3,12 @@ package it.univpm.demoSpringBootActivation.model;
 import java.util.HashSet;
 
 @SuppressWarnings({ "hiding", "serial" })
+/**
+ * Classe estensione di HashSet che rappresenta in un insieme i diversi Stadi.
+ * @author leonardomannini
+ *
+ * @param <String>
+ */
 public class Venues<String> extends HashSet<String>{
 	
 	public int numberOfVenues() {

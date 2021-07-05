@@ -1,8 +1,17 @@
 package it.univpm.demoSpringBootActivation.model;
 
 import java.util.HashSet;
-
+/**
+ * Classe estensione di HashSet che rappresenta in un insieme le diverse nazionalità
+ * @author leonardomannini
+ *
+ * @param <String>
+ */
 public class Nationalities<String> extends HashSet<String>{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2145839179631061856L;
 	private Nationality[] nationalities;
 		
 		public int numberOfNationalities() {

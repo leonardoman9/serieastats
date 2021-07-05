@@ -1,7 +1,11 @@
 package it.univpm.demoSpringBootActivation.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+/**
+ * Classe che estende Player e rappresenta i marcatori.
+ * @author leonardomannini
+ *
+ */
 public class Scorer extends Player{
 	
 	private int numberOfGoals;
