@@ -52,7 +52,7 @@ public class Scorers {
 		this.scorers = scorers;
 	}
 	public String toString() {
-		String result = "";
+		String result = "The 100 best SA scorers: \n";
 		for (Scorer i : scorers) {
 			result+= i.getPlayer().getName() + ": " + i.getNumberOfGoals() + " goals" + " (" + i.getTeam().getlongName()+")\n";
 		}

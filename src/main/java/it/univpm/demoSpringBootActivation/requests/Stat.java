@@ -93,6 +93,7 @@ public class Stat {
 		for (Scorer i : scorers.getScorers()) {
 			if (i.getTeam().getlongName().equals(longName)) result += i.getPlayer().getName() + ": " + i.getNumberOfGoals()+ "\n"; //TODO non funziona, i.getName() è sempre null (?)
 		}
+		System.out.println("The 100 best SA scorers: \n");
 		System.out.println(result);
 		return result;
 	}

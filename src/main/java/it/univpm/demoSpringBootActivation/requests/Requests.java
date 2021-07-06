@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import it.univpm.demoSpringBootActivation.exceptions.MissingTeamException;
 import it.univpm.demoSpringBootActivation.model.League;
+import it.univpm.demoSpringBootActivation.model.Scorer;
 import it.univpm.demoSpringBootActivation.model.Scorers;
 import it.univpm.demoSpringBootActivation.model.Team;
 import it.univpm.demoSpringBootActivation.utilities.Dataset;
@@ -39,8 +40,8 @@ public class Requests {
 		League newLeague = new League();
 		newLeague = JsonParser.parseLeague(firstResult);
 		int teamId = newLeague.lookForId(nomeTeam);
-		//if(teamId==-1)
-		//	{throw new MissingTeamException(nomeTeam);}
+		if(teamId==-1)
+			{throw new MissingTeamException(nomeTeam);}
 		String result = Dataset.download("https://api.football-data.org/v2/teams/" + teamId);
 		Team newTeam = new Team();
 		newTeam = JsonParser.parseTeam(result);
@@ -52,11 +53,16 @@ public class Requests {
 	 * @return
 	 * @throws IOException
 	 */
-	public static Scorers returnLeagueScorers() throws IOException {
+	public static String returnLeagueScorers() throws IOException {
 		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/scorers?limit=100");
 		Scorers scorers = new Scorers();
 		scorers = JsonParser.parseScorers(result);
+		result = "The 100 best SA scorers: \n";
+		for (Scorer i : scorers.getScorers()) {
+				result+= i.getPlayer().getName()+ ": " + i.getNumberOfGoals() + " goals" + " (" + i.getTeam().getlongName()+")\n";
+		}	
+		
 		System.out.println(scorers);
-		return scorers;
+		return result;
 	}
 }

@@ -85,10 +85,6 @@ public class SimpleRestController {
 	public String returnFoundedAfter(@RequestParam(name = "year", defaultValue = "1800") String yearFounded) throws IOException {
 		return Stat.returnFoundedAfter(yearFounded);
 	}
-	/*  TODO
-	 *  localhost:8080/teamsForEachVenue
-	 *  Shows all teams in every venue
-	 */
 	@GetMapping("/teamsForEachVenue")
 	@ResponseBody
 	@JsonIgnoreProperties
@@ -96,17 +92,17 @@ public class SimpleRestController {
 		return Stat.returnTeamsVenues();
 	}
 
-	@GetMapping("/leagueScorers")   //TODO: non ritorna una stringa fatta bene
+	@GetMapping("/leagueScorers")   
 	@ResponseBody
 	/**
 	 *  Mostra i primi 100 marcatori della Serie A, ordinati per numero di gol
 	 * 	localhost:8080/leagueScorers
-	 * TODO non so perché stampa un errore
+	 * 
 	 * @return
 	 * @throws IOException
 	 * @throws MissingTeamException
 	 */
-	public Scorers returnLeagueScorers() throws IOException, MissingTeamException {
+	public String returnLeagueScorers() throws IOException, MissingTeamException {
 		return Requests.returnLeagueScorers();
 	}
 	@GetMapping("/teamScorers")
