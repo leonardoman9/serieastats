@@ -48,6 +48,37 @@ public class Stat {
 		return newLeague.countVenues();
 	}
 	/**
+	 * Funzione che recupera e stampa tutti gli stadi della Serie A contando quante sqaudre diverse giocano
+	 * in ognuno di questi.
+	 * @return
+	 * @throws IOException
+	 */
+	public static String returnTeamsVenues() throws IOException {
+		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/teams");
+		League newLeague = new League();
+		newLeague = JsonParser.parseLeague(result);
+		List<String> stadi = new ArrayList<String>();
+		List<Integer> squadre = new ArrayList<Integer>();
+		for(Team t: newLeague.getTeams()) {
+			if(!stadi.contains(t.getVenue())) {
+				stadi.add(t.getVenue());
+				squadre.add(1);
+			}
+			else {
+				int index=stadi.indexOf(t.getVenue());
+				squadre.set(index, squadre.get(index)+1);
+			}
+		}
+		System.out.println("How many teams play in each venue: ");
+		result="";
+		for(int i=0; i<stadi.size(); i++) {
+			result = result + stadi.get(i)+": "+squadre.get(i)+"\n";
+		}
+		System.out.println(result);
+		return result;
+	}
+	
+	/**
 	 * Funzione che recupera e stampa tutti i marcatori di una determinata squadra scelta dall'utente
 	 * @param longName
 	 * @return
@@ -115,14 +146,7 @@ public class Stat {
 		}
 		return result;
 	}
-	/**
-	 * 
-	 * @return
-	 * @throws IOException
-	 */
-	public static String returnTeamsVenues() throws IOException {
-		return null;
-	}
+
 
 	
 }

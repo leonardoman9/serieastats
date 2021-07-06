@@ -6,7 +6,6 @@ package it.univpm.demoSpringBootActivation.model;
  */
 public class Venue {
 	private String venueName;
-
 	public Venue(String venueName) {
 		super();
 		this.venueName = venueName;
