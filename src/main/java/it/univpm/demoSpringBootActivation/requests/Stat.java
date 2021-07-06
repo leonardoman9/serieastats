@@ -149,9 +149,8 @@ public class Stat {
 	 * @throws IOException
 	 */
 	public static String returnYoungScorers(String longName)  throws IOException {
-		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/scorers?limit=100");
-		Scorers scorersp= new Scorers();
-		scorersp = JsonParser.parseScorers(result);
+		String result ="";
+		Scorers scorersp= Requests.returnLeagueScorers();
 		List<Scorer>  scorers = new ArrayList<Scorer>();
 		result = longName + ":\n";
 		for (Scorer i : scorersp.getScorers()) {

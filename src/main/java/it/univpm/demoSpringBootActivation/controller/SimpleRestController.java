@@ -193,7 +193,7 @@ public class SimpleRestController {
 		return result;
 	}
 	
-	//DA QUI INIZIANO I FILTRI""
+	//DA QUI INIZIANO I FILTRI
 	
 	/**
 	 * Mostra tutte le squadre il cui nome inizia con una certa lettera
