@@ -7,12 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import it.univpm.demoSpringBootActivation.model.League;
-import it.univpm.demoSpringBootActivation.model.Scorers;
-import it.univpm.demoSpringBootActivation.model.Team;
-import it.univpm.demoSpringBootActivation.requests.Filters;
-import it.univpm.demoSpringBootActivation.requests.Requests;
-import it.univpm.demoSpringBootActivation.requests.Stat;
+import it.univpm.demoSpringBootActivation.model.*;
+import it.univpm.demoSpringBootActivation.requests.*;
 import it.univpm.demoSpringBootActivation.exceptions.*;
 /**
  * RestController dell'applicazione WebRest SpringBoot
@@ -210,16 +206,40 @@ public class SimpleRestController {
 		System.out.println(result);
 		return result;
 	}
-	
+	/**
+	 * 
+	 * @param position
+	 * @param team
+	 * @return
+	 * @throws IOException
+	 */
 	@GetMapping("/getPosition")
 	@ResponseBody
 	@JsonIgnoreProperties
-	public String returnPosition(@RequestParam(name = "position", defaultValue = "Midfielder") String position, @RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String team) throws IOException {
-		String result = Filters.positionFilter(position, team);
+	public String returnPosition( @RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String team, 
+								  @RequestParam(name = "position", defaultValue = "Attacker") String position) 
+								  throws IOException {
+		String result = Filters.positionFilter(team, position);
 		System.out.println(result);
 		return result;
 	}
-	
+	public String returnPosition( @RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String team, 
+						   		  @RequestParam(name = "position1", defaultValue = "Attacker") String position1,
+						   		  @RequestParam(name = "position2", defaultValue = "Midfielder") String position2)
+						   		  throws IOException {
+		String result = Filters.positionFilter(team, position1, position2);
+		System.out.println(result);
+		return result;
+	}
+	public String returnPosition( @RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String team, 
+	   		  					  @RequestParam(name = "position1", defaultValue = "Attacker") String position1,
+	   		  					  @RequestParam(name = "position2", defaultValue = "Midfielder") String position2,
+	   		  					  @RequestParam(name = "position2", defaultValue = "Defender") String position3)
+	   		  					  throws IOException {
+		String result = Filters.positionFilter(team, position1, position2, position3);
+		System.out.println(result);
+		return result;
+	}
 }
 	
 

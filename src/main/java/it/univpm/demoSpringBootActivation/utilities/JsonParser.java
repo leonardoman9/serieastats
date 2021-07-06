@@ -11,7 +11,7 @@ import it.univpm.demoSpringBootActivation.model.*;
 public class JsonParser {
 
 	
-	@JsonIgnoreProperties
+
 	/**
 	 * Funzione che effettua la deserializzazione, da una stringa (json) ad un oggetto
 	 * @param jsonObj
@@ -19,7 +19,8 @@ public class JsonParser {
 	 * @throws JsonMappingException
 	 * @throws JsonProcessingException
 	 */
-		public static Team parseTeam(String jsonObj) throws JsonMappingException, JsonProcessingException {
+	@JsonIgnoreProperties
+	public static Team parseTeam(String jsonObj) throws JsonMappingException, JsonProcessingException {
 		// JSONObject json = new JSONObject(jsonObj);
 		Team newTeam = new Team();
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -27,6 +28,13 @@ public class JsonParser {
 		newTeam = objectMapper.readValue(jsonObj, Team.class);
 		return newTeam;
 	}
+	/**
+	 * 
+	 * @param jsonObj
+	 * @return
+	 * @throws JsonMappingException
+	 * @throws JsonProcessingException
+	 */
 	@JsonIgnoreProperties
 	public static League parseLeague(String jsonObj) throws JsonMappingException, JsonProcessingException {
 		// JSONObject json = new JSONObject(jsonObj);
@@ -36,6 +44,14 @@ public class JsonParser {
 		newLeague = objectMapper.readValue(jsonObj, League.class);
 		return newLeague;
 	}
+	/**
+	 * 
+	 * @param jsonObj
+	 * @return
+	 * @throws JsonMappingException
+	 * @throws JsonProcessingException
+	 */
+	@JsonIgnoreProperties
 	public static Scorers parseScorers(String jsonObj) throws JsonMappingException, JsonProcessingException {
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

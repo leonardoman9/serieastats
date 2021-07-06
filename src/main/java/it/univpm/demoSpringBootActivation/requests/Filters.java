@@ -53,13 +53,22 @@ public class Filters {
 	}
 	//TODO
 	public static String positionFilter(String position, String teamName) throws IOException {
-		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/scorers?limit=100");
-		Scorers scorers = new Scorers();
-		scorers = JsonParser.parseScorers(result);
-		result = "";
+		String result = "";
+		Scorers scorers = Requests.returnLeagueScorers();
+		
 		
 		
 		
 		return result;
+	}
+
+	public static String positionFilter(String team, String position1, String position2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static String positionFilter(String team, String position1, String position2, String position3) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

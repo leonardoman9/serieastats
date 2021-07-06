@@ -2,7 +2,6 @@ package it.univpm.demoSpringBootActivation.requests;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import it.univpm.demoSpringBootActivation.model.*;
@@ -135,13 +134,6 @@ public class Stat {
 		}
 		return result;
 	}
-	/*
-	for(int i=0; i<stadi.size(); i++) {
-		result = result + stadi.get(i)+": "+squadre.get(i)+"\n";
-	}
-	System.out.println(result);
-	return result;
-	*/
 	/**
 	 * Funzione che restituisce tutti i marcatori di una determinata squadra con un età minore di 28 anni.
 	 * @param longName
