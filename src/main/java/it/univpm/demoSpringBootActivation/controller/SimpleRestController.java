@@ -136,6 +136,23 @@ public class SimpleRestController {
 	public String returnteamNationalities(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName) throws IOException, MissingTeamException {
 		return Stat.returnTeamNationalities(longName);
 	}
+	
+	@GetMapping("/countNationalities")
+	@ResponseBody
+	/**
+	 * /*  
+	 *  Show the number of scorers of each nationality of the team
+	 *  Only works with Long Team Name, because the scorers request returns a Team object with only a Long Name attribute.
+	 *  localhost:8080/countNationalities?team={teamName}
+	 *  Inserire %20 al posto di uno spazio nel Nome del team
+	 * @param longName
+	 * @return
+	 * @throws IOException
+	 * @throws MissingTeamException
+	 */
+	public String returnCountNationalities(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName) throws IOException, MissingTeamException {
+		return Stat.returnCountNationalities(longName);
+	}
 	@GetMapping("/youngScorers")
 	@ResponseBody
 	/**

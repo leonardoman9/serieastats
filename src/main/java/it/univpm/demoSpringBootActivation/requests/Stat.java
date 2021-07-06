@@ -119,8 +119,45 @@ public class Stat {
 		System.out.println(result+"\n");
 		return result;
 	}
-	
-	
+	/**
+	 *Funzione che recupera e stampa marcatori di una certa nazionalità di una determinata squadra scelta dall'utente
+	 * 
+	 * @param longName
+	 * @return
+	 * @throws IOException
+	 */
+	public static String returnCountNationalities(String longName) throws IOException {
+		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/scorers?limit=100");
+		Scorers scorers = new Scorers();
+		scorers = JsonParser.parseScorers(result);
+		List<String> nationalities = new ArrayList<String>();
+		List<Integer> count = new ArrayList<Integer>();		
+		for (Scorer i : scorers.getScorers()) {
+			if (i.getTeam().getlongName().equals(longName)) {
+				if(!nationalities.contains(i.getPlayer().getNationality())) {
+					nationalities.add(i.getPlayer().getNationality());
+					count.add(1);
+				}
+				else {
+					int index=nationalities.indexOf(i.getPlayer().getNationality());
+					count.set(index, count.get(index)+1);
+				}
+			}
+		}	
+		result = "Number of "+longName+" players of different nationalaties:\n";
+		for(int i=0; i<nationalities.size(); i++) {
+			result = result + nationalities.get(i)+": "+count.get(i)+"\n";
+		}
+		System.out.println(result+"\n");
+		return result;
+	}
+	/*
+	for(int i=0; i<stadi.size(); i++) {
+		result = result + stadi.get(i)+": "+squadre.get(i)+"\n";
+	}
+	System.out.println(result);
+	return result;
+	*/
 	/**
 	 * Funzione che restituisce tutti i marcatori di una determinata squadra con un età minore di 28 anni.
 	 * @param longName
