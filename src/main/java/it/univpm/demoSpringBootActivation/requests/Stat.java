@@ -20,17 +20,16 @@ public class Stat {
 	 * @throws IOException
 	 */
 	public static String returnFoundedAfter(String yearFounded) throws IOException {
-		String result;
+		String result="";
 		int yearFoundedInt = Integer.parseInt(yearFounded);
 		Team[] Teams;
-		result = Dataset.download("https://api.football-data.org/v2/competitions/SA/teams");
-		League newLeague = JsonParser.parseLeague(result);
+		League newLeague = Requests.returnLeague();
 		Teams = newLeague.getTeams();
 		for (Team i : Teams) {
 			if (i.getFounded() > yearFoundedInt) {
-				System.out.print(i.getShortName()+ ":");
-				if(i.getShortName().length()<7) System.out.print("\t"); 
-				System.out.println("\t" + i.getFounded());
+				result+=i.getShortName()+ ":";
+				if(i.getShortName().length()<7) result+="\t"; 
+				result+="\t" + i.getFounded()+"\n";
 			}
 		}
 		return result;
@@ -41,10 +40,7 @@ public class Stat {
 	 * @throws IOException
 	 */
 	public static String returnVenues() throws IOException {
-		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/teams");
-		League newLeague = new League();
-		newLeague = JsonParser.parseLeague(result);
-		System.out.println(newLeague.countVenues());
+		League newLeague = Requests.returnLeague();
 		return newLeague.countVenues();
 	}
 	/**
@@ -54,9 +50,8 @@ public class Stat {
 	 * @throws IOException
 	 */
 	public static String returnTeamsVenues() throws IOException {
-		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/teams");
-		League newLeague = new League();
-		newLeague = JsonParser.parseLeague(result);
+		String result = "";
+		League newLeague = Requests.returnLeague();
 		List<String> stadi = new ArrayList<String>();
 		List<Integer> squadre = new ArrayList<Integer>();
 		for(Team t: newLeague.getTeams()) {
@@ -69,12 +64,10 @@ public class Stat {
 				squadre.set(index, squadre.get(index)+1);
 			}
 		}
-		System.out.println("How many teams play in each venue: ");
-		result="";
+		result+="How many teams play in each venue: \n";
 		for(int i=0; i<stadi.size(); i++) {
 			result = result + stadi.get(i)+": "+squadre.get(i)+"\n";
 		}
-		System.out.println(result);
 		return result;
 	}
 	
@@ -85,16 +78,13 @@ public class Stat {
 	 * @throws IOException
 	 */
 	public static String returnTeamScorers(String longName) throws IOException {
-		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/scorers?limit=100");
-		Scorers scorers = new Scorers();
-		scorers = JsonParser.parseScorers(result);
+		String result;
+		Scorers scorers = Requests.returnLeagueScorers();
 		result = "";
 		result = longName + ":\n";
 		for (Scorer i : scorers.getScorers()) {
 			if (i.getTeam().getlongName().equals(longName)) result += i.getPlayer().getName() + ": " + i.getNumberOfGoals()+ "\n"; //TODO non funziona, i.getName() è sempre null (?)
 		}
-		System.out.println("The 100 best SA scorers: \n");
-		System.out.println(result);
 		return result;
 	}
 	/**
@@ -105,18 +95,14 @@ public class Stat {
 	 * @throws IOException
 	 */
 	public static String returnTeamNationalities(String longName) throws IOException {
-		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/scorers?limit=100");
-		Scorers scorers = new Scorers();
-		scorers = JsonParser.parseScorers(result);
+		String result="";
+		Scorers scorers = Requests.returnLeagueScorers();
 		result = longName + ":\n";
-		HashMap nationalityCounter = new HashMap();
-		
 		for (Scorer i : scorers.getScorers()) {
 			if (i.getTeam().getlongName().equals(longName)) {
 				result+= i.getPlayer().getNationality().toString()+"\n";
 			}
 	}	
-		System.out.println(result+"\n");
 		return result;
 	}
 	/**
@@ -127,9 +113,8 @@ public class Stat {
 	 * @throws IOException
 	 */
 	public static String returnCountNationalities(String longName) throws IOException {
-		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/scorers?limit=100");
-		Scorers scorers = new Scorers();
-		scorers = JsonParser.parseScorers(result);
+		String result = "";
+		Scorers scorers = Requests.returnLeagueScorers();
 		List<String> nationalities = new ArrayList<String>();
 		List<Integer> count = new ArrayList<Integer>();		
 		for (Scorer i : scorers.getScorers()) {
@@ -148,7 +133,6 @@ public class Stat {
 		for(int i=0; i<nationalities.size(); i++) {
 			result = result + nationalities.get(i)+": "+count.get(i)+"\n";
 		}
-		System.out.println(result+"\n");
 		return result;
 	}
 	/*
@@ -164,7 +148,7 @@ public class Stat {
 	 * @return
 	 * @throws IOException
 	 */
-	public static String youngScorers(String longName)  throws IOException {
+	public static String returnYoungScorers(String longName)  throws IOException {
 		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/scorers?limit=100");
 		Scorers scorersp= new Scorers();
 		scorersp = JsonParser.parseScorers(result);
@@ -178,7 +162,6 @@ public class Stat {
 			if(28 > (2021 - a.getYear())) {
 				int year = 2021-a.getYear();
 				result += i.getPlayer().getName() + ": " + year + " years"+"\n";
-				System.out.println(i.getPlayer().getName() + ": " + year + " years");
 			}
 			
 		}

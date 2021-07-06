@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import ch.qos.logback.core.filter.Filter;
 import it.univpm.demoSpringBootActivation.model.League;
 import it.univpm.demoSpringBootActivation.model.Scorers;
 import it.univpm.demoSpringBootActivation.model.Team;
@@ -40,7 +39,11 @@ public class SimpleRestController {
 	 * @throws IOException
 	 */
 	public League returnLeague(@RequestParam(name = "showTeams", defaultValue = "true") String showTeams) throws IOException {
-		return Requests.returnLeague(Boolean.parseBoolean(showTeams));
+		League result = Requests.returnLeague();
+		if (Boolean.parseBoolean(showTeams)) {System.out.println(result.toStringHeaderAndTeams());}	
+		else						 { System.out.println(result.toStringHeader());}
+		
+		return result;
 	}
 	
 	
@@ -56,8 +59,28 @@ public class SimpleRestController {
 	 * @throws MissingTeamException
 	 */
 	public  Team returnTeam(@RequestParam(name = "name", defaultValue = "Roma") String nomeTeam) throws IOException, MissingTeamException {
-		return Requests.returnTeam(nomeTeam);
+		Team newTeam = Requests.returnTeam(nomeTeam);
+		System.out.println(newTeam+"\n");
+		return newTeam;
 	}
+	@GetMapping("/leagueScorers")       //TODO RISOLVERE!!!
+	@ResponseBody
+	/**
+	 *  Mostra i primi 100 marcatori della Serie A, ordinati per numero di gol
+	 * 	localhost:8080/leagueScorers
+	 * 
+	 * @return
+	 * @throws IOException
+	 * @throws MissingTeamException
+	 */
+	public Scorers returnLeagueScorers() throws IOException, MissingTeamException {
+		Scorers scorers = Requests.returnLeagueScorers();
+		System.out.println(scorers.toString());
+		return scorers;
+	}
+	
+	
+	//DA QUI INIZIANO LE STATISTICHE//
 	
 	@GetMapping("/venues")
 	@ResponseBody
@@ -69,7 +92,9 @@ public class SimpleRestController {
 	 * @throws IOException
 	 */
 	public String returnVenues() throws IOException {
-		return Stat.returnVenues();
+		String result = Stat.returnVenues();
+		System.out.println(result);
+		return result;
 	}
 
 	@GetMapping("/foundedAfter")
@@ -83,28 +108,20 @@ public class SimpleRestController {
 	 * @throws IOException
 	 */
 	public String returnFoundedAfter(@RequestParam(name = "year", defaultValue = "1800") String yearFounded) throws IOException {
-		return Stat.returnFoundedAfter(yearFounded);
+		String result = Stat.returnFoundedAfter(yearFounded);
+		System.out.println(result);
+		return result;
 	}
 	@GetMapping("/teamsForEachVenue")
 	@ResponseBody
 	@JsonIgnoreProperties
 	public String returnTeamsVenues() throws IOException {
-		return Stat.returnTeamsVenues();
+		String result = Stat.returnTeamsVenues();
+		System.out.println(result);
+		return result;
 	}
 
-	@GetMapping("/leagueScorers")   
-	@ResponseBody
-	/**
-	 *  Mostra i primi 100 marcatori della Serie A, ordinati per numero di gol
-	 * 	localhost:8080/leagueScorers
-	 * 
-	 * @return
-	 * @throws IOException
-	 * @throws MissingTeamException
-	 */
-	public String returnLeagueScorers() throws IOException, MissingTeamException {
-		return Requests.returnLeagueScorers();
-	}
+	
 	@GetMapping("/teamScorers")
 	@ResponseBody
 	/**
@@ -117,7 +134,9 @@ public class SimpleRestController {
 	 * @throws MissingTeamException
 	 */
 	public String returnteamScorers(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName) throws IOException, MissingTeamException {
-		return Stat.returnTeamScorers(longName);
+		String result = Stat.returnTeamScorers(longName);
+		System.out.println(result);
+		return result;
 	}
 	
 	@GetMapping("/teamNationalities")
@@ -134,7 +153,9 @@ public class SimpleRestController {
 	 * @throws MissingTeamException
 	 */
 	public String returnteamNationalities(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName) throws IOException, MissingTeamException {
-		return Stat.returnTeamNationalities(longName);
+		String result = Stat.returnTeamNationalities(longName);
+		System.out.println(result);
+		return result;
 	}
 	
 	@GetMapping("/countNationalities")
@@ -151,7 +172,9 @@ public class SimpleRestController {
 	 * @throws MissingTeamException
 	 */
 	public String returnCountNationalities(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName) throws IOException, MissingTeamException {
-		return Stat.returnCountNationalities(longName);
+		String result = Stat.returnCountNationalities(longName);
+		System.out.println(result);
+		return result;
 	}
 	@GetMapping("/youngScorers")
 	@ResponseBody
@@ -165,8 +188,12 @@ public class SimpleRestController {
 	 * @throws MissingTeamException
 	 */
 	public String returnYoungScorers(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName) throws IOException, MissingTeamException {
-		return Stat.youngScorers(longName);
+		String result = Stat.returnYoungScorers(longName);
+		System.out.println(result);
+		return result;
 	}
+	
+	//DA QUI INIZIANO I FILTRI""
 	
 	/**
 	 * Mostra tutte le squadre il cui nome inizia con una certa lettera
@@ -179,14 +206,18 @@ public class SimpleRestController {
 	@ResponseBody
 	@JsonIgnoreProperties
 	public String returnStartsWith(@RequestParam(name = "letter", defaultValue = "F") String letter) throws IOException {
-		return Filters.startsWith(letter);
+		String result = Filters.startsWith(letter);
+		System.out.println(result);
+		return result;
 	}
 	
 	@GetMapping("/getPosition")
 	@ResponseBody
 	@JsonIgnoreProperties
 	public String returnPosition(@RequestParam(name = "position", defaultValue = "Midfielder") String position, @RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String team) throws IOException {
-		return Filters.positionFilter(position, team);
+		String result = Filters.positionFilter(position, team);
+		System.out.println(result);
+		return result;
 	}
 	
 }

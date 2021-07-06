@@ -20,12 +20,11 @@ public class Requests {
 	 * @return Oggetto di tipo League popolato dalle informazioni sulla Serie A
 	 * @throws IOException
 	 */
-	public static League returnLeague(boolean showTeams) throws IOException {
+	public static League returnLeague() throws IOException {
 		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/teams");
 		League newLeague = new League();
 		newLeague = JsonParser.parseLeague(result);
-		if (showTeams==true) System.out.println(newLeague.toString());
-			else System.out.println(newLeague.toStringNoTeams());
+		
 		return newLeague;
 	}
 	/**
@@ -45,7 +44,6 @@ public class Requests {
 		String result = Dataset.download("https://api.football-data.org/v2/teams/" + teamId);
 		Team newTeam = new Team();
 		newTeam = JsonParser.parseTeam(result);
-		System.out.println(newTeam+"\n");
 		return newTeam;		
 	}
 	/**
@@ -53,7 +51,7 @@ public class Requests {
 	 * @return
 	 * @throws IOException
 	 */
-	public static String returnLeagueScorers() throws IOException {
+	public static Scorers returnLeagueScorers() throws IOException {
 		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/scorers?limit=100");
 		Scorers scorers = new Scorers();
 		scorers = JsonParser.parseScorers(result);
@@ -61,8 +59,6 @@ public class Requests {
 		for (Scorer i : scorers.getScorers()) {
 				result+= i.getPlayer().getName()+ ": " + i.getNumberOfGoals() + " goals" + " (" + i.getTeam().getlongName()+")\n";
 		}	
-		
-		System.out.println(scorers);
-		return result;
+		return scorers;
 	}
 }

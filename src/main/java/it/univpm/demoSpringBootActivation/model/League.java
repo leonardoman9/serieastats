@@ -46,32 +46,20 @@ public class League extends Competition{
 	private Team[] Teams;
 	public League() {
 	}
-	@Override
 	/**
 	 * Funzione che stampa in modo ordinato informazioni riguardanti il campionato di Serie A.
 	 */
-	public String toString() {
+	public String toStringTeams() {
 		String result = "";
-		result = "Number of Teams: \t" + count + "\n" +
-				"Competition Area: \t " + this.competition.getArea().getName() + "\n" +
-				"Competition Name: \t" + this.competition.getName() + "\n" + 
-				"Competition Code: \t" + this.competition.getCode() + "\n" +
-				"Competition Plan: \t" + this.competition.getPlan() + "\n" + 
-				"Start date: \t\t" + this.season.getStartDate() + "\n" +
-				"End date: \t\t" + this.season.getEndDate() + "\n" +
-				"Winner: \t\t" + this.season.getWinner().getlongName() + "\n" + 
-				"TLA: \t\t\t" + this.season.getWinner().getTla() + "\n" +
-				"Crest Url: \t\t" + this.season.getWinner().getCrestUrl() + "\n";
 		/**
 		 * Stampa informazioni per ogni Squadra del campionato
 		 */
 		for(Team i : Teams) {
-			System.out.println(i.toString());
-			System.out.println("\n");
+			result+=i.toString()+"\n";
 		}
 		return result;
 	}
-	public String toStringNoTeams() {
+	public String toStringHeader() {
 		String result = "";
 		result = "Number of Teams: \t" + count + "\n" +
 				"Competition Area: \t " + this.competition.getArea().getName() + "\n" +
@@ -83,6 +71,11 @@ public class League extends Competition{
 				"Winner: \t\t" + this.season.getWinner().getlongName() + "\n" + 
 				"TLA: \t\t\t" + this.season.getWinner().getTla() + "\n" +
 				"Crest Url: \t\t" + this.season.getWinner().getCrestUrl() + "\n";
+		return result;
+	}
+	public String toStringHeaderAndTeams() {
+		String result="";
+		result += this.toStringHeader()+"\n" + this.toStringTeams();
 		return result;
 	}
 	/**
