@@ -29,30 +29,7 @@ public class Requests {
 		newLeague = JsonParser.parseLeague("league.json");
 		return newLeague;
 	}
-	/**
-	 * Funzione che chiama le API per ottenere una stringa con formato JSON e deserializzarla in un oggetto di tipo Team
-	 * @param nomeTeam
-	 * @return
-	 * @throws IOException
-	 * @throws MissingTeamException
-	 */
-	public static Team returnTeam(String nomeTeam) throws IOException, MissingTeamException {
-		File leagueFile = new File("league.json");
-		League newLeague = new League();
-		if (!leagueFile.exists()) {
-			 newLeague = Requests.returnLeague();
-		}
-		else {
-			 newLeague = JsonParser.parseLeague(FileInputOutput.toString("league.json")); // TODO ???'
-		}
-		int teamId = newLeague.lookForId(nomeTeam);
-		if(teamId==-1)
-			{throw new MissingTeamException(nomeTeam);}
-		String result = Dataset.download("https://api.football-data.org/v2/teams/" + teamId);
-		Team newTeam = new Team();
-		newTeam = JsonParser.parseTeam(result);
-		return newTeam;	
-	}
+	
 	/**
 	 * Funzione che chiama le API per ottenere una stringa con formato JSON e deserializzarla in un oggetto di tipo Scorers
 	 * @return

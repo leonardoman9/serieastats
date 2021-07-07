@@ -63,12 +63,12 @@ public class Scorers {
 	 * per poi stamparli senza ripetizioni
 	 * @return
 	 */
-	public String countNationalities() {
+	/*public String countNationalities() {
 		Nationalities<String> Nationalities = new Nationalities<String>();
 		for(Scorer s : scorers) {
 			Nationalities.add(s.getPlayer().getNationality());
 		}
 		return  Nationalities.toString();
-	}
+	}*/
 }
 

@@ -22,7 +22,7 @@ public class Stat {
 		String result="";
 		int yearFoundedInt = Integer.parseInt(yearFounded);
 		Team[] Teams;
-		League newLeague = Requests.returnLeague();
+		League newLeague = JsonParser.parseLeague("league.json");
 		Teams = newLeague.getTeams();
 		for (Team i : Teams) {
 			if (i.getFounded() > yearFoundedInt) {
@@ -39,7 +39,7 @@ public class Stat {
 	 * @throws IOException
 	 */
 	public static String returnVenues() throws IOException {
-		League newLeague = Requests.returnLeague();
+		League newLeague = JsonParser.parseLeague("league.json");
 		return newLeague.countVenues();
 	}
 	/**
@@ -50,7 +50,7 @@ public class Stat {
 	 */
 	public static String returnTeamsVenues() throws IOException {
 		String result = "";
-		League newLeague = Requests.returnLeague();
+		League newLeague = JsonParser.parseLeague("league.json");
 		List<String> stadi = new ArrayList<String>();
 		List<Integer> squadre = new ArrayList<Integer>();
 		for(Team t: newLeague.getTeams()) {
@@ -78,7 +78,7 @@ public class Stat {
 	 */
 	public static String returnTeamScorers(String longName) throws IOException {
 		String result;
-		Scorers scorers = Requests.returnLeagueScorers();
+		Scorers scorers = JsonParser.parseScorers("scorers.json");
 		result = "";
 		result = longName + ":\n";
 		for (Scorer i : scorers.getScorers()) {
@@ -95,13 +95,18 @@ public class Stat {
 	 */
 	public static String returnTeamNationalities(String longName) throws IOException {
 		String result="";
-		Scorers scorers = Requests.returnLeagueScorers();
+		Scorers scorers = JsonParser.parseScorers("scorers.json");
+		List<String> nationalities = new ArrayList<String>();
 		result = longName + ":\n";
 		for (Scorer i : scorers.getScorers()) {
 			if (i.getTeam().getlongName().equals(longName)) {
-				result+= i.getPlayer().getNationality().toString()+"\n";
+				if(!nationalities.contains(i.getPlayer().getNationality())) {
+					nationalities.add(i.getPlayer().getNationality());
+					result=result+i.getPlayer().getNationality()+"\n";
+				}
 			}
-	}	
+		}
+		
 		return result;
 	}
 	/**
@@ -113,7 +118,7 @@ public class Stat {
 	 */
 	public static String returnCountNationalities(String longName) throws IOException {
 		String result = "";
-		Scorers scorers = Requests.returnLeagueScorers();
+		Scorers scorers =  JsonParser.parseScorers("scorers.json");
 		List<String> nationalities = new ArrayList<String>();
 		List<Integer> count = new ArrayList<Integer>();		
 		for (Scorer i : scorers.getScorers()) {
@@ -142,7 +147,7 @@ public class Stat {
 	 */
 	public static String returnYoungScorers(String longName)  throws IOException {
 		String result ="";
-		Scorers scorersp= Requests.returnLeagueScorers();
+		Scorers scorersp= JsonParser.parseScorers("scorers.json");
 		List<Scorer>  scorers = new ArrayList<Scorer>();
 		result = longName + ":\n";
 		for (Scorer i : scorersp.getScorers()) {
