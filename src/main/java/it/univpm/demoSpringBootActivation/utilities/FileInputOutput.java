@@ -13,7 +13,6 @@ public class FileInputOutput {
 		writer.close();
 	}
 	public static String toString(String fileName) throws IOException {
-		//TODO
 		BufferedReader reader = new BufferedReader(new FileReader(fileName));
 		 String line="{";
 		 while(reader.read()!=-1) {

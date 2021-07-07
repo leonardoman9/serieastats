@@ -1,7 +1,9 @@
 package it.univpm.demoSpringBootActivation.requests;
 
+import java.io.File;
 import java.io.IOException;
 
+import it.univpm.demoSpringBootActivation.exceptions.MissingTeamException;
 import it.univpm.demoSpringBootActivation.model.*;
 import it.univpm.demoSpringBootActivation.utilities.*;
 /**
@@ -11,6 +13,24 @@ import it.univpm.demoSpringBootActivation.utilities.*;
  */
 public class Filters {
 	/**
+	 * Funzione che chiama le API per ottenere una stringa con formato JSON e deserializzarla in un oggetto di tipo Team
+	 * @param nomeTeam
+	 * @return
+	 * @throws IOException
+	 * @throws MissingTeamException
+	 */
+	public static Team returnTeam(String nomeTeam) throws IOException, MissingTeamException { //ex richiesa
+		File leagueFile = new File("league.json");
+		League newLeague = JsonParser.parseLeague("league.json"); // TODO ???'
+		int teamId = newLeague.lookForId(nomeTeam);
+		if(teamId==-1)
+			{throw new MissingTeamException(nomeTeam);}
+		String result = Dataset.download("https://api.football-data.org/v2/teams/" + teamId);
+		FileInputOutput.toFile(result,  "team"+teamId+".json");
+		Team newTeam = JsonParser.parseTeam("team"+teamId+".json");
+		return newTeam;	
+	}
+	/**
 	 * Funzione che, dato in input un anno, restituisce tutte le squadre fondate dopo quell'anno
 	 * @param year
 	 * @return
@@ -18,10 +38,8 @@ public class Filters {
 	 */
 	public static String foundedYearFilter(String year) throws IOException{
 		int yearStr =Integer.parseInt(year);
-		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/teams");
-		League newLeague = new League();
-		newLeague = JsonParser.parseLeague(result);
-		result = year + ":\n";
+		League newLeague = JsonParser.parseLeague("league.json");
+		String result = year + ":\n";
 		for (Team i : newLeague.getTeams()) {
 			if(i.getFounded()==yearStr) {
 				result += i.getlongName()+"\n";
@@ -39,10 +57,8 @@ public class Filters {
 	 */
 	public static String startsWith(String letter) throws IOException {
 		char letterChar = letter.charAt(0);
-		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/teams");
-		League newLeague = new League();
-		newLeague = JsonParser.parseLeague(result);
-		result = "Club names that start with letter " + letterChar + ":\n";
+		League newLeague= JsonParser.parseLeague("league.json");
+		String result = "Club names that start with letter " + letterChar + ":\n";
 		for (Team i : newLeague.getTeams()) {
 			if (i.getlongName().charAt(0)==letterChar) {
 				result += i.getlongName() + "\n";
@@ -55,10 +71,6 @@ public class Filters {
 	public static String positionFilter(String position, String teamName) throws IOException {
 		String result = "";
 		Scorers scorers = Requests.returnLeagueScorers();
-		
-		
-		
-		
 		return result;
 	}
 

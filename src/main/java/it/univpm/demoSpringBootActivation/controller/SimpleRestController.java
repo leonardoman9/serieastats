@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import it.univpm.demoSpringBootActivation.model.*;
 import it.univpm.demoSpringBootActivation.requests.*;
+import it.univpm.demoSpringBootActivation.utilities.JsonParser;
 import it.univpm.demoSpringBootActivation.exceptions.*;
 /**
  * RestController dell'applicazione WebRest SpringBoot
@@ -35,7 +36,7 @@ public class SimpleRestController {
 	 * @throws IOException
 	 */
 	public League returnLeague(@RequestParam(name = "showTeams", defaultValue = "true") String showTeams) throws IOException {
-		League result = Requests.returnLeague();
+		League result = JsonParser.parseLeague("league.json");
 		if (Boolean.parseBoolean(showTeams)) {System.out.println(result.toStringHeaderAndTeams());}	
 		else						 { System.out.println(result.toStringHeader());}
 		
@@ -55,7 +56,7 @@ public class SimpleRestController {
 	 * @throws MissingTeamException
 	 */
 	public  Team returnTeam(@RequestParam(name = "name", defaultValue = "Roma") String nomeTeam) throws IOException, MissingTeamException {
-		Team newTeam = Requests.returnTeam(nomeTeam);
+		Team newTeam = Filters.returnTeam(nomeTeam);
 		System.out.println(newTeam+"\n");
 		return newTeam;
 	}
@@ -70,7 +71,7 @@ public class SimpleRestController {
 	 * @throws MissingTeamException
 	 */
 	public Scorers returnLeagueScorers() throws IOException, MissingTeamException {
-		Scorers scorers = Requests.returnLeagueScorers();
+		Scorers scorers = JsonParser.parseScorers("scorers.json");
 		System.out.println(scorers.toString());
 		return scorers;
 	}
@@ -122,7 +123,7 @@ public class SimpleRestController {
 	@ResponseBody
 	/**
 	 * Mostra i marcatori di una specifica squadra, a scelta dell'utente.
-	 * 	localhost:8080/teamScorers?name={longTeamName}
+	 * 	localhost:8080/teamScorers?team={longTeamName}
 	 *  Inserire %20 al posto di uno spazio nel Nome del team
 	 * @param longName
 	 * @return
@@ -188,7 +189,22 @@ public class SimpleRestController {
 		System.out.println(result);
 		return result;
 	}
-	
+	@GetMapping("/scorersForPosition")
+	@ResponseBody
+	/**
+	 * Mostra tutti i marcatori di un ruolo di una squadra
+	 * localhost:8080/youngScorers?team={longName}?position={position}
+	 * Inserire %20 al posto di uno spazio nel Nome lungo del team
+	 * @param longName
+	 * @return
+	 * @throws IOException
+	 * @throws MissingTeamException
+	 */
+	public String returnScorersForPosition(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName, @RequestParam(name = "position", defaultValue = "Attacker") String position) throws IOException, MissingTeamException {
+		String result = Stat.returnScorersForPosition(longName, position);
+		System.out.println(result);
+		return result;
+	}
 	//DA QUI INIZIANO I FILTRI
 	
 	/**

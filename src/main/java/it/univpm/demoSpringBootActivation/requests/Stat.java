@@ -4,8 +4,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.univpm.demoSpringBootActivation.model.*;
-import it.univpm.demoSpringBootActivation.utilities.*;
+import it.univpm.demoSpringBootActivation.model.DateOfBirth;
+import it.univpm.demoSpringBootActivation.model.League;
+import it.univpm.demoSpringBootActivation.model.Scorer;
+import it.univpm.demoSpringBootActivation.model.Scorers;
+import it.univpm.demoSpringBootActivation.model.Team;
+import it.univpm.demoSpringBootActivation.utilities.AgeCalculator;
+import it.univpm.demoSpringBootActivation.utilities.FileInputOutput;
+import it.univpm.demoSpringBootActivation.utilities.JsonParser;
 /**
  * Classe contenente  metodi statici per effettuare statistiche
  * @author leonardomannini
@@ -20,9 +26,9 @@ public class Stat {
 	 */
 	public static String returnFoundedAfter(String yearFounded) throws IOException {
 		String result="";
-		int yearFoundedInt = Integer.parseInt(yearFounded);
 		Team[] Teams;
-		League newLeague = Requests.returnLeague();
+		int yearFoundedInt = Integer.parseInt(yearFounded);
+		League newLeague = JsonParser.parseLeague("league.json");
 		Teams = newLeague.getTeams();
 		for (Team i : Teams) {
 			if (i.getFounded() > yearFoundedInt) {
@@ -39,7 +45,7 @@ public class Stat {
 	 * @throws IOException
 	 */
 	public static String returnVenues() throws IOException {
-		League newLeague = Requests.returnLeague();
+		League newLeague = JsonParser.parseLeague("league.json");
 		return newLeague.countVenues();
 	}
 	/**
@@ -50,7 +56,7 @@ public class Stat {
 	 */
 	public static String returnTeamsVenues() throws IOException {
 		String result = "";
-		League newLeague = Requests.returnLeague();
+		League newLeague = JsonParser.parseLeague("league.json");
 		List<String> stadi = new ArrayList<String>();
 		List<Integer> squadre = new ArrayList<Integer>();
 		for(Team t: newLeague.getTeams()) {
@@ -78,7 +84,7 @@ public class Stat {
 	 */
 	public static String returnTeamScorers(String longName) throws IOException {
 		String result;
-		Scorers scorers = Requests.returnLeagueScorers();
+		Scorers scorers = JsonParser.parseScorers("scorers.json");
 		result = "";
 		result = longName + ":\n";
 		for (Scorer i : scorers.getScorers()) {
@@ -95,7 +101,7 @@ public class Stat {
 	 */
 	public static String returnTeamNationalities(String longName) throws IOException {
 		String result="";
-		Scorers scorers = Requests.returnLeagueScorers();
+		Scorers scorers = JsonParser.parseScorers("scorers.json");
 		result = longName + ":\n";
 		for (Scorer i : scorers.getScorers()) {
 			if (i.getTeam().getlongName().equals(longName)) {
@@ -113,7 +119,7 @@ public class Stat {
 	 */
 	public static String returnCountNationalities(String longName) throws IOException {
 		String result = "";
-		Scorers scorers = Requests.returnLeagueScorers();
+		Scorers scorers = JsonParser.parseScorers("scorers.json");
 		List<String> nationalities = new ArrayList<String>();
 		List<Integer> count = new ArrayList<Integer>();		
 		for (Scorer i : scorers.getScorers()) {
@@ -142,7 +148,7 @@ public class Stat {
 	 */
 	public static String returnYoungScorers(String longName)  throws IOException {
 		String result ="";
-		Scorers scorersp= Requests.returnLeagueScorers();
+		Scorers scorersp= JsonParser.parseScorers("scorers.json");
 		List<Scorer>  scorers = new ArrayList<Scorer>();
 		result = longName + ":\n";
 		for (Scorer i : scorersp.getScorers()) {
@@ -159,6 +165,17 @@ public class Stat {
 		return result;
 	}
 
+	public static String returnScorersForPosition(String longName, String position) throws IOException {
+		String result = "";
+		result += longName + " " + position + "s:\n";
+		Scorers scorers= JsonParser.parseScorers("scorers.json");
+		for (Scorer i : scorers.getScorers()) {
+			if (i.getPlayer().getPosition().equals(position) && i.getTeam().getlongName().equals(longName)) {
+				result += i.getPlayer().getName()+"\n";
+			}
+		}
+		return result;
+	}
 
 	
 }

@@ -6,6 +6,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.univpm.demoSpringBootActivation.exceptions.MissingTeamException;
+import it.univpm.demoSpringBootActivation.requests.Requests;
 import it.univpm.demoSpringBootActivation.utilities.AgeCalculator;
 /**
  * This applications gives informations and statics about Italian's tier one football league (Serie A).
@@ -17,13 +19,8 @@ import it.univpm.demoSpringBootActivation.utilities.AgeCalculator;
 @SpringBootApplication
 @RestController
 public class DemoSpringBootActivationApplication {
-public static void main(String[] args) throws IOException { 
-	/*try {
-		System.out.println(AgeCalculator.calculateAge("1973-09-09"));
-	} catch (Exception e) {
-		// TODO Auto-generated catch block
-		+
-	}*/
+public static void main(String[] args) throws IOException, MissingTeamException { 
+	Requests.doRequests();
 	SpringApplication.run(DemoSpringBootActivationApplication.class, args);
 }
 
