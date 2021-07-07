@@ -102,10 +102,12 @@ public class Stat {
 	public static String returnTeamNationalities(String longName) throws IOException {
 		String result="";
 		Scorers scorers = JsonParser.parseScorers("scorers.json");
+		List<String> nationalities = new ArrayList<String>();
 		result = longName + ":\n";
 		for (Scorer i : scorers.getScorers()) {
-			if (i.getTeam().getlongName().equals(longName)) {
-				result+= i.getPlayer().getNationality().toString()+"\n";
+			if (i.getTeam().getlongName().equals(longName)&&!nationalities.contains(i.getPlayer().getNationality())) {
+				nationalities.add(i.getPlayer().getNationality());
+				result+= i.getPlayer().getNationality()+"\n";
 			}
 	}	
 		return result;
@@ -174,6 +176,19 @@ public class Stat {
 				result += i.getPlayer().getName()+"\n";
 			}
 		}
+		return result;
+	}
+	
+	public static String returnScorersForNationality(String longName/*, String nationality*/) throws IOException{
+		String result = longName + ":\n";
+		Scorers scorers= JsonParser.parseScorers("scorers.json");
+		for (Scorer i : scorers.getScorers()) {
+			if (i.getTeam().getlongName().equals(longName) /*&& i.getPlayer().getNationality().equals(nationality)*/) {
+					//String prova = i.getPlayer().getName();
+					result+=i.getPlayer().getName()+"\n";
+			}
+		}
+		
 		return result;
 	}
 

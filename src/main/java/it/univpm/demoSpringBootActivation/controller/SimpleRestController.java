@@ -1,7 +1,7 @@
 package it.univpm.demoSpringBootActivation.controller;
 
 import java.io.IOException;
-
+import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -256,6 +256,17 @@ public class SimpleRestController {
 		System.out.println(result);
 		return result;
 	}
-}
-	
 
+	
+	@GetMapping("/nationalitiesForTeam")
+	@ResponseBody
+	@JsonIgnoreProperties
+	public String returnScorersForNationality(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName
+			/*,@RequestParam(name = "country")String nationalities*/) throws IOException {
+			String result="";
+			result = Stat.returnScorersForNationality(longName/*, nationalities*/);
+			System.out.println(result);
+			return result;
+	}
+
+}
