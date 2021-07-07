@@ -60,7 +60,7 @@ public class SimpleRestController {
 		System.out.println(newTeam+"\n");
 		return newTeam;
 	}
-	@GetMapping("/leagueScorers")       //TODO RISOLVERE!!!
+	@GetMapping("/leagueScorers")     
 	@ResponseBody
 	/**
 	 *  Mostra i primi 100 marcatori della Serie A, ordinati per numero di gol

@@ -1,6 +1,7 @@
 package it.univpm.demoSpringBootActivation.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -94,11 +95,15 @@ public class League extends Competition{
 	 * @return Stringa composta dagli stadi in sequenza ordinata.
 	 */
 	public String countVenues() {
-		Venues<String> Venues = new Venues<String>();
+		String result = "Venues: \n";
+		HashSet<String> Venues = new HashSet<String>();
 		for(Team t : this.Teams) {
 			Venues.add(t.getVenue());
 		}
-		return  Venues.toString();
+		for(String t: Venues) {
+			result+=t+"\n";
+		}
+		return  result;
 	}
 	
 	

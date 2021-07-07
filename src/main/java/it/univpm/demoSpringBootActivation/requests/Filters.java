@@ -12,6 +12,26 @@ import it.univpm.demoSpringBootActivation.utilities.*;
  *
  */
 public class Filters {
+	/** 	
+	 * Funzione che chiama le API per ottenere una stringa con formato JSON e deserializzarla in un oggetto di tipo Team
+	 * @param nomeTeam
+	 * @return
+	 * @throws IOException
+	 * @throws MissingTeamException
+	 */
+	public static Team returnTeam(String nomeTeam) throws IOException, MissingTeamException {
+		File leagueFile = new File("league.json");
+		League newLeague = new League();
+		newLeague = JsonParser.parseLeague("league.json");
+		int teamId = newLeague.lookForId(nomeTeam);
+		if(teamId==-1)
+			{throw new MissingTeamException(nomeTeam);}
+		String result = Dataset.download("https://api.football-data.org/v2/teams/" + teamId);
+		FileInputOutput.toFile(result, "team" +teamId+".json");
+		Team newTeam = JsonParser.parseTeam("team" +teamId+".json");
+		return newTeam;	
+	}
+	
 	/**
 	 * Funzione che chiama le API per ottenere una stringa con formato JSON e deserializzarla in un oggetto di tipo Team
 	 * @param nomeTeam
@@ -36,6 +56,7 @@ public class Filters {
 	 * @return
 	 * @throws IOException
 	 */
+	
 	public static String foundedYearFilter(String year) throws IOException{
 		int yearStr =Integer.parseInt(year);
 		League newLeague = JsonParser.parseLeague("league.json");
