@@ -5,6 +5,7 @@ package it.univpm.demoSpringBootActivation.model;
  * @author leonardomannini
  *
  */
+
 public class WinnerTeam extends Team{
 	public WinnerTeam() {
 		super();

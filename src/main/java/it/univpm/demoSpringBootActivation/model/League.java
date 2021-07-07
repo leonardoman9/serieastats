@@ -1,6 +1,5 @@
 package it.univpm.demoSpringBootActivation.model;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

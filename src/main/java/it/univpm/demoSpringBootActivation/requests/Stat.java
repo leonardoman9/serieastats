@@ -4,20 +4,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.univpm.demoSpringBootActivation.model.DateOfBirth;
-import it.univpm.demoSpringBootActivation.model.League;
-import it.univpm.demoSpringBootActivation.model.Scorer;
-import it.univpm.demoSpringBootActivation.model.Scorers;
-import it.univpm.demoSpringBootActivation.model.Team;
-import it.univpm.demoSpringBootActivation.utilities.AgeCalculator;
-import it.univpm.demoSpringBootActivation.utilities.FileInputOutput;
-import it.univpm.demoSpringBootActivation.utilities.JsonParser;
+import it.univpm.demoSpringBootActivation.model.*;
+import it.univpm.demoSpringBootActivation.utilities.*;
 /**
  * Classe contenente  metodi statici per effettuare statistiche
  * @author leonardomannini
  *
  */
-public class Stat {
+public class Stat implements Directories{
 	/**
 	 * Funzione che, dato in input un anno, restituisce tutte le squadre fondate dopo quell'anno
 	 * @param yearFounded
@@ -28,7 +22,7 @@ public class Stat {
 		String result="";
 		Team[] Teams;
 		int yearFoundedInt = Integer.parseInt(yearFounded);
-		League newLeague = JsonParser.parseLeague("league.json");
+		League newLeague = JsonParser.parseLeague(LEAGUE_DIR);
 		Teams = newLeague.getTeams();
 		for (Team i : Teams) {
 			if (i.getFounded() > yearFoundedInt) {
@@ -45,7 +39,7 @@ public class Stat {
 	 * @throws IOException
 	 */
 	public static String returnVenues() throws IOException {
-		League newLeague = JsonParser.parseLeague("league.json");
+		League newLeague = JsonParser.parseLeague(LEAGUE_DIR);
 		return newLeague.countVenues();
 	}
 	/**
@@ -56,7 +50,7 @@ public class Stat {
 	 */
 	public static String returnTeamsVenues() throws IOException {
 		String result = "";
-		League newLeague = JsonParser.parseLeague("league.json");
+		League newLeague = JsonParser.parseLeague(LEAGUE_DIR);
 		List<String> stadi = new ArrayList<String>();
 		List<Integer> squadre = new ArrayList<Integer>();
 		for(Team t: newLeague.getTeams()) {
@@ -84,7 +78,7 @@ public class Stat {
 	 */
 	public static String returnTeamScorers(String longName) throws IOException {
 		String result;
-		Scorers scorers = JsonParser.parseScorers("scorers.json");
+		Scorers scorers = JsonParser.parseScorers(SCORERS_DIR);
 		result = "";
 		result = longName + ":\n";
 		for (Scorer i : scorers.getScorers()) {
@@ -101,7 +95,7 @@ public class Stat {
 	 */
 	public static String returnTeamNationalities(String longName) throws IOException {
 		String result="";
-		Scorers scorers = JsonParser.parseScorers("scorers.json");
+		Scorers scorers = JsonParser.parseScorers(SCORERS_DIR);
 		List<String> nationalities = new ArrayList<String>();
 		result = longName + ":\n";
 		for (Scorer i : scorers.getScorers()) {
@@ -121,7 +115,7 @@ public class Stat {
 	 */
 	public static String returnCountNationalities(String longName) throws IOException {
 		String result = "";
-		Scorers scorers = JsonParser.parseScorers("scorers.json");
+		Scorers scorers = JsonParser.parseScorers(SCORERS_DIR);
 		List<String> nationalities = new ArrayList<String>();
 		List<Integer> count = new ArrayList<Integer>();		
 		for (Scorer i : scorers.getScorers()) {
@@ -136,7 +130,7 @@ public class Stat {
 				}
 			}
 		}	
-		result = "Number of "+longName+" players of different nationalaties:\n";
+		result = "Number of "+longName+" players for different nationalities:\n";
 		for(int i=0; i<nationalities.size(); i++) {
 			result = result + nationalities.get(i)+": "+count.get(i)+"\n";
 		}
@@ -150,7 +144,7 @@ public class Stat {
 	 */
 	public static String returnYoungScorers(String longName)  throws IOException {
 		String result ="";
-		Scorers scorersp= JsonParser.parseScorers("scorers.json");
+		Scorers scorersp= JsonParser.parseScorers(SCORERS_DIR);
 		List<Scorer>  scorers = new ArrayList<Scorer>();
 		result = longName + ":\n";
 		for (Scorer i : scorersp.getScorers()) {
@@ -170,7 +164,7 @@ public class Stat {
 	public static String returnScorersForPosition(String longName, String position) throws IOException {
 		String result = "";
 		result += longName + " " + position + "s:\n";
-		Scorers scorers= JsonParser.parseScorers("scorers.json");
+		Scorers scorers= JsonParser.parseScorers(SCORERS_DIR);
 		for (Scorer i : scorers.getScorers()) {
 			if (i.getPlayer().getPosition().equals(position) && i.getTeam().getlongName().equals(longName)) {
 				result += i.getPlayer().getName()+"\n";
@@ -181,7 +175,7 @@ public class Stat {
 	
 	public static String returnScorersForNationality(String longName/*, String nationality*/) throws IOException{
 		String result = longName + ":\n";
-		Scorers scorers= JsonParser.parseScorers("scorers.json");
+		Scorers scorers= JsonParser.parseScorers(SCORERS_DIR);
 		for (Scorer i : scorers.getScorers()) {
 			if (i.getTeam().getlongName().equals(longName) /*&& i.getPlayer().getNationality().equals(nationality)*/) {
 					//String prova = i.getPlayer().getName();

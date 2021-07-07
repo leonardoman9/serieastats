@@ -11,7 +11,7 @@ import it.univpm.demoSpringBootActivation.utilities.*;
  * @author leonardomannini
  *
  */
-public class Filters {
+public class Filters implements Directories {
 	/**
 	 * Funzione che chiama le API per ottenere una stringa con formato JSON e deserializzarla in un oggetto di tipo Team
 	 * @param nomeTeam
@@ -20,14 +20,14 @@ public class Filters {
 	 * @throws MissingTeamException
 	 */
 	public static Team returnTeam(String nomeTeam) throws IOException, MissingTeamException { //ex richiesa
-		File leagueFile = new File("league.json");
-		League newLeague = JsonParser.parseLeague("league.json"); // TODO ???'
+		//File leagueFile = new File(LEAGUE_DIR);
+		League newLeague = JsonParser.parseLeague(LEAGUE_DIR); // TODO ???'
 		int teamId = newLeague.lookForId(nomeTeam);
 		if(teamId==-1)
 			{throw new MissingTeamException(nomeTeam);}
 		String result = Dataset.download("https://api.football-data.org/v2/teams/" + teamId);
-		FileInputOutput.toFile(result,  "team"+teamId+".json");
-		Team newTeam = JsonParser.parseTeam("team"+teamId+".json");
+		FileInputOutput.toFile(result,  TEAM_DIR+"/team"+teamId+".json");
+		Team newTeam = JsonParser.parseTeam(TEAM_DIR+"/team"+teamId+".json");
 		return newTeam;	
 	}
 	/**
@@ -39,7 +39,7 @@ public class Filters {
 	
 	public static String foundedYearFilter(String year) throws IOException{
 		int yearStr =Integer.parseInt(year);
-		League newLeague = JsonParser.parseLeague("league.json");
+		League newLeague = JsonParser.parseLeague(LEAGUE_DIR);
 		String result = year + ":\n";
 		for (Team i : newLeague.getTeams()) {
 			if(i.getFounded()==yearStr) {
@@ -58,7 +58,7 @@ public class Filters {
 	 */
 	public static String startsWith(String letter) throws IOException {
 		char letterChar = letter.charAt(0);
-		League newLeague= JsonParser.parseLeague("league.json");
+		League newLeague= JsonParser.parseLeague(LEAGUE_DIR	);
 		String result = "Club names that start with letter " + letterChar + ":\n";
 		for (Team i : newLeague.getTeams()) {
 			if (i.getlongName().charAt(0)==letterChar) {

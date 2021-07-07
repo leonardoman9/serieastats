@@ -1,15 +1,13 @@
 package it.univpm.demoSpringBootActivation.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import it.univpm.demoSpringBootActivation.model.*;
 import it.univpm.demoSpringBootActivation.requests.*;
-import it.univpm.demoSpringBootActivation.utilities.JsonParser;
+import it.univpm.demoSpringBootActivation.utilities.*;
 import it.univpm.demoSpringBootActivation.exceptions.*;
 /**
  * RestController dell'applicazione WebRest SpringBoot
@@ -19,7 +17,7 @@ import it.univpm.demoSpringBootActivation.exceptions.*;
  */
 
 @RestController
-public class SimpleRestController {
+public class SimpleRestController implements Directories{
 	
 	@GetMapping("/league")
 	@ResponseBody
@@ -36,7 +34,7 @@ public class SimpleRestController {
 	 * @throws IOException
 	 */
 	public League returnLeague(@RequestParam(name = "showTeams", defaultValue = "true") String showTeams) throws IOException {
-		League result = JsonParser.parseLeague("league.json");
+		League result = JsonParser.parseLeague(LEAGUE_DIR);
 		if (Boolean.parseBoolean(showTeams)) {System.out.println(result.toStringHeaderAndTeams());}	
 		else						 { System.out.println(result.toStringHeader());}
 		
@@ -71,7 +69,7 @@ public class SimpleRestController {
 	 * @throws MissingTeamException
 	 */
 	public Scorers returnLeagueScorers() throws IOException, MissingTeamException {
-		Scorers scorers = JsonParser.parseScorers("scorers.json");
+		Scorers scorers = JsonParser.parseScorers(SCORERS_DIR);
 		System.out.println(scorers.toString());
 		return scorers;
 	}
@@ -189,7 +187,7 @@ public class SimpleRestController {
 		System.out.println(result);
 		return result;
 	}
-	@GetMapping("/scorersForPosition")
+	@GetMapping("/scorersForPosition")			//TODO NON FUNZIONA
 	@ResponseBody
 	/**
 	 * Mostra tutti i marcatori di un ruolo di una squadra
@@ -200,7 +198,8 @@ public class SimpleRestController {
 	 * @throws IOException
 	 * @throws MissingTeamException
 	 */
-	public String returnScorersForPosition(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName, @RequestParam(name = "position", defaultValue = "Attacker") String position) throws IOException, MissingTeamException {
+	public String returnScorersForPosition(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName, 
+										   @RequestParam(name = "position", defaultValue = "Attacker") String position) throws IOException, MissingTeamException {
 		String result = Stat.returnScorersForPosition(longName, position);
 		System.out.println(result);
 		return result;
@@ -221,6 +220,16 @@ public class SimpleRestController {
 		String result = Filters.startsWith(letter);
 		System.out.println(result);
 		return result;
+	}
+	@GetMapping("/nationalitiesForTeam")
+	@ResponseBody
+	@JsonIgnoreProperties
+	public String returnScorersForNationality(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName
+			/*,@RequestParam(name = "country")String nationalities*/) throws IOException {
+			String result="";
+			result = Stat.returnScorersForNationality(longName/*, nationalities*/);
+			System.out.println(result);
+			return result;
 	}
 	/**
 	 * 
@@ -255,18 +264,6 @@ public class SimpleRestController {
 		String result = Filters.positionFilter(team, position1, position2, position3);
 		System.out.println(result);
 		return result;
-	}
-
-	
-	@GetMapping("/nationalitiesForTeam")
-	@ResponseBody
-	@JsonIgnoreProperties
-	public String returnScorersForNationality(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName
-			/*,@RequestParam(name = "country")String nationalities*/) throws IOException {
-			String result="";
-			result = Stat.returnScorersForNationality(longName/*, nationalities*/);
-			System.out.println(result);
-			return result;
 	}
 
 }

@@ -4,8 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;  
 import org.joda.time.*;
 
-import it.univpm.demoSpringBootActivation.model.DateOfBirth;
-import it.univpm.demoSpringBootActivation.model.Scorer;
+import it.univpm.demoSpringBootActivation.model.*;
 public class AgeCalculator {
 	@SuppressWarnings("deprecation")
 	public static long calculateAge(String dateOfBirthStr) throws Exception {
