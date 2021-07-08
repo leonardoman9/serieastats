@@ -2,6 +2,7 @@ package it.univpm.demoSpringBootActivation.requests;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import it.univpm.demoSpringBootActivation.exceptions.MissingTeamException;
 import it.univpm.demoSpringBootActivation.model.*;
@@ -74,32 +75,31 @@ public class Filters implements Directories {
 	 * @return
 	 * @throws IOException
 	 */
-	public static String returnScorersForNationality(String longName, String nationality) throws IOException{
+	public static String returnScorersForNationality(String longName, List<String> nationality) throws IOException{
 		String result = longName + ":\n";
 		Scorers scorers= JsonParser.parseScorers(SCORERS_DIR);
 		for (Scorer i : scorers.getScorers()) {
-			if (i.getTeam().getlongName().equals(longName) && i.getPlayer().getNationality().equals(nationality)) {
+			if (i.getTeam().getlongName().equals(longName) && nationality.contains(i.getPlayer().getNationality())) {
 					result+=i.getPlayer().getName()+"\n";
 			}
 		}
-		if(result.equals(longName + ":\n"))
-			result+="There are no scorers";
 		return result;
 	}
-	//TODO
-	public static String positionFilter(String position, String teamName) throws IOException {
-		String result = "";
-		Scorers scorers = Requests.returnLeagueScorers();
+	/**
+	 * Funzione che, data in input una squadra e uno o più ruoli, restituisce tutti i marcatori del ruolo corrispondente
+	 * @param longName, position
+	 * @return
+	 * @throws IOException
+	 */
+	public static String returnScorersForPosition(String longName, List<String> position) throws IOException{
+		String result = longName + ":\n";
+		Scorers scorers= JsonParser.parseScorers(SCORERS_DIR);
+		for (Scorer i : scorers.getScorers()) {
+			if (i.getTeam().getlongName().equals(longName) && position.contains(i.getPlayer().getPosition())) {
+					result+=i.getPlayer().getName()+"\n";
+			}
+		}
 		return result;
 	}
-
-	public static String positionFilter(String team, String position1, String position2) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public static String positionFilter(String team, String position1, String position2, String position3) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }

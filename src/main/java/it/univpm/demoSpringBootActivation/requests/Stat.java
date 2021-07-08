@@ -173,18 +173,7 @@ public class Stat implements Directories{
 		return result;
 	}
 	
-	public static String returnScorersForNationality(String longName, String nationality) throws IOException{
-		String result = longName + ":\n";
-		Scorers scorers= JsonParser.parseScorers(SCORERS_DIR);
-		for (Scorer i : scorers.getScorers()) {
-			if (i.getTeam().getlongName().equals(longName) && i.getPlayer().getNationality().equals(nationality)) {
-					result+=i.getPlayer().getName()+"\n";
-			}
-		}
-		if(result.equals(longName + ":\n"))
-			result+="There are no scorers";
-		return result;
-	}
+	
 
 	
 }
