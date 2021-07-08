@@ -225,9 +225,9 @@ public class SimpleRestController implements Directories{
 	@ResponseBody
 	@JsonIgnoreProperties
 	public String returnScorersForNationality(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName
-			/*,@RequestParam(name = "country")String nationalities*/) throws IOException {
+											 ,@RequestParam(name = "nationality")String nationalities) throws IOException {
 			String result="";
-			result = Stat.returnScorersForNationality(longName/*, nationalities*/);
+			result = Stat.returnScorersForNationality(longName, nationalities);
 			System.out.println(result);
 			return result;
 	}

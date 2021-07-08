@@ -1,14 +1,21 @@
 package it.univpm.demoSpringBootActivation.requests;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.univpm.demoSpringBootActivation.model.*;
-import it.univpm.demoSpringBootActivation.utilities.*;
+import it.univpm.demoSpringBootActivation.model.DateOfBirth;
+import it.univpm.demoSpringBootActivation.model.League;
+import it.univpm.demoSpringBootActivation.model.Scorer;
+import it.univpm.demoSpringBootActivation.model.Scorers;
+import it.univpm.demoSpringBootActivation.model.Team;
+import it.univpm.demoSpringBootActivation.utilities.AgeCalculator;
+import it.univpm.demoSpringBootActivation.utilities.JsonParser;
 /**
  * Classe contenente  metodi statici per effettuare statistiche
- * @author leonardomannini
+ * @author Leonardo Mannini
+ * @author Luca Ranucci
  *
  */
 public class Stat implements Directories{
@@ -18,7 +25,7 @@ public class Stat implements Directories{
 	 * @return
 	 * @throws IOException
 	 */
-	public static String returnFoundedAfter(String yearFounded) throws IOException {
+	public static String returnFoundedAfter(String yearFounded) throws IOException, FileNotFoundException {
 		String result="";
 		Team[] Teams;
 		int yearFoundedInt = Integer.parseInt(yearFounded);
@@ -38,7 +45,7 @@ public class Stat implements Directories{
 	 * @return
 	 * @throws IOException
 	 */
-	public static String returnVenues() throws IOException {
+	public static String returnVenues() throws IOException, FileNotFoundException {
 		League newLeague = JsonParser.parseLeague(LEAGUE_DIR);
 		return newLeague.countVenues();
 	}
@@ -48,7 +55,7 @@ public class Stat implements Directories{
 	 * @return
 	 * @throws IOException
 	 */
-	public static String returnTeamsVenues() throws IOException {
+	public static String returnTeamsVenues() throws IOException, FileNotFoundException{
 		String result = "";
 		League newLeague = JsonParser.parseLeague(LEAGUE_DIR);
 		List<String> stadi = new ArrayList<String>();
@@ -76,7 +83,7 @@ public class Stat implements Directories{
 	 * @return
 	 * @throws IOException
 	 */
-	public static String returnTeamScorers(String longName) throws IOException {
+	public static String returnTeamScorers(String longName) throws IOException, FileNotFoundException{
 		String result;
 		Scorers scorers = JsonParser.parseScorers(SCORERS_DIR);
 		result = "";
@@ -93,7 +100,7 @@ public class Stat implements Directories{
 	 * @return
 	 * @throws IOException
 	 */
-	public static String returnTeamNationalities(String longName) throws IOException {
+	public static String returnTeamNationalities(String longName) throws IOException, FileNotFoundException {
 		String result="";
 		Scorers scorers = JsonParser.parseScorers(SCORERS_DIR);
 		List<String> nationalities = new ArrayList<String>();
@@ -113,7 +120,7 @@ public class Stat implements Directories{
 	 * @return
 	 * @throws IOException
 	 */
-	public static String returnCountNationalities(String longName) throws IOException {
+	public static String returnCountNationalities(String longName) throws IOException, FileNotFoundException {
 		String result = "";
 		Scorers scorers = JsonParser.parseScorers(SCORERS_DIR);
 		List<String> nationalities = new ArrayList<String>();
@@ -142,7 +149,7 @@ public class Stat implements Directories{
 	 * @return
 	 * @throws IOException
 	 */
-	public static String returnYoungScorers(String longName)  throws IOException {
+	public static String returnYoungScorers(String longName)  throws IOException, FileNotFoundException {
 		String result ="";
 		Scorers scorersp= JsonParser.parseScorers(SCORERS_DIR);
 		List<Scorer>  scorers = new ArrayList<Scorer>();
@@ -161,7 +168,7 @@ public class Stat implements Directories{
 		return result;
 	}
 
-	public static String returnScorersForPosition(String longName, String position) throws IOException {
+	public static String returnScorersForPosition(String longName, String position) throws IOException, FileNotFoundException {
 		String result = "";
 		result += longName + " " + position + "s:\n";
 		Scorers scorers= JsonParser.parseScorers(SCORERS_DIR);
@@ -173,12 +180,11 @@ public class Stat implements Directories{
 		return result;
 	}
 	
-	public static String returnScorersForNationality(String longName/*, String nationality*/) throws IOException{
+	public static String returnScorersForNationality(String longName, String nationality) throws IOException, FileNotFoundException {
 		String result = longName + ":\n";
 		Scorers scorers= JsonParser.parseScorers(SCORERS_DIR);
 		for (Scorer i : scorers.getScorers()) {
-			if (i.getTeam().getlongName().equals(longName) /*&& i.getPlayer().getNationality().equals(nationality)*/) {
-					//String prova = i.getPlayer().getName();
+			if (i.getTeam().getlongName().equals(longName) && i.getPlayer().getNationality().equals(nationality)) {
 					result+=i.getPlayer().getName()+"\n";
 			}
 		}

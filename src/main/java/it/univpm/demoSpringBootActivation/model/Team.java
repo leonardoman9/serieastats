@@ -185,7 +185,7 @@ public Team(int teamId,
 	
 	public String toString() {
 		String result;
-		result = "Teamid: \t"+this.getteamId()+"\n"+
+		result = "TeamId: \t"+this.getteamId()+"\n"+
 				"Team Name: \t" + this.getlongName() + "\n" +
 				"Short Name: \t" + this.getShortName() + "\n" +
 				"Abbreviation: \t" + this.getTla() + "\n" +
@@ -196,7 +196,7 @@ public Team(int teamId,
 				"Address: \t" + this.getAddress() + "\n" +
 				"Founded: \t" + (this.getFounded()) + "\n" +
 				"Club Colours: \t" + this.getClubColors() + "\n" +
-				"Venue: \t\t" + this.getVenue();
+				"Venue: \t\t" + this.getVenue()+"\n";
 		return result;	
 	}
 }

@@ -1,12 +1,13 @@
 package it.univpm.demoSpringBootActivation;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.univpm.demoSpringBootActivation.requests.Requests;
+import it.univpm.demoSpringBootActivation.requests.*;
 import it.univpm.demoSpringBootActivation.exceptions.*;
 
 /**
@@ -19,9 +20,13 @@ import it.univpm.demoSpringBootActivation.exceptions.*;
 @SpringBootApplication
 @RestController
 public class DemoSpringBootActivationApplication {
-public static void main(String[] args) throws IOException, MissingTeamException { 
-	Requests.doRequests();
+public static void main(String[] args) throws IOException, MissingTeamException{ 
+	try {
+		Requests.doRequests();
+	} catch (UnknownHostException e) {
+		System.out.println(e + ": Unable to Connect to server\n");
+	}
 	SpringApplication.run(DemoSpringBootActivationApplication.class, args);
-}
+	}
 }
 

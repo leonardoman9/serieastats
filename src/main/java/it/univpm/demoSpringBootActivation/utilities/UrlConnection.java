@@ -17,10 +17,13 @@ public class UrlConnection {
 					con.setRequestMethod("GET");
 			//int status = con.getResponseCode();
 		} catch (MalformedURLException e) {
+			System.out.println(e);
 			e.printStackTrace();
 		} catch (ProtocolException e) {
+			System.out.println(e);
 			e.printStackTrace();
 		} catch (IOException e) {
+			System.out.println(e);
 			e.printStackTrace();
 		}
 	}

@@ -1,14 +1,15 @@
 package it.univpm.demoSpringBootActivation.requests;
 
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import it.univpm.demoSpringBootActivation.exceptions.MissingTeamException;
+import it.univpm.demoSpringBootActivation.exceptions.*;
 import it.univpm.demoSpringBootActivation.model.*;
 import it.univpm.demoSpringBootActivation.utilities.*;
 /**
  * Classe contenente  metodi statici per realizzare filtri
- * @author leonardomannini
+ * @author Leonardo Mannini
+ * @author Luca Ranucci
  *
  */
 public class Filters implements Directories {
@@ -19,7 +20,7 @@ public class Filters implements Directories {
 	 * @throws IOException
 	 * @throws MissingTeamException
 	 */
-	public static Team returnTeam(String nomeTeam) throws IOException, MissingTeamException { //ex richiesa
+	public static Team returnTeam(String nomeTeam) throws IOException, MissingTeamException, FileNotFoundException { //ex richiesa
 		//File leagueFile = new File(LEAGUE_DIR);
 		League newLeague = JsonParser.parseLeague(LEAGUE_DIR); // TODO ???'
 		int teamId = newLeague.lookForId(nomeTeam);
@@ -37,7 +38,7 @@ public class Filters implements Directories {
 	 * @throws IOException
 	 */
 	
-	public static String foundedYearFilter(String year) throws IOException{
+	public static String foundedYearFilter(String year) throws IOException, FileNotFoundException{
 		int yearStr =Integer.parseInt(year);
 		League newLeague = JsonParser.parseLeague(LEAGUE_DIR);
 		String result = year + ":\n";
@@ -56,9 +57,9 @@ public class Filters implements Directories {
 	 * @return
 	 * @throws IOException
 	 */
-	public static String startsWith(String letter) throws IOException {
+	public static String startsWith(String letter) throws IOException, FileNotFoundException {
 		char letterChar = letter.charAt(0);
-		League newLeague= JsonParser.parseLeague(LEAGUE_DIR	);
+		League newLeague= JsonParser.parseLeague(LEAGUE_DIR);
 		String result = "Club names that start with letter " + letterChar + ":\n";
 		for (Team i : newLeague.getTeams()) {
 			if (i.getlongName().charAt(0)==letterChar) {
@@ -69,7 +70,7 @@ public class Filters implements Directories {
 		return result;
 	}
 	//TODO
-	public static String positionFilter(String position, String teamName) throws IOException {
+	public static String positionFilter(String position, String teamName) throws IOException, FileNotFoundException {
 		String result = "";
 		Scorers scorers = Requests.returnLeagueScorers();
 		return result;
