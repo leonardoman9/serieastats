@@ -187,7 +187,7 @@ public class SimpleRestController implements Directories{
 		System.out.println(result);
 		return result;
 	}
-	@GetMapping("/scorersForPosition")			//TODO NON FUNZIONA
+	@GetMapping("/scorersForPosition")			
 	@ResponseBody
 	/**
 	 * Mostra tutti i marcatori di un ruolo di una squadra
@@ -221,13 +221,13 @@ public class SimpleRestController implements Directories{
 		System.out.println(result);
 		return result;
 	}
-	@GetMapping("/nationalitiesForTeam")
+	@GetMapping("/scorersForNationalities")
 	@ResponseBody
 	@JsonIgnoreProperties
 	public String returnScorersForNationality(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName
-			/*,@RequestParam(name = "country")String nationalities*/) throws IOException {
+			,@RequestParam(name = "nationality")String nationalities) throws IOException {
 			String result="";
-			result = Stat.returnScorersForNationality(longName/*, nationalities*/);
+			result = Stat.returnScorersForNationality(longName, nationalities);
 			System.out.println(result);
 			return result;
 	}
