@@ -1,6 +1,8 @@
 package it.univpm.demoSpringBootActivation.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -199,8 +201,8 @@ public class SimpleRestController implements Directories{
 	 * @throws MissingTeamException
 	 */
 	public String returnScorersForPosition(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName, 
-										   @RequestParam(name = "position", defaultValue = "Attacker") String position) throws IOException, MissingTeamException {
-		String result = Stat.returnScorersForPosition(longName, position);
+										   @RequestParam(name = "position", defaultValue = "Attacker") List<String> position) throws IOException, MissingTeamException {
+		String result = Filters.returnScorersForPosition(longName, position);
 		System.out.println(result);
 		return result;
 	}
@@ -233,7 +235,7 @@ public class SimpleRestController implements Directories{
 	@ResponseBody
 	@JsonIgnoreProperties
 	public String returnScorersForNationality(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName
-											 ,@RequestParam(name = "nationality")String nationalities) throws IOException {
+											 ,@RequestParam(name = "nationality")List<String> nationalities) throws IOException {
 			String result="";
 			result = Filters.returnScorersForNationality(longName, nationalities);
 			System.out.println(result);

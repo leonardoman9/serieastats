@@ -2,6 +2,7 @@ package it.univpm.demoSpringBootActivation.requests;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import it.univpm.demoSpringBootActivation.model.*;
@@ -19,18 +20,19 @@ public class Stat implements Directories{
 	 * @throws IOException
 	 */
 	public static String returnFoundedAfter(String yearFounded) throws IOException {
-		String result="";
+		String result="Teams founded after " + yearFounded + ":\n";
 		Team[] Teams;
+		int n=0;
 		int yearFoundedInt = Integer.parseInt(yearFounded);
 		League newLeague = JsonParser.parseLeague(LEAGUE_DIR);
 		Teams = newLeague.getTeams();
 		for (Team i : Teams) {
 			if (i.getFounded() > yearFoundedInt) {
-				result+=i.getShortName()+ ":";
-				if(i.getShortName().length()<7) result+="\t"; 
-				result+="\t" + i.getFounded()+"\n";
+				result+=i.toString()+"\n";
+				n++;
 			}
 		}
+		result+= n + " teams founded after year " + yearFounded + ".\n";
 		return result;
 	}
 	/**
@@ -80,10 +82,11 @@ public class Stat implements Directories{
 		String result;
 		Scorers scorers = JsonParser.parseScorers(SCORERS_DIR);
 		result = "";
-		result = longName + ":\n";
+		result = longName + ":\n\n";
 		for (Scorer i : scorers.getScorers()) {
-			if (i.getTeam().getlongName().equals(longName)) result += i.getPlayer().getName() + ": " + i.getNumberOfGoals()+ "\n"; //TODO non funziona, i.getName() è sempre null (?)
+			if (i.getTeam().getlongName().equals(longName)) result += i.getPlayer().toString() + i.toString() +"\n";
 		}
+		result+="Total: " + scorers.getSize(longName) + " scorers.\n";
 		return result;
 	}
 	/**
@@ -104,6 +107,7 @@ public class Stat implements Directories{
 				result+= i.getPlayer().getNationality()+"\n";
 			}
 	}	
+		result+="Total: " + nationalities.size()+" nationalities\n";
 		return result;
 	}
 	/**
@@ -144,34 +148,26 @@ public class Stat implements Directories{
 	 */
 	public static String returnYoungScorers(String longName)  throws IOException {
 		String result ="";
+		int n=0;
 		Scorers scorersp= JsonParser.parseScorers(SCORERS_DIR);
 		List<Scorer>  scorers = new ArrayList<Scorer>();
-		result = longName + ":\n";
+		result = longName + ":\n\n";
 		for (Scorer i : scorersp.getScorers()) {
 			if (i.getTeam().getlongName().equals(longName)) scorers.add(i);
 		}
 		for (Scorer i : scorers) {
 			DateOfBirth a = AgeCalculator.parseDate(i.getPlayer().getDateOfBirth());
-			if(28 > (2021 - a.getYear())) {
-				int year = 2021-a.getYear();
-				result += i.getPlayer().getName() + ": " + year + " years"+"\n";
+			if(28 > (Calendar.getInstance().get(Calendar.YEAR) - a.getYear())) {
+				result += i.getPlayer().toString() +"\n";
+				n++;
 			}
 			
 		}
+		result+="Total: " + n +" scorers younger than 28 years old	\n";
 		return result;
 	}
 
-	public static String returnScorersForPosition(String longName, String position) throws IOException {
-		String result = "";
-		result += longName + " " + position + "s:\n";
-		Scorers scorers= JsonParser.parseScorers(SCORERS_DIR);
-		for (Scorer i : scorers.getScorers()) {
-			if (i.getPlayer().getPosition().equals(position) && i.getTeam().getlongName().equals(longName)) {
-				result += i.getPlayer().getName()+"\n";
-			}
-		}
-		return result;
-	}
+
 	
 	
 

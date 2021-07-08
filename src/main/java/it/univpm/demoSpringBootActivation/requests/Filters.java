@@ -40,14 +40,16 @@ public class Filters implements Directories {
 	
 	public static String foundedYearFilter(String year) throws IOException{
 		int yearStr =Integer.parseInt(year);
+		int n=0;
 		League newLeague = JsonParser.parseLeague(LEAGUE_DIR);
-		String result = year + ":\n";
+		String result = "Founded " + year + ":\n\n";
 		for (Team i : newLeague.getTeams()) {
 			if(i.getFounded()==yearStr) {
-				result += i.getlongName()+"\n";
+				result += i.toString()+"\n";
+				n++;
 			}
 		}
-		System.out.println(result);
+		result+="Total: " + n +" teams founded in " + year +".\n";
 		return result;
 	}
 
@@ -59,14 +61,16 @@ public class Filters implements Directories {
 	 */
 	public static String startsWith(String letter) throws IOException {
 		char letterChar = letter.charAt(0);
+		int n=0;
 		League newLeague= JsonParser.parseLeague(LEAGUE_DIR	);
-		String result = "Club names that start with letter " + letterChar + ":\n";
+		String result = "Teams that start with the letter " + letterChar + ":\n\n";
 		for (Team i : newLeague.getTeams()) {
 			if (i.getlongName().charAt(0)==letterChar) {
-				result += i.getlongName() + "\n";
+				result += i.toString() + "\n\n";
+				n++;
 			}
 		}
-		System.out.println(result);
+		result+="Total: " + n + " teams.\n";
 		return result;
 	}
 	/**
@@ -76,11 +80,11 @@ public class Filters implements Directories {
 	 * @throws IOException
 	 */
 	public static String returnScorersForNationality(String longName, List<String> nationality) throws IOException{
-		String result = longName + ":\n";
+		String result = longName + ":\n\n";
 		Scorers scorers= JsonParser.parseScorers(SCORERS_DIR);
 		for (Scorer i : scorers.getScorers()) {
 			if (i.getTeam().getlongName().equals(longName) && nationality.contains(i.getPlayer().getNationality())) {
-					result+=i.getPlayer().getName()+"\n";
+					result+=i.getPlayer().toString()+"\n";
 			}
 		}
 		return result;
@@ -92,13 +96,16 @@ public class Filters implements Directories {
 	 * @throws IOException
 	 */
 	public static String returnScorersForPosition(String longName, List<String> position) throws IOException{
-		String result = longName + ":\n";
+		String result = longName + ":\n\n";
+		int n=0;
 		Scorers scorers= JsonParser.parseScorers(SCORERS_DIR);
 		for (Scorer i : scorers.getScorers()) {
 			if (i.getTeam().getlongName().equals(longName) && position.contains(i.getPlayer().getPosition())) {
-					result+=i.getPlayer().getName()+"\n";
+					result+=i.getPlayer().toString()+"\n";
+					n++;
 			}
 		}
+		result+="Total: " + n + " " + " scorers.\n";
 		return result;
 	}
 	

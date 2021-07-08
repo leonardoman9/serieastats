@@ -103,6 +103,7 @@ public class League extends Competition{
 		for(String t: Venues) {
 			result+=t+"\n";
 		}
+		result+="Total: " + Venues.size() + " venues.\n";
 		return  result;
 	}
 	
