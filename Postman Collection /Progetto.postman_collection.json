@@ -1,0 +1,361 @@
+{
+	"info": {
+		"_postman_id": "2a5108ba-9708-4f25-be33-a56a11f3e4c3",
+		"name": "Progetto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Requests",
+			"item": [
+				{
+					"name": "League",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/league",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"league"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "League Scorers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/leagueScorers?team",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"leagueScorers"
+							],
+							"query": [
+								{
+									"key": "team",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stats",
+			"item": [
+				{
+					"name": "Venues",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/venues",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"venues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Teams For Each Venue",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/teamsForEachVenue?team",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teamsForEachVenue"
+							],
+							"query": [
+								{
+									"key": "team",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Founded After Year",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/foundedAfter?year",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"foundedAfter"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Team Scorers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/teamScorers?team",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teamScorers"
+							],
+							"query": [
+								{
+									"key": "team",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Team Nationalities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/teamNationalities?team",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teamNationalities"
+							],
+							"query": [
+								{
+									"key": "team",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Count Nationalities For Team",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/nationalitesForTeam?team",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"nationalitesForTeam"
+							],
+							"query": [
+								{
+									"key": "team",
+									"value": null
+								},
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Young Scorers For Team",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/youngScorers?team",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"youngScorers"
+							],
+							"query": [
+								{
+									"key": "team",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Filters",
+			"item": [
+				{
+					"name": "Team",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/team?team",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"team"
+							],
+							"query": [
+								{
+									"key": "team",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Teams starting with letter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/startsWith?letter",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"startsWith"
+							],
+							"query": [
+								{
+									"key": "letter",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Founded In year",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/foundedIn?year",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"foundedIn"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Nationalities For Team",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/nationalitiesForTeam?team&nationality",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"nationalitiesForTeam"
+							],
+							"query": [
+								{
+									"key": "team",
+									"value": null
+								},
+								{
+									"key": "nationality",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Scorers For Position",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/ScorersForPosition?team&position",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ScorersForPosition"
+							],
+							"query": [
+								{
+									"key": "team",
+									"value": null
+								},
+								{
+									"key": "position",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
