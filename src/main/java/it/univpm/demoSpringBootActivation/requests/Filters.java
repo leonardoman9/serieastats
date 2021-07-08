@@ -69,6 +69,24 @@ public class Filters implements Directories {
 		System.out.println(result);
 		return result;
 	}
+	/**
+	 * Funzione che, data in input una squadra e una o più nazionalità, restituisce tutti i marcatori di nazionalità corrispondente
+	 * @param longName, nationality
+	 * @return
+	 * @throws IOException
+	 */
+	public static String returnScorersForNationality(String longName, String nationality) throws IOException{
+		String result = longName + ":\n";
+		Scorers scorers= JsonParser.parseScorers(SCORERS_DIR);
+		for (Scorer i : scorers.getScorers()) {
+			if (i.getTeam().getlongName().equals(longName) && i.getPlayer().getNationality().equals(nationality)) {
+					result+=i.getPlayer().getName()+"\n";
+			}
+		}
+		if(result.equals(longName + ":\n"))
+			result+="There are no scorers";
+		return result;
+	}
 	//TODO
 	public static String positionFilter(String position, String teamName) throws IOException, FileNotFoundException {
 		String result = "";
