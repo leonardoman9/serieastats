@@ -1,8 +1,6 @@
 package it.univpm.demoSpringBootActivation.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -189,7 +187,7 @@ public class SimpleRestController implements Directories{
 		System.out.println(result);
 		return result;
 	}
-	@GetMapping("/scorersForPosition")			
+	@GetMapping("/scorersForPosition")
 	@ResponseBody
 	/**
 	 * Mostra tutti i marcatori di un ruolo di una squadra
@@ -223,46 +221,25 @@ public class SimpleRestController implements Directories{
 		System.out.println(result);
 		return result;
 	}
-	/**
-	 * Filtra i marcatori di una squadra per una o più nazionalità
-	 * localhost:8080/scorersForNationalities?team={longName}&nationality={nationality}
-	 * Si possono impostare più nazionalità da filtrare aggiungendo ulteriori &nationality={nationality}
-	 * alle fine della richiesta
-	 * @param position
-	 * @param team
-	 * @return
-	 * @throws IOException
-	 */
-	@GetMapping("/scorersForNationalities")
+	@GetMapping("/foundedIn")
+	@ResponseBody
+	@JsonIgnoreProperties
+	public String returnFoundedYearFilter(@RequestParam(name = "year", defaultValue = "1902") String year) throws IOException {
+		String result = Filters.foundedYearFilter(year);
+		System.out.println(result);
+		return result;
+	}
+	@GetMapping("/nationalitiesForTeam")
 	@ResponseBody
 	@JsonIgnoreProperties
 	public String returnScorersForNationality(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName
-			,@RequestParam(name = "nationality")List<String> nationalities) throws IOException {
+											 ,@RequestParam(name = "nationality")String nationalities) throws IOException {
 			String result="";
 			result = Filters.returnScorersForNationality(longName, nationalities);
 			System.out.println(result);
 			return result;
 	}
-	/**
-	 * Filtra i marcatori di una squadra per uno o più ruoli
-	 * * localhost:8080/scorersForNationalities?team={longName}&position={position}
-	 * Si possono impostare più ruoli da filtrare aggiungendo ulteriori &position={position}
-	 * alla fine della richiesta
-	 * @param position
-	 * @param team
-	 * @return
-	 * @throws IOException
-	 */
-	@GetMapping("/scorersForPosition")
-	@ResponseBody
-	@JsonIgnoreProperties
-	public String returnScorersForPosition(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName
-			,@RequestParam(name = "position")List<String> position) throws IOException {
-			String result="";
-			result = Filters.returnScorersForPosition(longName, position);
-			System.out.println(result);
-			return result;
-	}
 	
 	
+
 }

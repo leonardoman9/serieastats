@@ -57,6 +57,7 @@ public class League extends Competition{
 		for(Team i : Teams) {
 			result+=i.toString()+"\n";
 		}
+		result+="\n";
 		return result;
 	}
 	public String toStringHeader() {
