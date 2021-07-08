@@ -4,9 +4,7 @@ package it.univpm.demoSpringBootActivation.utilities;
 import java.io.IOException;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import it.univpm.demoSpringBootActivation.model.*;

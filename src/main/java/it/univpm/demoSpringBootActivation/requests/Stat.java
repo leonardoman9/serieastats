@@ -19,21 +19,32 @@ public class Stat implements Directories{
 	 * @return
 	 * @throws IOException
 	 */
-	public static String returnFoundedAfter(String yearFounded) throws IOException {
+	public static String returnFoundedAfter(String yearFounded) {
 		String result="Teams founded after " + yearFounded + ":\n";
 		Team[] Teams;
-		int n=0;
-		int yearFoundedInt = Integer.parseInt(yearFounded);
-		League newLeague = JsonParser.parseLeague(LEAGUE_DIR);
-		Teams = newLeague.getTeams();
-		for (Team i : Teams) {
-			if (i.getFounded() > yearFoundedInt) {
-				result+=i.toString()+"\n";
-				n++;
+		int yearFoundedInt, n=0;
+		try {
+			yearFoundedInt = Integer.parseInt(yearFounded);
+			League newLeague = JsonParser.parseLeague(LEAGUE_DIR);
+			Teams = newLeague.getTeams();
+			for (Team i : Teams) {
+				if (i.getFounded() > yearFoundedInt) {
+					result+=i.toString()+"\n";
+					n++;
+				}
 			}
+			result+= n + " teams founded after year " + yearFounded + ".\n";
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			return "ERRORE";
 		}
-		result+= n + " teams founded after year " + yearFounded + ".\n";
+		catch(IOException e) {
+			e.printStackTrace();
+			return "ERRORE";
+			
+		}
 		return result;
+		
 	}
 	/**
 	 * Funzione che recupera e stampa tutti gli stadi della Serie A.
