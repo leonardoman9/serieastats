@@ -15,7 +15,6 @@ public class UrlConnection {
 			this.con = (HttpURLConnection) Url.openConnection();
 					con.setRequestProperty("X-Auth-Token", "85f94a3f96e1441aa9702acaeea4e1df");
 					con.setRequestMethod("GET");
-			//int status = con.getResponseCode();
 		} catch (MalformedURLException e) {
 			System.out.println(e);
 			e.printStackTrace();

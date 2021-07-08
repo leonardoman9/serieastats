@@ -16,9 +16,14 @@ public class DateOfBirth {
 		this.day = 1;
 	}
 	public DateOfBirth(String first, String second, String third) {
+		try {
 		this.year = Integer.parseInt(first);
 		this.month= Integer.parseInt(second);
 		this.day = Integer.parseInt(third);
+		}
+		catch(NumberFormatException e) {
+			e.printStackTrace();
+		}
 	}
 	public int getYear() {
 		return year;

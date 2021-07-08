@@ -9,7 +9,8 @@ public class Dataset {
 	 * @return		Stringa json contenente la risposta
 	 * @throws IOException
 	 */
-	static public String download(String url) throws IOException {
+	static public String download(String url) {
+		try {
 		UrlConnection urlc = new UrlConnection(url);
 		BufferedReader in = new BufferedReader(new InputStreamReader(urlc.con.getInputStream()));
 				String line = in.readLine();
@@ -22,5 +23,11 @@ public class Dataset {
 		in.close();
 		urlc.con.disconnect();
 		return json;
+		}
+		catch (IOException e) {
+			System.out.println("Error: Invalid url");
+			e.printStackTrace();
+			return e.toString();
+		}
 	}
 }
