@@ -44,6 +44,8 @@ public class Scorer extends Player{
 	}
 	
 	public String toString() {
-		return this.getName() + ": " + this.numberOfGoals + " goals";
+		String result="";
+		result += "Number of Goals: " + this.numberOfGoals + "\n";
+		return result;
 	}
 }

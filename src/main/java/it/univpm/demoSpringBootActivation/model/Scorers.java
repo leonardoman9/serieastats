@@ -58,6 +58,14 @@ public class Scorers {
 		}
 		return result;
 	}
+	
+	public int getSize(String longName) {
+		int s=0;
+		for (Scorer i : scorers) {
+			if (i.getTeam().getlongName().equals(longName)) s++;
+		}
+		return s;
+	}
 	/**
 	 * Funzione che popola un HashSet Nationalities per rappresentare tutti i diversi possibili di nazionalità,
 	 * per poi stamparli senza ripetizioni

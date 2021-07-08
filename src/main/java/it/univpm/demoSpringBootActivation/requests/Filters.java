@@ -42,11 +42,14 @@ public class Filters implements Directories {
 		int yearStr =Integer.parseInt(year);
 		League newLeague = JsonParser.parseLeague(LEAGUE_DIR);
 		String result = year + ":\n";
+		int n=0;
 		for (Team i : newLeague.getTeams()) {
 			if(i.getFounded()==yearStr) {
-				result += i.getlongName()+"\n";
+				result += i.toString()+"\n";
+				n++;
 			}
 		}
+		result += "Total: " + n + " teams founded in year " + year + ".\n";
 		System.out.println(result);
 		return result;
 	}
@@ -63,7 +66,7 @@ public class Filters implements Directories {
 		String result = "Club names that start with letter " + letterChar + ":\n";
 		for (Team i : newLeague.getTeams()) {
 			if (i.getlongName().charAt(0)==letterChar) {
-				result += i.getlongName() + "\n";
+				result += i.toString() + "\n";
 			}
 		}
 		System.out.println(result);
@@ -78,29 +81,15 @@ public class Filters implements Directories {
 	public static String returnScorersForNationality(String longName, String nationality) throws IOException{
 		String result = longName + ":\n";
 		Scorers scorers= JsonParser.parseScorers(SCORERS_DIR);
+		int n=0;
 		for (Scorer i : scorers.getScorers()) {
 			if (i.getTeam().getlongName().equals(longName) && i.getPlayer().getNationality().equals(nationality)) {
-					result+=i.getPlayer().getName()+"\n";
+					result+=i.getPlayer().toString() + i.toString()+"\n";
+					n++;
 			}
 		}
-		if(result.equals(longName + ":\n"))
-			result+="There are no scorers";
+		result += "Total: " + n + " scorers from " + nationality + ".\n";
 		return result;
 	}
-	//TODO
-	public static String positionFilter(String position, String teamName) throws IOException, FileNotFoundException {
-		String result = "";
-		Scorers scorers = Requests.returnLeagueScorers();
-		return result;
-	}
-
-	public static String positionFilter(String team, String position1, String position2) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public static String positionFilter(String team, String position1, String position2, String position3) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }

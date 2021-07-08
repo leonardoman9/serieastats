@@ -95,5 +95,13 @@ public class Player {
 	public void setLastUpdated(String lastUpdated) {
 		this.lastUpdated = lastUpdated;
 	}
+	public String toString() {
+		String result="";
+		result += "Full Name: " + this.getName() + "\n" +
+				   "Date Of Birth: " + this.getDateOfBirth() + "\n"+
+				   "Nationality: " + this.getNationality() + "\n" +
+				   "Position: " + this.getPosition() + "\n";
+		return result;
+	}
 	
 }

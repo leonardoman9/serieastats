@@ -187,7 +187,7 @@ public class SimpleRestController implements Directories{
 		System.out.println(result);
 		return result;
 	}
-	@GetMapping("/scorersForPosition")			//TODO NON FUNZIONA
+	@GetMapping("/scorersForPosition")
 	@ResponseBody
 	/**
 	 * Mostra tutti i marcatori di un ruolo di una squadra
@@ -221,49 +221,25 @@ public class SimpleRestController implements Directories{
 		System.out.println(result);
 		return result;
 	}
+	@GetMapping("/foundedIn")
+	@ResponseBody
+	@JsonIgnoreProperties
+	public String returnFoundedYearFilter(@RequestParam(name = "year", defaultValue = "1902") String year) throws IOException {
+		String result = Filters.foundedYearFilter(year);
+		System.out.println(result);
+		return result;
+	}
 	@GetMapping("/nationalitiesForTeam")
 	@ResponseBody
 	@JsonIgnoreProperties
 	public String returnScorersForNationality(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName
 											 ,@RequestParam(name = "nationality")String nationalities) throws IOException {
 			String result="";
-			result = Stat.returnScorersForNationality(longName, nationalities);
+			result = Filters.returnScorersForNationality(longName, nationalities);
 			System.out.println(result);
 			return result;
 	}
-	/**
-	 * 
-	 * @param position
-	 * @param team
-	 * @return
-	 * @throws IOException
-	 */
-	@GetMapping("/getPosition")
-	@ResponseBody
-	@JsonIgnoreProperties
-	public String returnPosition( @RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String team, 
-								  @RequestParam(name = "position", defaultValue = "Attacker") String position) 
-								  throws IOException {
-		String result = Filters.positionFilter(team, position);
-		System.out.println(result);
-		return result;
-	}
-	public String returnPosition( @RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String team, 
-						   		  @RequestParam(name = "position1", defaultValue = "Attacker") String position1,
-						   		  @RequestParam(name = "position2", defaultValue = "Midfielder") String position2)
-						   		  throws IOException {
-		String result = Filters.positionFilter(team, position1, position2);
-		System.out.println(result);
-		return result;
-	}
-	public String returnPosition( @RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String team, 
-	   		  					  @RequestParam(name = "position1", defaultValue = "Attacker") String position1,
-	   		  					  @RequestParam(name = "position2", defaultValue = "Midfielder") String position2,
-	   		  					  @RequestParam(name = "position2", defaultValue = "Defender") String position3)
-	   		  					  throws IOException {
-		String result = Filters.positionFilter(team, position1, position2, position3);
-		System.out.println(result);
-		return result;
-	}
+	
+	
 
 }
