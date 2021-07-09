@@ -1,5 +1,6 @@
 package it.univpm.demoSpringBootActivation.requests;
 
+
 import java.io.IOException;
 import java.util.List;
 
@@ -13,41 +14,32 @@ import it.univpm.demoSpringBootActivation.utilities.*;
  */
 public class Filters implements Directories {
 	/**
-	 * Construttore vuoto
-	 */
-	public Filters() {}
-	/**
 	 * Funzione che chiama le API per ottenere una stringa con formato JSON e deserializzarla in un oggetto di tipo Team
-	 * @param nomeTeam Nome della squadra  da visualizzare
-	 * @return newTeam Oggetto Team contenente il json Deserializzato
-	 * @throws IOException se accade qualche errore di I/O
-	 * @throws MissingTeamException Se la squadra richiesta non esiste
+	 * @param nomeTeam
+	 * @return
+	 * @throws IOException
+	 * @throws MissingTeamException
 	 */
 	public static Team returnTeam(String nomeTeam) throws IOException, MissingTeamException { //ex richiesa
 		//File leagueFile = new File(LEAGUE_DIR);
-		League newLeague = JsonParser.parseLeague(LEAGUE_DIR); 
+		League newLeague = JsonParser.parseLeague(LEAGUE_DIR); // TODO ???'
 		int teamId = newLeague.lookForId(nomeTeam);
 		if(teamId==-1)
 			{throw new MissingTeamException(nomeTeam);}
-		String result = Dataset.download(TEAM_DIR + teamId);
+		String result = Dataset.download("https://api.football-data.org/v2/teams/" + teamId);
 		FileInputOutput.toFile(result,  TEAM_DIR+"/team"+teamId+".json");
 		Team newTeam = JsonParser.parseTeam(TEAM_DIR+"/team"+teamId+".json");
 		return newTeam;	
 	}
 	/**
 	 * Funzione che, dato in input un anno, restituisce tutte le squadre fondate dopo quell'anno
-	 * @param year Anno con cui filtrare le squadre
-	 * @return result Elenco di squadre fondate nell'anno <code>year</code>
-	 * @throws IOException se accade qualche errore di I/O
+	 * @param year
+	 * @return
+	 * @throws IOException
 	 */
 	
 	public static String foundedYearFilter(String year) throws IOException{
-		int yearStr=0;
-		try{
-			yearStr =Integer.parseInt(year);
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		}
+		int yearStr =Integer.parseInt(year);
 		int n=0;
 		League newLeague = JsonParser.parseLeague(LEAGUE_DIR);
 		String result = "Founded " + year + ":\n\n";
@@ -63,9 +55,9 @@ public class Filters implements Directories {
 
 	/**
 	 * Funzione che, data in input una lettera, restituisce tutte le squadre il cui nome inizia con quella lettera
-	 * @param letter Lettera con cui filtrare le squadre
-	 * @return result Elenco di squadre il cui nome inizia per <code> letter </code>
-	 * @throws IOException se accade qualche errore di I/O
+	 * @param letter
+	 * @return
+	 * @throws IOException
 	 */
 	public static String startsWith(String letter) throws IOException {
 		char letterChar = letter.charAt(0);
@@ -83,10 +75,9 @@ public class Filters implements Directories {
 	}
 	/**
 	 * Funzione che, data in input una squadra e una o più nazionalità, restituisce tutti i marcatori di nazionalità corrispondente
-	 * @param longName Nome della squadra da visualizzare
-	 * @param nationality ArrayList di nazionalità con cui filtrare i marcatori della squadra scelta
-	 * @return result Elenco di marcatori di una squadra filtrati per nazionalità
-	 * @throws IOException se accade qualche errore di I/O
+	 * @param longName, nationality
+	 * @return
+	 * @throws IOException
 	 */
 	public static String returnScorersForNationality(String longName, List<String> nationality) throws IOException{
 		String result = longName + ":\n\n";
@@ -100,13 +91,11 @@ public class Filters implements Directories {
 	}
 	/**
 	 * Funzione che, data in input una squadra e uno o più ruoli, restituisce tutti i marcatori del ruolo corrispondente
-	 * @param longName Nome della squadra da visualizzare
-	 * @param position ArrayList di ruoli con cui i filtrare i marcatori della squadra scelta
-	 * @return result Elenco di  marcatori di una squadra filtrati per ruolo
-	 * @throws MissingTeamException Se non esiste la squadra <code>longName</code>
-	 * @throws IOException se accade qualche errore di I/O
+	 * @param longName, position
+	 * @return
+	 * @throws IOException
 	 */
-	public static String returnScorersForPosition(String longName, List<String> position) throws MissingTeamException, IOException{
+	public static String returnScorersForPosition(String longName, List<String> position) throws IOException{
 		String result = longName + ":\n\n";
 		int n=0;
 		Scorers scorers= JsonParser.parseScorers(SCORERS_DIR);

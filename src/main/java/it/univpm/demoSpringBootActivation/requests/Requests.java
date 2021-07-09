@@ -2,70 +2,50 @@ package it.univpm.demoSpringBootActivation.requests;
 	
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.UnknownHostException;
 
-import it.univpm.demoSpringBootActivation.model.*;
-import it.univpm.demoSpringBootActivation.utilities.*;
+import it.univpm.demoSpringBootActivation.exceptions.MissingTeamException;
+import it.univpm.demoSpringBootActivation.model.League;
+import it.univpm.demoSpringBootActivation.model.Scorers;
+import it.univpm.demoSpringBootActivation.utilities.Dataset;
+import it.univpm.demoSpringBootActivation.utilities.FileInputOutput;
+import it.univpm.demoSpringBootActivation.utilities.JsonParser;
 /**
  * Classe contenente i diversi tipi di richiesta da effettuare alle API per ottenere i dati richiesti
  * @author Luca Ranucci
  * @author Leonardo Mannini
+ *
  */
 public class Requests implements Directories{
 	/**
-	 * Construttore vuoto
+	 * Funzione che chiama le API per ottenere una stringa con formato JSON e deserializzarla in un oggetto di tipo League
+	 * @param showTeams Parametro booleano per decidere se mostrare tutte le squadre della serie A (true) (di default è true), o mostrare solo informazioni riguardo la competizione (false)
+	 * @return Oggetto di tipo League popolato dalle informazioni sulla Serie A
+	 * @throws IOException
 	 */
-	public Requests() {}
-	/**
-	 * Funzione che chiama le API per ottenere una stringa con formato JSON e deserializzarla in un oggetto di tipo <code>League</code>
-	 * @return JsonParser.parseLeague(LEAGUE_DIR) Oggetto di tipo League popolato dalle informazioni sulla Serie A
-	 * @throws FileNotFoundException Se il file <code>LEAGUE_DIR</code> non è nella directory
-	 * @throws UnknownHostException Se la connessione alle API fallisce
-	 */
-	public static League returnLeague() throws FileNotFoundException, UnknownHostException {
-		League  newLeague = new League();
-		try {
+	public static League returnLeague() throws IOException, FileNotFoundException {
 		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/teams");
 		FileInputOutput.toFile(result, LEAGUE_DIR);
-		newLeague = JsonParser.parseLeague(LEAGUE_DIR);
-		return newLeague;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return newLeague;
+		return JsonParser.parseLeague(LEAGUE_DIR);
 	}
 	
 	/**
-	 * Funzione che chiama le API per ottenere una stringa con formato JSON e deserializzarla in un oggetto di tipo <code>Scorers</code>
-	 * @return JsonParser.parseScorers(SCORERS_DIR) Oggetto di tipo <code>Scorers</code> popolato dalle informazioni sulla Serie A
-	 * @throws FileNotFoundException Se il file <code>SCORERS_DIR</code> non è nella directory
-	 * @throws UnknownHostException Se la connessione alle API fallisce
+	 * Funzione che chiama le API per ottenere una stringa con formato JSON e deserializzarla in un oggetto di tipo Scorers
+	 * @return
+	 * @throws IOException
 	 */
-	public static Scorers returnLeagueScorers() throws FileNotFoundException, UnknownHostException {
-		Scorers scorers = new Scorers();
-		try {
-			String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/scorers?limit=100"); //SE AUMENTO IL LIMIT, NON FUNZIONA /scorersForPosition
-			FileInputOutput.toFile(result, SCORERS_DIR);
-			scorers =  JsonParser.parseScorers(SCORERS_DIR);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return scorers;
+	public static Scorers returnLeagueScorers()  throws IOException, FileNotFoundException {
+		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/scorers?limit=100"); //SE AUMENTO IL LIMIT, NON FUNZIONA /scorersForPosition
+		FileInputOutput.toFile(result, SCORERS_DIR);
+		return JsonParser.parseScorers(SCORERS_DIR);
 	}
-	/**
-	 * Funzione utilizzata per scaricare i due file "league.json" e "scorers.json" tramite le due richieste dei metodi <code>returnLeague()</code> e <code>returnLeagueScorers()</code>,
+	/*
+	 * Funzione utilizzata per scaricare i due file "league.json" e "scorers.json" tramite le due richieste dei metodi returnLeague() e returnLeagueScorers(),
 	 * per avere un Dataset su cui lavorare ad ogni avvio del programma
-	 * @throws FileNotFoundException Se <code>SCORERS_DIR</code> o <code>LEAGUE_DIR</code> non sono nella directory
 	 */
 	@SuppressWarnings("unused")
-	public static void doRequests() throws FileNotFoundException {
-		try {
+	public static void doRequests() throws IOException, MissingTeamException, FileNotFoundException {
 		League leagueFile = Requests.returnLeague();
 		Scorers leagueScorers = Requests.returnLeagueScorers();
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		}
-	}
+	
 }

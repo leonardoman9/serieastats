@@ -2,20 +2,15 @@ package it.univpm.demoSpringBootActivation.utilities;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-/**
- * Classe con un metodo statico per effettuare il download del dataset
- * @author Leonardo Mannini
- * @author Luca Ranucci
- *
- */
+import java.net.UnknownServiceException;
 public class Dataset {
 	/**
 	 * Funzione che, dato un URL di richiesta alle API, restituisce la risposta in una stringa
 	 * @param url	Una stringa contenente URL a cui effettuare la richiestsa
-	 * @return json	Stringa json contenente la risposta
-	 * @throws IOException In caso di errori di I/O
+	 * @return		Stringa json contenente la risposta
+	 * @throws IOException
 	 */
-	static public String download(String url) throws IOException{
+	static public String download(String url) {
 		try {
 		UrlConnection urlc = new UrlConnection(url);
 		BufferedReader in = new BufferedReader(new InputStreamReader(urlc.con.getInputStream()));
@@ -29,6 +24,11 @@ public class Dataset {
 		in.close();
 		urlc.con.disconnect();
 		return json;
+		}
+		catch (UnknownServiceException e) {
+			System.out.println("Error: An unknown service exception has occurred");
+			e.printStackTrace();
+			return e.toString();
 		}
 		catch (IOException e) {
 			System.out.println("Error: Invalid url");

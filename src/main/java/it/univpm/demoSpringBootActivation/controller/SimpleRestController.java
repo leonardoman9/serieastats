@@ -20,108 +20,95 @@ import it.univpm.demoSpringBootActivation.exceptions.*;
 
 @RestController
 public class SimpleRestController implements Directories{
-	/**
-	 *  Mostra informazioni riguardo tutte le squadre della Serie A e informazioni riguardanti la Serie A
-	 *  <br>
-	 *  <code>localhost:8080/league</code>
-	 *  <br>
-	 *  Mostra informazioni riguardanti la Serie A
-	 *  <br>
-	 *  <code>localhost:8080/league?showTeams=false</code>
-	 *  <br>
-	 * @param showTeams <code>true</code> o <code>false</code>, serve a decidere se mostrare informazioni su tutte le squadre (true) o solo informazioni sul Campionato (false)
-	 * @return newLeague Oggetto contenente la squadra deserializzata 
-	 */
+	
 	@GetMapping("/league")
 	@ResponseBody
 	@JsonIgnoreProperties
-	public League returnLeague(@RequestParam(name = "showTeams", defaultValue = "true") String showTeams) {
-		League newLeague=new League();
-		try {
-			newLeague = JsonParser.parseLeague(LEAGUE_DIR);
-		} catch (IOException e) {
-		}
-		if (Boolean.parseBoolean(showTeams)) {System.out.println(newLeague.toStringHeaderAndTeams());}	
-		else						 { System.out.println(newLeague.toStringHeader());}
-		
-		return newLeague;
-	}
 	/**
-	 * Mostra informazioni riguardanti una squadra a scelta dell'utente
-	 * <br>
-	 * <code>localhost:8080/team?name=[nomeTeam]</code>
-	 * <br>
-	 * @param nomeTeam Il nome della squadra da visualizzare
-	 * @return newTeam Oggetto contenente la squadra deserializzata 
-	 * @throws IOException Se accade qualche errore di I/O
-	 * @throws MissingTeamException Se il team richiesto non esiste
+	 * /*
+	 *  localhost:8080/league
+	 *  Mostra informazioni riguardo tutte le squadre della Serie A e informazioni riguardanti la Serie A
+	 *  
+	 *  localhost:8080/league?showTeams=false
+	 *  Mostra informazioni riguardanti la Serie A
+	 * @param showTeams
+	 * @return
+	 * @throws IOException
 	 */
+	public League returnLeague(@RequestParam(name = "showTeams", defaultValue = "true") String showTeams) throws IOException {
+		League result = JsonParser.parseLeague(LEAGUE_DIR);
+		if (Boolean.parseBoolean(showTeams)) {System.out.println(result.toStringHeaderAndTeams());}	
+		else						 { System.out.println(result.toStringHeader());}
+		
+		return result;
+	}
+	
+	
 	@GetMapping("/team")
 	@ResponseBody
-	@JsonIgnoreProperties
+	/**
+	 * Mostra informazioni riguardanti una squadra a scelta dell'utente
+	 * localhost:8080/team?name={shortname}
+	 * Funziona con lo shortname
+	 * @param nomeTeam
+	 * @return
+	 * @throws IOException
+	 * @throws MissingTeamException
+	 */
 	public  Team returnTeam(@RequestParam(name = "name", defaultValue = "Roma") String nomeTeam) throws IOException, MissingTeamException {
-		Team newTeam = new Team();;
-		try {
-			newTeam = Filters.returnTeam(nomeTeam);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (MissingTeamException e) {
-			e.printStackTrace();
-		}
+		Team newTeam = Filters.returnTeam(nomeTeam);
 		System.out.println(newTeam+"\n");
 		return newTeam;
 	}
-	/**
-	 *  Mostra i primi 100 marcatori della Serie A, ordinati per numero di gol
-	 *  <br>
-	 * 	<code>localhost:8080/leagueScorers</code>
-	 * <br>
-	 * @return scorers Oggetto contenente la squadra deserializzata
-	 * @throws IOException Se accade un errore di I/O
-	 */
 	@GetMapping("/leagueScorers")     
 	@ResponseBody
-
-	public Scorers returnLeagueScorers() throws IOException {
+	/**
+	 *  Mostra i primi 100 marcatori della Serie A, ordinati per numero di gol
+	 * 	localhost:8080/leagueScorers
+	 * 
+	 * @return
+	 * @throws IOException
+	 * @throws MissingTeamException
+	 */
+	public Scorers returnLeagueScorers() throws IOException, MissingTeamException {
 		Scorers scorers = JsonParser.parseScorers(SCORERS_DIR);
 		System.out.println(scorers.toString());
 		return scorers;
 	}
 	
 	
-	/*********************************************DA QUI INIZIANO LE STATISTICHE**********************************/
+	//DA QUI INIZIANO LE STATISTICHE//
 	
-	
-	/**
-	 *  Mostra i nomi degli stadi delle partite di Serie A.
-	 *  <br>
-	 *  <code>localhost:8080/venues</code>
-	 *  <br>
-	 * @return result Elenco di stadi della Serie A
-	 * @throws IOException Se accade qualche errore di I/O
-	 */
 	@GetMapping("/venues")
 	@ResponseBody
 	@JsonIgnoreProperties
+	/**
+	 *  Mostra informazioni riguardanti gli stadi delle partite di Serie A.
+	 *  localhost:8080/venues
+	 * @return
+	 * @throws IOException
+	 */
 	public String returnVenues() throws IOException {
-		String result="";
-		try {
-			result = Stat.returnVenues();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		String result = Stat.returnVenues();
 		System.out.println(result);
 		return result;
 	}
-	
+
+	@GetMapping("/foundedAfter")
+	@ResponseBody
+	@JsonIgnoreProperties
 	/**
-	 * Mostra tutti gli stadi e il numero di squadra che giocano in ognuno di essi le partite "in casa".
-	 * <br>
-	 * <code>localhost:8080/teamsForEachVenue</code>
-	 * <br>
-	 * @return result Elenco di stadi e numero di relative squadre
-	 * @throws IOException Se accade qualche errore di I/O
+	 * Mostra tutte le squadre fondate dopo un certo anno specificato dall'utente
+	 * localhost:8080/foundedAfter?year={year}
+	 * @param yearFounded
+	 * @return
+	 * @throws IOException
 	 */
+	public String returnFoundedAfter(@RequestParam(name = "year", defaultValue = "1800") String yearFounded) throws IOException {
+		String result = Stat.returnFoundedAfter(yearFounded);
+		System.out.println(result);
+		return result;
+	}
 	@GetMapping("/teamsForEachVenue")
 	@ResponseBody
 	@JsonIgnoreProperties
@@ -130,114 +117,103 @@ public class SimpleRestController implements Directories{
 		System.out.println(result);
 		return result;
 	}
-	/**
-	 * Mostra tutte le squadre fondate dopo un certo anno, specificato dall'utente
-     * <br>
-	 * <code>localhost:8080/foundedAfter?year=[year]</code>
-	 * <br>
-	 * @param yearFounded Anno minimo di fondazione
-	 * @return result Elenco di squadre fondate dopo l'anno richiesto
-	 * @throws IOException Se accade qualche errore di I/O
-	 */
-	@GetMapping("/foundedAfter")
-	@ResponseBody
-	@JsonIgnoreProperties
-	public String returnFoundedAfter(@RequestParam(name = "year", defaultValue = "1800") String yearFounded) throws IOException {
-		String result = Stat.returnFoundedAfter(yearFounded);
-		System.out.println(result);
-		return result;
-	}
 
-	 /**
-	 *  Mostra i marcatori di una specifica squadra, a scelta dell'utente.
-	 * <br>
-	 * 	<code>localhost:8080/teamScorers?team=[longTeamName]</code>
-	 * <br>
-	 *  Utilizzare il nome esteso della squadra  come input
-	 *  
-	 * @param longName Nome della squadra di cui visualizzarne i marcatori
-	 * @return result Elenco di marcatori della squadra richiesta
-	 * @throws IOException Se accade qualche errore di I/O
-	 * @throws MissingTeamException se la squadra richiesta non esiste
-	 */
+	
 	@GetMapping("/teamScorers")
 	@ResponseBody
+	/**
+	 * Mostra i marcatori di una specifica squadra, a scelta dell'utente.
+	 * 	localhost:8080/teamScorers?team={longTeamName}
+	 *  Inserire %20 al posto di uno spazio nel Nome del team
+	 * @param longName
+	 * @return
+	 * @throws IOException
+	 * @throws MissingTeamException
+	 */
 	public String returnteamScorers(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName) throws IOException, MissingTeamException {
 		String result = Stat.returnTeamScorers(longName);
 		System.out.println(result);
 		return result;
 	}
-	/**
-	 *  
-	 *  Mostra tutte le nazionalità dei marcatori di una specifica squadra, a scelta dell'utente
-	 *<br>
-	 *<code> localhost:8080/teamNationalities?team=[teamName]</code>
-	 *  <br>
-	 *  Utilizzare il nome esteso della squadra come input
-	 *  
-	 * @param longName Nome della squadra di cui si vuole visualizzare la nazionalità dei marcatori
-	 * @return result Elenco di nazionalità dei marcatori della squadra richiesta
-	 * @throws IOException Se accade qualche errore di I/O
-	 * @throws MissingTeamException se la squadra richiesta non esiste
-	 */
+	
 	@GetMapping("/teamNationalities")
 	@ResponseBody
-	public String returnTeamNationalities(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName) throws IOException, MissingTeamException {
+	/**
+	 * /*  
+	 *  Show scorers from a particular Team.
+	 *  Only works with Long Team Name, because the scorers request returns a Team object with only a Long Name attribute.
+	 *  localhost:8080/teamNationalities?team={teamName}
+	 *  Inserire %20 al posto di uno spazio nel Nome del team
+	 * @param longName
+	 * @return
+	 * @throws IOException
+	 * @throws MissingTeamException
+	 */
+	public String returnteamNationalities(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName) throws IOException, MissingTeamException {
 		String result = Stat.returnTeamNationalities(longName);
 		System.out.println(result);
 		return result;
 	}
-	/**
-	 *
-	 * <p>
-	 * Mostra e conta tutte le nazionalità dei marcatori di una specifica squadra, a scelta dell'utente.
-	 * <br>
-	 * <code>localhost:8080/countNationalities?team=[teamName]</code>
-	 * <br>
-	 * Utilizzare il nome esteso della squadra come input
-	 * </p>
-	 * @param longName Nome della squadra di cui si vuole visualizzare e contare le nazionalità dei marcatori
-	 * @return result Elenco di nazionalità e numero di marcatori per ogni nazionalità
-	 * @throws IOException Se accade qualche errore di I/O
-	 * @throws MissingTeamException se la squadra richiesta non esiste
-	 */
+	
 	@GetMapping("/countNationalities")
 	@ResponseBody
+	/**
+	 * /*  
+	 *  Show the number of scorers of each nationality of the team
+	 *  Only works with Long Team Name, because the scorers request returns a Team object with only a Long Name attribute.
+	 *  localhost:8080/countNationalities?team={teamName}
+	 *  Inserire %20 al posto di uno spazio nel Nome del team
+	 * @param longName
+	 * @return
+	 * @throws IOException
+	 * @throws MissingTeamException
+	 */
 	public String returnCountNationalities(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName) throws IOException, MissingTeamException {
 		String result = Stat.returnCountNationalities(longName);
 		System.out.println(result);
 		return result;
 	}
-	/**
-	 * Mostra tutti i marcatori di una squadra con età minore di 28 anni
-	 * <br>
-	 * <code>localhost:8080/youngScorers?team=[longName]</code>
-	 * <br>
-	 * Utilizzare il nome esteso della squadra come input
-	 * 
-	 * @param longName Nome della squadra di cuoi si vuole visualizzare i marcatori giovani
-	 * @return result Elenco di marcatori con età minore di 28 anni
-	 * @throws IOException Se accade qualche errore di I/O
-	 * @throws MissingTeamException se la squadra richiesta none esiste
-	 */
 	@GetMapping("/youngScorers")
 	@ResponseBody
+	/**
+	 * Mostra tutti i marcatori di una squadra con età minore a 28 anni
+	 * localhost:8080/youngScorers?team={longName}
+	 * Inserire %20 al posto di uno spazio nel Nome lungo del team
+	 * @param longName
+	 * @return
+	 * @throws IOException
+	 * @throws MissingTeamException
+	 */
 	public String returnYoungScorers(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName) throws IOException, MissingTeamException {
 		String result = Stat.returnYoungScorers(longName);
 		System.out.println(result);
 		return result;
 	}
-
-	/*********************************************DA QUI INIZIANO I FILTRI**********************************/
+	@GetMapping("/scorersForPosition")
+	@ResponseBody
+	/**
+	 * Mostra tutti i marcatori di un ruolo di una squadra
+	 * localhost:8080/youngScorers?team={longName}&position={position}
+	 * Inserire %20 al posto di uno spazio nel Nome lungo del team
+	 * @param longName
+	 * @return
+	 * @throws IOException
+	 * @throws MissingTeamException
+	 */
+	public String returnScorersForPosition(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName, 
+										   @RequestParam(name = "position", defaultValue = "Attacker") List<String> position) throws IOException, MissingTeamException {
+		String result = Filters.returnScorersForPosition(longName, position);
+		System.out.println(result);
+		return result;
+	}
+	//DA QUI INIZIANO I FILTRI
 	
 	/**
-	 * Mostra tutte le squadre il cui nome inizia con una certa lettera, a scelta dell'utente.
-	 * <br>
-	 * <code>localhost:8080/startsWith?letter=[letter]</code>
-	 * <br>
-	 * @param letter Lettera con cui filtrare i nomi delle squadre
-	 * @return Elenco di squadre il cui nome inizia per <code>letter</code>
-	 * @throws IOException Se accade qualche errore di I/O
+	 * Mostra tutte le squadre il cui nome inizia con una certa lettera
+	 * localhost:8080/startsWith?letter={c}
+	 * @param letter
+	 * @return
+	 * @throws IOException
 	 */
 	@GetMapping("/startsWith")
 	@ResponseBody
@@ -247,15 +223,6 @@ public class SimpleRestController implements Directories{
 		System.out.println(result);
 		return result;
 	}
-	/**
-	 * Mostra tutte le squadre fondate in un certo anno, a scelta dell'utente
-	 * <br>
-	 * <code>localhost:8080/foundedIn?year=[year]</code>
-	 * <br>
-	 * @param year Anno con cui filtrare le squadre
-	 * @return Elenco di squadre fondate nell'anno scelto dall'utente
-	 * @throws IOException Se accade qualche errore di I/O
-	 */
 	@GetMapping("/foundedIn")
 	@ResponseBody
 	@JsonIgnoreProperties
@@ -264,18 +231,6 @@ public class SimpleRestController implements Directories{
 		System.out.println(result);
 		return result;
 	}
-	/**
-	 * Mostra tutti i giocatori di una o più nazionalità di una squadra, a scelta dell'utente.
-	 * <br>
-	 * <code>localhost:8080/team?=[longName]&#38;nationality?=[nationality]</code>
-	 * <br>
-	 * Utilizzare il nome esteso della squadra  come input
-	 * 
-	 * @param longName Nome della squadra di cui visualizzare i marcatori filtrati per nazionalità
-	 * @param nationalities Una o più nazionalità da filtrare
-	 * @return Elenco dei marcatori della squadra scelta filtrati per nazionalità
-	 * @throws IOException Se accade qualche errore di I/O
-	 */
 	@GetMapping("/nationalitiesForTeam")
 	@ResponseBody
 	@JsonIgnoreProperties
@@ -286,25 +241,7 @@ public class SimpleRestController implements Directories{
 			System.out.println(result);
 			return result;
 	}
-	/**
-	 * Mostra tutti i marcatori di un ruolo di una squadra
-	 * <br>
-	 * <code>localhost:8080/scorersForPosition?team=[longName]&#38;position[position]</code>
-	 * <br>
-	 * Utilizzare il nome esteso della squadra come input
-	 * @param longName Nome della squadra di cui visualizzare i marcatori giovani
-	 * @param position Ruoli da filtrare
-	 * @return result Elenco di marcatori della squadra scelta filtrati per ruolo
-	 * @throws IOException Se accade qualche errore di I/O
-	 * @throws MissingTeamException se la squadra richiesta non esiste
-	 */
 	
-	@GetMapping("/scorersForPosition")
-	@ResponseBody
-	public String returnScorersForPosition(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName, 
-										   @RequestParam(name = "position", defaultValue = "Attacker") List<String> position) throws IOException, MissingTeamException {
-		String result = Filters.returnScorersForPosition(longName, position);
-		System.out.println(result);
-		return result;
-	}
+	
+
 }

@@ -61,12 +61,8 @@ public class Scorers {
 	
 	public int getSize(String longName) {
 		int s=0;
-		try {
-			for (Scorer i : scorers) {
-				if (i.getTeam().getlongName().equals(longName)) s++;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		for (Scorer i : scorers) {
+			if (i.getTeam().getlongName().equals(longName)) s++;
 		}
 		return s;
 	}

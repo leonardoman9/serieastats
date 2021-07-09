@@ -9,21 +9,15 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import it.univpm.demoSpringBootActivation.model.*;
-/**
- * Classe per effettuare il parsing dei file Json
- * @author Leonardo Mannini
- * @author Luca Ranucci
- *
- */
 public class JsonParser {
 	/**
-	 * Metodo che a partire dal percorso di un file json ne ritorna un oggetto parsato League
-	 * @param jsonObjPath Directory del file da parsare
-	 * @return newLeague Oggetto parsato
-	 * @throws IOException se accadono errori di I/O
+	 * 
+	 * @param jsonObj
+	 * @return
+	 * @throws IOException 
 	 */
 	@JsonIgnoreProperties
-	public static League parseLeague(String jsonObjPath) throws IOException{
+	public static League parseLeague(String jsonObjPath) {
 		String jsonObj = FileInputOutput.toString(jsonObjPath);
 		League newLeague = new League();
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -39,14 +33,13 @@ public class JsonParser {
 	
 
 	/**
-	 * Metodo che a partire dal percorso di un file json ne ritorna un oggetto parsato Team
-	 * @param jsonObjPath Directory del file da parsare
-	 * @return newTeam Oggetto parsato
-	 * @throws IOException se accadono errori di I/O
+	 * Funzione che effettua la deserializzazione, da una stringa (json) ad un oggetto
+	 * @param jsonObj
+	 * @return
+	 * @throws IOException 
 	 */
 	@JsonIgnoreProperties
-	public static Team parseTeam(String jsonObjPath) throws IOException{
-		// JSONObject json = new JSONObject(jsonObj);
+	public static Team parseTeam(String jsonObjPath) {
 		String jsonObj = FileInputOutput.toString(jsonObjPath);
 		Team newTeam = new Team();
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -61,13 +54,13 @@ public class JsonParser {
 	}
 
 	/**
-	 * Metodo che a partire dal percorso di un file json ne ritorna un oggetto parsato Scorers
-	 * @param jsonObjPath Directory del file da parsare
-	 * @return Scorers Oggetto parsato
-	 * @throws IOException se accadono errori di I/O
+	 * 
+	 * @param jsonObj
+	 * @return
+	 * @throws IOException 
 	 */
 	@JsonIgnoreProperties
-	public static Scorers parseScorers(String jsonObjPath) throws IOException{
+	public static Scorers parseScorers(String jsonObjPath) {
 		String jsonObj = FileInputOutput.toString(jsonObjPath);
 		Scorers scorers = new Scorers();
 		try {
