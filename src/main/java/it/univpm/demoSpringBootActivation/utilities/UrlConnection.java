@@ -6,9 +6,24 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
+/**
+ * Classe per gestire la connessione ed effettuare l'autenticazione nelle API
+ * @author leonardomannini
+ *
+ */
 public class UrlConnection {
+	/**
+	 * URL dove effettuare la richiesta
+	 */
 	String url;
+	/**
+	 * @see HttpURLConnection
+	 */
 	HttpURLConnection con;
+	/**
+	 * Costruttore della classe
+	 * @param url Url a cui effettuare la richiesta
+	 */
 	public UrlConnection(String url) {
 		try {
 			URL Url = new URL(url);

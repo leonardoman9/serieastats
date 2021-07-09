@@ -8,18 +8,22 @@ import java.util.List;
 import it.univpm.demoSpringBootActivation.model.*;
 import it.univpm.demoSpringBootActivation.utilities.*;
 /**
- * Classe contenente  metodi statici per effettuare statistiche
+ * Classe contenente metodi statici per effettuare statistiche
  * @author leonardomannini
  *
  */
 public class Stat implements Directories{
 	/**
-	 * Funzione che, dato in input un anno, restituisce tutte le squadre fondate dopo quell'anno
-	 * @param yearFounded
-	 * @return
-	 * @throws IOException
+	 * Construttore vuoto 
 	 */
-	public static String returnFoundedAfter(String yearFounded) {
+	public Stat() {}
+	/**
+	 * Funzione che, dato in input un anno, restituisce tutte le squadre fondate dopo quell'anno
+	 * @param yearFounded Anno minimo di fondazione delle squadre
+	 * @return result Elenco di squadre fondate dopo l'anno <code>yearFounded</code>
+	 * @throws IOException se accade qualche errore di I/O
+	 */
+	public static String returnFoundedAfter(String yearFounded) throws IOException{
 		String result="Teams founded after " + yearFounded + ":\n";
 		Team[] Teams;
 		int yearFoundedInt, n=0;
@@ -35,21 +39,16 @@ public class Stat implements Directories{
 			}
 			result+= n + " teams founded after year " + yearFounded + ".\n";
 		} catch (NumberFormatException e) {
+			System.out.println("Errore: Formato numerico non corretto");
 			e.printStackTrace();
-			return "ERRORE";
-		}
-		catch(IOException e) {
-			e.printStackTrace();
-			return "ERRORE";
-			
 		}
 		return result;
 		
 	}
 	/**
 	 * Funzione che recupera e stampa tutti gli stadi della Serie A.
-	 * @return
-	 * @throws IOException
+	 * @return newLeague.countVenues() Elenco di Stadi della Serie A
+	 * @throws IOException se accade qualche errore di I/O
 	 */
 	public static String returnVenues() throws IOException {
 		League newLeague = JsonParser.parseLeague(LEAGUE_DIR);
@@ -58,8 +57,8 @@ public class Stat implements Directories{
 	/**
 	 * Funzione che recupera e stampa tutti gli stadi della Serie A contando quante sqaudre diverse giocano
 	 * in ognuno di questi.
-	 * @return
-	 * @throws IOException
+	 * @return result Elenco di stadi e numero di squadre diverse che ci giocano le partite "in casa"
+	 * @throws IOException se accade qualche errore di I/O
 	 */
 	public static String returnTeamsVenues() throws IOException {
 		String result = "";
@@ -85,9 +84,9 @@ public class Stat implements Directories{
 	
 	/**
 	 * Funzione che recupera e stampa tutti i marcatori di una determinata squadra scelta dall'utente
-	 * @param longName
-	 * @return
-	 * @throws IOException
+	 * @param longName Nome della squadra di cui visualizzare i marcatori
+	 * @return Elenco di marcatori della squadra
+	 * @throws IOException se accade qualche errore di I/O
 	 */
 	public static String returnTeamScorers(String longName) throws IOException {
 		String result;
@@ -103,9 +102,9 @@ public class Stat implements Directories{
 	/**
 	 *Funzione che recupera e stampa tutte le nazionalità dei marcatori di una determinata squadra scelta dall'utente
 	 * 
-	 * @param longName
-	 * @return
-	 * @throws IOException
+	 * @param longName Nome della squadra di cui visualizzare la nazionalità dei marcatori
+	 * @return result Elenco di marcatori di una certa nazionalità di una squadra
+	 * @throws IOException se accade qualche errore di I/O
 	 */
 	public static String returnTeamNationalities(String longName) throws IOException {
 		String result="";
@@ -122,11 +121,11 @@ public class Stat implements Directories{
 		return result;
 	}
 	/**
-	 *Funzione che recupera e stampa marcatori di una certa nazionalità di una determinata squadra scelta dall'utente
+	 * Funzione che recupera e stampa marcatori di una certa nazionalità di una determinata squadra scelta dall'utente
 	 * 
-	 * @param longName
-	 * @return
-	 * @throws IOException
+	 * @param longName Nome della squadra di cui visualizzare e contare le diverse nazionalità dei marcatori
+	 * @return  result Elenco di nazionalità diverse per numero di marcatori che ne fanno parte
+	 * @throws IOException se accade qualche errore di I/O
 	 */
 	public static String returnCountNationalities(String longName) throws IOException {
 		String result = "";
@@ -153,9 +152,9 @@ public class Stat implements Directories{
 	}
 	/**
 	 * Funzione che restituisce tutti i marcatori di una determinata squadra con un età minore di 28 anni.
-	 * @param longName
-	 * @return
-	 * @throws IOException
+	 * @param longName Nome della squadra di cui visualizzare i marcatori con età minore di 28 anni
+	 * @return result Elenco di marcatori la cui età è minore di 28 anni
+	 * @throws IOException se accade qualche errore di I/O
 	 */
 	public static String returnYoungScorers(String longName)  throws IOException {
 		String result ="";
@@ -177,10 +176,4 @@ public class Stat implements Directories{
 		result+="Total: " + n +" scorers younger than 28 years old	\n";
 		return result;
 	}
-
-
-	
-	
-
-	
 }

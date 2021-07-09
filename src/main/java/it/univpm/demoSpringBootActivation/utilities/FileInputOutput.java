@@ -7,8 +7,17 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
+/**
+ * Classe per gesire la lettura/scrittura di file json
+ * @author leonardomannini
+ *
+ */
 public class FileInputOutput {
+	/**
+	 * Metodo per salvare una stringa in un file
+	 * @param string Stringa da salvare
+	 * @param fileName Percorso dove salvare il file
+	 */
 	public static void toFile(String string, String fileName) {
 		BufferedWriter writer;
 		try {
@@ -21,6 +30,11 @@ public class FileInputOutput {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * Metodo per memorizzare in una stringa il contenuto di un file di testo
+	 * @param fileName Directory del file da leggere
+	 * @return line Stringa contenente il file letto
+	 */
 	public static String toString(String fileName)  {
 		BufferedReader reader;
 		String line="{";

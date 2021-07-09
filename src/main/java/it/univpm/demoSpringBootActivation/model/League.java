@@ -106,8 +106,4 @@ public class League extends Competition{
 		result+="Total: " + Venues.size() + " venues.\n";
 		return  result;
 	}
-	
-	
-
-	
 }

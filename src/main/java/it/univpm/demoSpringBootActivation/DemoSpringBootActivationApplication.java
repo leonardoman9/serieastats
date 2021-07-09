@@ -1,17 +1,15 @@
 package it.univpm.demoSpringBootActivation;
 
-import java.io.IOException;
-import java.net.UnknownHostException;
-
+import java.io.FileNotFoundException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.univpm.demoSpringBootActivation.requests.*;
-import it.univpm.demoSpringBootActivation.exceptions.*;
 
 /**
- * This applications gives informations and statics about Italian's tier one football league (Serie A).
+ * Questa applicazione API REST restituisce informazioni, statistiche, filtri riguardanti la Serie A (massima serie del campionato italiano di calcio),
+ * Le informazioni sono fornite dal servizio RESTful www.football-data.org tramite Rest API.
  * @author Leonardo Mannini
  * @author Luca Ranucci
  * @version 1.0
@@ -20,11 +18,15 @@ import it.univpm.demoSpringBootActivation.exceptions.*;
 @SpringBootApplication
 @RestController
 public class DemoSpringBootActivationApplication {
-public static void main(String[] args) throws IOException, MissingTeamException{ 
+	/**
+	 * Main dell'applicazione
+	 * @param args Argomenti passati a linea di comando
+	 */
+public static void main(String[] args) { 
 	try {
 		Requests.doRequests();
-	} catch (UnknownHostException e) {
-		System.out.println(e + ": Unable to Connect to server\n");
+	} catch (FileNotFoundException e) {
+		e.printStackTrace();
 	}
 	SpringApplication.run(DemoSpringBootActivationApplication.class, args);
 	}

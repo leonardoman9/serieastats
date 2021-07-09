@@ -2,14 +2,20 @@ package it.univpm.demoSpringBootActivation.utilities;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+/**
+ * Classe con un metodo statico per effettuare il download del dataset
+ * @author Leonardo Mannini
+ * @author Luca Ranucci
+ *
+ */
 public class Dataset {
 	/**
 	 * Funzione che, dato un URL di richiesta alle API, restituisce la risposta in una stringa
 	 * @param url	Una stringa contenente URL a cui effettuare la richiestsa
-	 * @return		Stringa json contenente la risposta
-	 * @throws IOException
+	 * @return json	Stringa json contenente la risposta
+	 * @throws IOException In caso di errori di I/O
 	 */
-	static public String download(String url) {
+	static public String download(String url) throws IOException{
 		try {
 		UrlConnection urlc = new UrlConnection(url);
 		BufferedReader in = new BufferedReader(new InputStreamReader(urlc.con.getInputStream()));

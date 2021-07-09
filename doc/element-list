@@ -1,5 +1,5 @@
 it.univpm.demoSpringBootActivation
 it.univpm.demoSpringBootActivation.controller
 it.univpm.demoSpringBootActivation.exceptions
-it.univpm.demoSpringBootActivation.model
-it.univpm.demoSpringBootActivation.stats
+it.univpm.demoSpringBootActivation.requests
+it.univpm.demoSpringBootActivation.utilities
