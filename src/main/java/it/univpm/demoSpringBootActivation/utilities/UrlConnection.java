@@ -18,6 +18,8 @@ public class UrlConnection {
 		} catch (MalformedURLException e) {
 			System.out.println(e);
 			e.printStackTrace();
+		} catch (IllegalStateException e) 
+			
 		} catch (ProtocolException e) {
 			System.out.println(e);
 			e.printStackTrace();

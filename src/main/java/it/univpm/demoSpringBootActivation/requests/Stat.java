@@ -38,11 +38,6 @@ public class Stat implements Directories{
 			e.printStackTrace();
 			return "ERRORE";
 		}
-		catch(IOException e) {
-			e.printStackTrace();
-			return "ERRORE";
-			
-		}
 		return result;
 		
 	}
@@ -51,7 +46,7 @@ public class Stat implements Directories{
 	 * @return
 	 * @throws IOException
 	 */
-	public static String returnVenues() throws IOException {
+	public static String returnVenues() {
 		League newLeague = JsonParser.parseLeague(LEAGUE_DIR);
 		return newLeague.countVenues();
 	}
@@ -61,7 +56,7 @@ public class Stat implements Directories{
 	 * @return
 	 * @throws IOException
 	 */
-	public static String returnTeamsVenues() throws IOException {
+	public static String returnTeamsVenues() {
 		String result = "";
 		League newLeague = JsonParser.parseLeague(LEAGUE_DIR);
 		List<String> stadi = new ArrayList<String>();
@@ -89,7 +84,7 @@ public class Stat implements Directories{
 	 * @return
 	 * @throws IOException
 	 */
-	public static String returnTeamScorers(String longName) throws IOException {
+	public static String returnTeamScorers(String longName) {
 		String result;
 		Scorers scorers = JsonParser.parseScorers(SCORERS_DIR);
 		result = "";
@@ -107,7 +102,7 @@ public class Stat implements Directories{
 	 * @return
 	 * @throws IOException
 	 */
-	public static String returnTeamNationalities(String longName) throws IOException {
+	public static String returnTeamNationalities(String longName) {
 		String result="";
 		Scorers scorers = JsonParser.parseScorers(SCORERS_DIR);
 		List<String> nationalities = new ArrayList<String>();

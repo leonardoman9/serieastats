@@ -4,6 +4,7 @@ package it.univpm.demoSpringBootActivation.utilities;
 import java.io.IOException;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -39,7 +40,6 @@ public class JsonParser {
 	 */
 	@JsonIgnoreProperties
 	public static Team parseTeam(String jsonObjPath) {
-		// JSONObject json = new JSONObject(jsonObj);
 		String jsonObj = FileInputOutput.toString(jsonObjPath);
 		Team newTeam = new Team();
 		ObjectMapper objectMapper = new ObjectMapper();

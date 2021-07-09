@@ -193,7 +193,7 @@ public class SimpleRestController implements Directories{
 	@ResponseBody
 	/**
 	 * Mostra tutti i marcatori di un ruolo di una squadra
-	 * localhost:8080/youngScorers?team={longName}?position={position}
+	 * localhost:8080/youngScorers?team={longName}&position={position}
 	 * Inserire %20 al posto di uno spazio nel Nome lungo del team
 	 * @param longName
 	 * @return

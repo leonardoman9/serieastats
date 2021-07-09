@@ -2,6 +2,7 @@ package it.univpm.demoSpringBootActivation.utilities;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.UnknownServiceException;
 public class Dataset {
 	/**
 	 * Funzione che, dato un URL di richiesta alle API, restituisce la risposta in una stringa
@@ -23,6 +24,11 @@ public class Dataset {
 		in.close();
 		urlc.con.disconnect();
 		return json;
+		}
+		catch (UnknownServiceException e) {
+			System.out.println("Error: An unknown service exception has occurred");
+			e.printStackTrace();
+			return e.toString();
 		}
 		catch (IOException e) {
 			System.out.println("Error: Invalid url");

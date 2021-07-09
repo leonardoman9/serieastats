@@ -1,6 +1,8 @@
 package it.univpm.demoSpringBootActivation.exceptions;
 
-public class MissingTeamException extends Exception{
+import java.io.IOException;
+
+public class MissingTeamException extends IOException{
 	private static final long serialVersionUID = 1L;
 	public MissingTeamException(){
 		super();

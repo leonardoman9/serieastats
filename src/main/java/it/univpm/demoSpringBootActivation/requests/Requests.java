@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import it.univpm.demoSpringBootActivation.exceptions.MissingTeamException;
 import it.univpm.demoSpringBootActivation.model.League;
-import it.univpm.demoSpringBootActivation.model.Scorer;
 import it.univpm.demoSpringBootActivation.model.Scorers;
 import it.univpm.demoSpringBootActivation.utilities.Dataset;
 import it.univpm.demoSpringBootActivation.utilities.FileInputOutput;
