@@ -33,8 +33,9 @@ public class UrlConnection {
 		} catch (MalformedURLException e) {
 			System.out.println(e);
 			e.printStackTrace();
-		} catch (IllegalStateException e) 
-			
+		} catch (IllegalStateException e) {
+			System.out.println(e);
+			e.printStackTrace();
 		} catch (ProtocolException e) {
 			System.out.println(e);
 			e.printStackTrace();

@@ -3,7 +3,6 @@ package it.univpm.demoSpringBootActivation.requests;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import it.univpm.demoSpringBootActivation.exceptions.MissingTeamException;
 import it.univpm.demoSpringBootActivation.model.League;
 import it.univpm.demoSpringBootActivation.model.Scorers;
 import it.univpm.demoSpringBootActivation.utilities.Dataset;
@@ -43,9 +42,16 @@ public class Requests implements Directories{
 	 * per avere un Dataset su cui lavorare ad ogni avvio del programma
 	 */
 	@SuppressWarnings("unused")
-	public static void doRequests() throws IOException, MissingTeamException, FileNotFoundException {
-		League leagueFile = Requests.returnLeague();
-		Scorers leagueScorers = Requests.returnLeagueScorers();
+	public static void doRequests()  {
+		try {
+			League leagueFile = Requests.returnLeague();
+			Scorers leagueScorers = Requests.returnLeagueScorers();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 		}
 	
 }

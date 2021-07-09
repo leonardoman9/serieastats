@@ -19,13 +19,14 @@ public class Stat implements Directories{
 	 * @return
 	 * @throws IOException
 	 */
-	public static String returnFoundedAfter(String yearFounded) {
+	public static String returnFoundedAfter(String yearFounded) throws IOException {
 		String result="Teams founded after " + yearFounded + ":\n";
 		Team[] Teams;
 		int yearFoundedInt, n=0;
+		League newLeague = new League();
 		try {
 			yearFoundedInt = Integer.parseInt(yearFounded);
-			League newLeague = JsonParser.parseLeague(LEAGUE_DIR);
+			newLeague = JsonParser.parseLeague(LEAGUE_DIR);
 			Teams = newLeague.getTeams();
 			for (Team i : Teams) {
 				if (i.getFounded() > yearFoundedInt) {
@@ -46,8 +47,9 @@ public class Stat implements Directories{
 	 * @return
 	 * @throws IOException
 	 */
-	public static String returnVenues() {
-		League newLeague = JsonParser.parseLeague(LEAGUE_DIR);
+	public static String returnVenues() throws IOException {
+		League newLeague=new League();;
+		newLeague = JsonParser.parseLeague(LEAGUE_DIR);
 		return newLeague.countVenues();
 	}
 	/**
@@ -56,9 +58,10 @@ public class Stat implements Directories{
 	 * @return
 	 * @throws IOException
 	 */
-	public static String returnTeamsVenues() {
+	public static String returnTeamsVenues() throws IOException {
 		String result = "";
-		League newLeague = JsonParser.parseLeague(LEAGUE_DIR);
+		League newLeague = new League();
+		newLeague = JsonParser.parseLeague(LEAGUE_DIR);
 		List<String> stadi = new ArrayList<String>();
 		List<Integer> squadre = new ArrayList<Integer>();
 		for(Team t: newLeague.getTeams()) {
@@ -84,9 +87,10 @@ public class Stat implements Directories{
 	 * @return
 	 * @throws IOException
 	 */
-	public static String returnTeamScorers(String longName) {
+	public static String returnTeamScorers(String longName) throws IOException {
 		String result;
-		Scorers scorers = JsonParser.parseScorers(SCORERS_DIR);
+		Scorers scorers = new Scorers();
+		scorers = JsonParser.parseScorers(SCORERS_DIR);
 		result = "";
 		result = longName + ":\n\n";
 		for (Scorer i : scorers.getScorers()) {
@@ -102,9 +106,10 @@ public class Stat implements Directories{
 	 * @return
 	 * @throws IOException
 	 */
-	public static String returnTeamNationalities(String longName) {
+	public static String returnTeamNationalities(String longName) throws IOException {
 		String result="";
-		Scorers scorers = JsonParser.parseScorers(SCORERS_DIR);
+		Scorers scorers = new Scorers();
+		scorers = JsonParser.parseScorers(SCORERS_DIR);
 		List<String> nationalities = new ArrayList<String>();
 		result = longName + ":\n";
 		for (Scorer i : scorers.getScorers()) {
@@ -172,10 +177,4 @@ public class Stat implements Directories{
 		result+="Total: " + n +" scorers younger than 28 years old	\n";
 		return result;
 	}
-
-
-	
-	
-
-	
 }
