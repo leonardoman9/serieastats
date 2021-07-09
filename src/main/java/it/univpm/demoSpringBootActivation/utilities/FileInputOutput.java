@@ -17,16 +17,15 @@ public class FileInputOutput {
 	 * Metodo per salvare una stringa in un file
 	 * @param string Stringa da salvare
 	 * @param fileName Percorso dove salvare il file
+	 * @throws FileNotFoundException se il file nel percorso indicato non esiste
 	 */
-	public static void toFile(String string, String fileName) {
+	public static void toFile(String string, String fileName) throws FileNotFoundException{
+	try {
 		BufferedWriter writer;
-		try {
 			writer = new BufferedWriter(new FileWriter(fileName));
-		
-		writer.write(string);
-		writer.close();
+			writer.write(string);
+			writer.close();
 		} catch (IOException e) {
-			System.out.println("Error while writing into file " + fileName);
 			e.printStackTrace();
 		}
 	}
