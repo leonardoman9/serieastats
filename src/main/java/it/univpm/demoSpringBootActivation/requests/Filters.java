@@ -28,11 +28,16 @@ public class Filters implements Directories {
 		League newLeague = JsonParser.parseLeague(LEAGUE_DIR); 
 		int teamId = newLeague.lookForId(nomeTeam);
 		if(teamId==-1)
-			{throw new MissingTeamException(nomeTeam);}
-		String result = Dataset.download("https://api.football-data.org/v2/teams/" + teamId);
-		FileInputOutput.toFile(result,  TEAM_DIR+"/team"+teamId+".json");
-		Team newTeam = JsonParser.parseTeam(TEAM_DIR+"/team"+teamId+".json");
-		return newTeam;	
+			{
+			throw new MissingTeamException(nomeTeam);
+			}
+		else
+			{
+			String result = Dataset.download("https://api.football-data.org/v2/teams/" + teamId);
+			FileInputOutput.toFile(result,  TEAM_DIR+"/team"+teamId+".json");
+			Team newTeam = JsonParser.parseTeam(TEAM_DIR+"/team"+teamId+".json");
+			return newTeam;	
+		}
 	}
 	/**
 	 * Funzione che, dato in input un anno, restituisce tutte le squadre fondate dopo quell'anno

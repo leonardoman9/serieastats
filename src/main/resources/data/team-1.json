@@ -1,0 +1,1 @@
+java.io.IOException: Server returned HTTP response code: 400 for URL: https://api.football-data.org/v2/teams/-1

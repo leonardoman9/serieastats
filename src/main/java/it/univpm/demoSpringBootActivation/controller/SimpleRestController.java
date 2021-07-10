@@ -59,8 +59,8 @@ public class SimpleRestController implements Directories{
 	@GetMapping("/team")
 	@ResponseBody
 	@JsonIgnoreProperties
-	public  Team returnTeam(@RequestParam(name = "name", defaultValue = "Roma") String nomeTeam) throws IOException, MissingTeamException {
-		Team newTeam = new Team();;
+	public  Team returnTeam(@RequestParam(name = "name", defaultValue = "Roma") String nomeTeam)  {
+		Team newTeam = new Team();
 		try {
 			newTeam = Filters.returnTeam(nomeTeam);
 		} catch (MissingTeamException e) {
