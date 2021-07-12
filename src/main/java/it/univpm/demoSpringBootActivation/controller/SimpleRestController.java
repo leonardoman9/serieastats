@@ -40,9 +40,12 @@ public class SimpleRestController implements Directories{
 		try {
 			newLeague = JsonParser.parseLeague(LEAGUE_DIR);
 		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		if (Boolean.parseBoolean(showTeams)) {System.out.println(newLeague.toStringHeaderAndTeams());}	
-		else						 { System.out.println(newLeague.toStringHeader());}
+		if (Boolean.parseBoolean(showTeams)) 
+			{System.out.println(newLeague.toStringHeaderAndTeams());}	
+		else
+			{ System.out.println(newLeague.toStringHeader());}
 		
 		return newLeague;
 	}
@@ -59,17 +62,22 @@ public class SimpleRestController implements Directories{
 	@GetMapping("/team")
 	@ResponseBody
 	@JsonIgnoreProperties
-	public  Team returnTeam(@RequestParam(name = "name", defaultValue = "Roma") String nomeTeam)  {
+	public  Team returnTeam(@RequestParam(name = "name", defaultValue = "Roma") String nomeTeam) throws MissingTeamException {
 		Team newTeam = new Team();
 		try {
 			newTeam = Filters.returnTeam(nomeTeam);
-		} catch (MissingTeamException e) {
-			e.printStackTrace();
-		}catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		} 
-		System.out.println(newTeam+"\n");
-		return newTeam;
+		if(newTeam.getShortName()==null) {
+			System.out.println("There is not a team called "+nomeTeam+".");
+			throw new MissingTeamException();
+		}
+		else {
+			System.out.println(newTeam+"\n");
+			return newTeam;
+		}
+			
 	}
 	/**
 	 *  Mostra i primi 100 marcatori della Serie A, ordinati per numero di gol
@@ -162,7 +170,7 @@ public class SimpleRestController implements Directories{
 	 */
 	@GetMapping("/teamScorers")
 	@ResponseBody
-	public String returnteamScorers(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName) throws IOException, MissingTeamException {
+	public String returnteamScorers(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName) throws IOException {
 		String result = Stat.returnTeamScorers(longName);
 		System.out.println(result);
 		return result;
@@ -182,10 +190,11 @@ public class SimpleRestController implements Directories{
 	 */
 	@GetMapping("/teamNationalities")
 	@ResponseBody
-	public String returnTeamNationalities(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName) throws IOException, MissingTeamException {
+	public String returnTeamNationalities(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName) throws IOException {
 		String result = Stat.returnTeamNationalities(longName);
 		System.out.println(result);
 		return result;
+	
 	}
 	/**
 	 *
@@ -203,7 +212,7 @@ public class SimpleRestController implements Directories{
 	 */
 	@GetMapping("/countNationalities")
 	@ResponseBody
-	public String returnCountNationalities(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName) throws IOException, MissingTeamException {
+	public String returnCountNationalities(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName) throws IOException {
 		String result = Stat.returnCountNationalities(longName);
 		System.out.println(result);
 		return result;
@@ -222,7 +231,7 @@ public class SimpleRestController implements Directories{
 	 */
 	@GetMapping("/youngScorers")
 	@ResponseBody
-	public String returnYoungScorers(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName) throws IOException, MissingTeamException {
+	public String returnYoungScorers(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName) throws IOException {
 		String result = Stat.returnYoungScorers(longName);
 		System.out.println(result);
 		return result;

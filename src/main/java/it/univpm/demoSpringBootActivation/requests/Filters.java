@@ -23,13 +23,14 @@ public class Filters implements Directories {
 	 * @throws IOException se accade qualche errore di I/O
 	 * @throws MissingTeamException Se la squadra richiesta non esiste
 	 */
-	public static Team returnTeam(String nomeTeam) throws IOException, MissingTeamException { //ex richiesa
+	public static Team returnTeam(String nomeTeam) throws IOException { //ex richiesa
 		//File leagueFile = new File(LEAGUE_DIR);
 		League newLeague = JsonParser.parseLeague(LEAGUE_DIR); 
 		int teamId = newLeague.lookForId(nomeTeam);
 		if(teamId==-1)
 			{
-			throw new MissingTeamException(nomeTeam);
+				Team newTeam = new Team();
+				return newTeam;
 			}
 		else
 			{
@@ -74,6 +75,12 @@ public class Filters implements Directories {
 	 */
 	public static String startsWith(String letter) throws IOException {
 		char letterChar = letter.charAt(0);
+		if(!Character.isLetter(letterChar)) {
+			return "Incorrect input: you have to type in a letter.";
+		}
+		if(Character.isLowerCase(letterChar)) {
+			letterChar = Character.toUpperCase(letterChar);
+		}
 		int n=0;
 		League newLeague= JsonParser.parseLeague(LEAGUE_DIR	);
 		String result = "Teams that start with the letter " + letterChar + ":\n\n";

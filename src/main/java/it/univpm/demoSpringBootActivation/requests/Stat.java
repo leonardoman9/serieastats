@@ -20,7 +20,7 @@ public class Stat implements Directories{
 	 * @throws IOException se accade qualche errore di I/O
 	 */
 	public static String returnFoundedAfter(String yearFounded) throws IOException{
-		String result="Teams founded after " + yearFounded + ":\n";
+		String result="Teams founded after " + yearFounded + ":\n\n";
 		Team[] Teams;
 		int yearFoundedInt, n=0;
 		try {
@@ -36,7 +36,7 @@ public class Stat implements Directories{
 			result+= n + " teams founded after year " + yearFounded + ".\n";
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
-			return "ERRORE";
+			return "ERROR: insert a valid year as input.";
 		}
 		return result;
 		
@@ -86,14 +86,22 @@ public class Stat implements Directories{
 	 */
 	public static String returnTeamScorers(String longName) throws IOException {
 		String result;
+		boolean correctName = false;
 		Scorers scorers = JsonParser.parseScorers(SCORERS_DIR);
 		result = "";
 		result = longName + ":\n\n";
 		for (Scorer i : scorers.getScorers()) {
-			if (i.getTeam().getlongName().equals(longName)) result += i.getPlayer().toString() + i.toString() +"\n";
+			if (i.getTeam().getlongName().equals(longName)) {
+				result += i.getPlayer().toString() + i.toString() +"\n";
+				correctName = true;
+				
+			}
 		}
-		result+="Total: " + scorers.getSize(longName) + " scorers.\n";
-		return result;
+		if(correctName) {
+			result+="Total: " + scorers.getSize(longName) + " scorers.\n";
+			return result;
+		}
+		else return "There is not a team called "+longName+".";
 	}
 	/**
 	 *Funzione che recupera e stampa tutte le nazionalità dei marcatori di una determinata squadra scelta dall'utente
@@ -104,6 +112,7 @@ public class Stat implements Directories{
 	 */
 	public static String returnTeamNationalities(String longName) throws IOException {
 		String result="";
+		boolean correctName = false;
 		Scorers scorers = JsonParser.parseScorers(SCORERS_DIR);
 		List<String> nationalities = new ArrayList<String>();
 		result = longName + ":\n";
@@ -111,10 +120,15 @@ public class Stat implements Directories{
 			if (i.getTeam().getlongName().equals(longName)&&!nationalities.contains(i.getPlayer().getNationality())) {
 				nationalities.add(i.getPlayer().getNationality());
 				result+= i.getPlayer().getNationality()+"\n";
+				correctName = true;
 			}
-	}	
-		result+="Total: " + nationalities.size()+" nationalities\n";
-		return result;
+		}	
+		if(correctName) {
+			result+="Total: " + nationalities.size()+" nationalities\n";
+			return result;
+		}
+		else return "There is not a team called "+longName+".";
+		
 	}
 	/**
 	 * Funzione che recupera e stampa marcatori di una certa nazionalità di una determinata squadra scelta dall'utente
@@ -125,11 +139,13 @@ public class Stat implements Directories{
 	 */
 	public static String returnCountNationalities(String longName) throws IOException {
 		String result = "";
+		boolean correctName = false;
 		Scorers scorers = JsonParser.parseScorers(SCORERS_DIR);
 		List<String> nationalities = new ArrayList<String>();
 		List<Integer> count = new ArrayList<Integer>();		
 		for (Scorer i : scorers.getScorers()) {
 			if (i.getTeam().getlongName().equals(longName)) {
+				correctName = true;
 				if(!nationalities.contains(i.getPlayer().getNationality())) {
 					nationalities.add(i.getPlayer().getNationality());
 					count.add(1);
@@ -139,12 +155,15 @@ public class Stat implements Directories{
 					count.set(index, count.get(index)+1);
 				}
 			}
-		}	
-		result = "Number of "+longName+" players for different nationalities:\n";
-		for(int i=0; i<nationalities.size(); i++) {
-			result = result + nationalities.get(i)+": "+count.get(i)+"\n";
 		}
-		return result;
+		if(correctName) {
+			result = "Number of "+longName+" players for different nationalities:\n";
+			for(int i=0; i<nationalities.size(); i++) {
+				result = result + nationalities.get(i)+": "+count.get(i)+"\n";
+			}
+			return result;
+		}
+		else return "There is not a team called "+longName+".";
 	}
 	/**
 	 * Funzione che restituisce tutti i marcatori di una determinata squadra con un età minore di 28 anni.
@@ -154,12 +173,16 @@ public class Stat implements Directories{
 	 */
 	public static String returnYoungScorers(String longName)  throws IOException {
 		String result ="";
+		boolean correctName= false;
 		int n=0;
 		Scorers scorersp= JsonParser.parseScorers(SCORERS_DIR);
 		List<Scorer>  scorers = new ArrayList<Scorer>();
 		result = longName + ":\n\n";
 		for (Scorer i : scorersp.getScorers()) {
-			if (i.getTeam().getlongName().equals(longName)) scorers.add(i);
+			if (i.getTeam().getlongName().equals(longName)) {
+				scorers.add(i);
+				correctName = true;
+			}
 		}
 		for (Scorer i : scorers) {
 			DateOfBirth a = AgeCalculator.parseDate(i.getPlayer().getDateOfBirth());
@@ -169,7 +192,10 @@ public class Stat implements Directories{
 			}
 			
 		}
-		result+="Total: " + n +" scorers younger than 28 years old	\n";
-		return result;
+		if(correctName) {
+			result+="Total: " + n +" scorers younger than 28 years old	\n";
+			return result;
+		}
+		else return "There is not a team called "+longName+".";
 	}
 }
