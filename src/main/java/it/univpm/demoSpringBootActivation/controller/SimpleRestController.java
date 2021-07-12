@@ -251,7 +251,7 @@ public class SimpleRestController implements Directories{
 	@GetMapping("/startsWith")
 	@ResponseBody
 	@JsonIgnoreProperties
-	public String returnStartsWith(@RequestParam(name = "letter", defaultValue = "F") String letter) throws IOException {
+	public String returnStartsWith(@RequestParam(name = "letter", defaultValue = "f") String letter) throws IOException {
 		String result = Filters.startsWith(letter);
 		System.out.println(result);
 		return result;

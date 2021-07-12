@@ -101,13 +101,21 @@ public class Filters implements Directories {
 	 * @throws IOException se accade qualche errore di I/O
 	 */
 	public static String returnScorersForNationality(String longName, List<String> nationality) throws IOException{
+		for(String i : nationality) {
+			if(!Nationalities.isNationality(i)) {
+				return "One of the searched nationalities is not correct: "+i+" is not a nationality.";
+			}
+		}
 		String result = longName + ":\n\n";
+		int n=0;
 		Scorers scorers= JsonParser.parseScorers(SCORERS_DIR);
 		for (Scorer i : scorers.getScorers()) {
 			if (i.getTeam().getlongName().equals(longName) && nationality.contains(i.getPlayer().getNationality())) {
 					result+=i.getPlayer().toString()+"\n";
+					n++;
 			}
 		}
+		result+="Total: " + n + " " + " scorers of the searched nationality.\n";
 		return result;
 	}
 	/**
@@ -119,6 +127,11 @@ public class Filters implements Directories {
 	 * @throws IOException se accade qualche errore di I/O
 	 */
 	public static String returnScorersForPosition(String longName, List<String> position) throws MissingTeamException, IOException{
+		for(String i : position) {
+			if(!Positions.isPosition(i)) {
+				return "One of the searched position is not correct: "+i+" is not a soccer position.";
+			}
+		}
 		String result = longName + ":\n\n";
 		int n=0;
 		Scorers scorers= JsonParser.parseScorers(SCORERS_DIR);
