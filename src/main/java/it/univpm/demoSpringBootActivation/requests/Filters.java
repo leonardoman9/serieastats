@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import it.univpm.demoSpringBootActivation.exceptions.MissingTeamException;
+import it.univpm.demoSpringBootActivation.exceptions.NoNationalityException;
 import it.univpm.demoSpringBootActivation.model.*;
 import it.univpm.demoSpringBootActivation.utilities.*;
 /**
@@ -103,7 +104,8 @@ public class Filters implements Directories {
 	public static String returnScorersForNationality(String longName, List<String> nationality) throws IOException{
 		for(String i : nationality) {
 			if(!Nationalities.isNationality(i)) {
-				return "One of the searched nationalities is not correct: "+i+" is not a nationality.";
+				System.out.println("One of the searched nationalities is not correct: "+i+" is not a nationality.\n");
+				throw new  NoNationalityException();
 			}
 		}
 		String result = longName + ":\n\n";

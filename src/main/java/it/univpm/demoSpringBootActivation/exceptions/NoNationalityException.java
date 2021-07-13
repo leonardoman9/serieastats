@@ -1,11 +1,18 @@
 package it.univpm.demoSpringBootActivation.exceptions;
+
+import java.io.IOException;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 /**
  * Eccezione lanciata nel caso in cui l'utente faccia una richiesta contenente una nazionalità inesistente
  * o di cui non ne fa parte alcun marcatore.
  * @author Luca Ranucci
  * @author Leonardo Mannini
  */
-public class NoNationalityException extends Exception {
+@ResponseStatus(value=HttpStatus.NOT_FOUND, reason="The searched nationality is wrong.")
+public class NoNationalityException extends IOException {
 	/**
 	 * Identificatore univoco dell'eccezione
 	 * @see Exception#serialVersionUID
@@ -15,13 +22,13 @@ public class NoNationalityException extends Exception {
 	 * Construttore per la classe NoNationalityException
 	 */
 	public NoNationalityException() {
-		System.out.println("No Nationality for this Player.");
+		super();
 	}
 	/**
 	 * Un altro costruttore per la classe NoNationalityException
 	 * @param e Eccezione generata
 	 */
-	public NoNationalityException(Exception e) {
-		System.out.println(e);
+	public NoNationalityException(String msg) {
+		super(msg + " is not a nationality");
 	}
 }
