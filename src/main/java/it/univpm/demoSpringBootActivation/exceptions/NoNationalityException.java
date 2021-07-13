@@ -6,8 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * Eccezione lanciata nel caso in cui l'utente faccia una richiesta contenente una nazionalità inesistente
- * o di cui non ne fa parte alcun marcatore.
+ * Eccezione lanciata nel caso in cui l'utente faccia una richiesta contenente una nazionalità inesistente.
  * @author Luca Ranucci
  * @author Leonardo Mannini
  */
@@ -17,7 +16,7 @@ public class NoNationalityException extends IOException {
 	 * Identificatore univoco dell'eccezione
 	 * @see Exception#serialVersionUID
 	 */
-	private static final long serialVersionUID = -9204615679004044262L;
+	//private static final long serialVersionUID = -9204615679004044262L;
 	/**
 	 * Construttore per la classe NoNationalityException
 	 */

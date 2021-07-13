@@ -232,9 +232,18 @@ public class SimpleRestController implements Directories{
 	@GetMapping("/youngScorers")
 	@ResponseBody
 	public String returnYoungScorers(@RequestParam(name = "team", defaultValue = "FC Internazionale Milano") String longName) throws IOException {
-		String result = Stat.returnYoungScorers(longName);
-		System.out.println(result);
-		return result;
+		//try { //possibile altra implementazione
+			String result = Stat.returnYoungScorers(longName);
+			System.out.println(result);
+			return result;
+		/*
+		 * }
+		catch(MissingTeamException e) {
+			System.out.println("The searched team does not exist");
+			return "The searched team does not exist";
+		}
+		*/
+		
 	}
 
 	/*********************************************DA QUI INIZIANO I FILTRI**********************************/

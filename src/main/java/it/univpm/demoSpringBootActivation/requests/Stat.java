@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import it.univpm.demoSpringBootActivation.exceptions.MissingTeamException;
 import it.univpm.demoSpringBootActivation.model.*;
 import it.univpm.demoSpringBootActivation.utilities.*;
 /**
@@ -196,6 +197,7 @@ public class Stat implements Directories{
 			result+="Total: " + n +" scorers younger than 28 years old	\n";
 			return result;
 		}
-		else return "There is not a team called "+longName+".";
+		else throw new MissingTeamException(longName);
+			//return "There is not a team called "+longName+".";
 	}
 }

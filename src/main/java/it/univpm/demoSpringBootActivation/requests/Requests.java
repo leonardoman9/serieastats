@@ -43,7 +43,7 @@ public class Requests implements Directories{
 	public static Scorers returnLeagueScorers()  {
 		Scorers scorers = new Scorers();
 		try {
-			String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/scorers?limit=100");//SE AUMENTO IL LIMIT, NON FUNZIONA /scorersForPosition
+			String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/scorers?limit=285");
 				FileInputOutput.toFile(result, SCORERS_DIR);
 				scorers =  JsonParser.parseScorers(SCORERS_DIR);
 			}catch (UnknownHostException e1) {
