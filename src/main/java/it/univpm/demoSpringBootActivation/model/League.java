@@ -44,6 +44,7 @@ public class League extends Competition{
 	private Season season;
 	@JsonProperty("teams")
 	private Team[] Teams;
+	private HashSet<String> Venues = new HashSet<String>();
 	public League() {
 	}
 	/**
@@ -94,17 +95,23 @@ public class League extends Competition{
 	 * Funzione che stampa gli stadi del campionato, utilizzata nella statistica riguardante gli stadi.
 	 * @return Stringa composta dagli stadi in sequenza ordinata.
 	 */
-	public String countVenues() {
+	public String toStringVenues() {
 		String result = "Venues: \n";
-		HashSet<String> Venues = new HashSet<String>();
 		for(Team t : this.Teams) {
 			Venues.add(t.getVenue());
 		}
 		for(String t: Venues) {
 			result+=t+"\n";
 		}
-		result+="Total: " + Venues.size() + " venues.\n";
+		result+="Total: " + countVenues() + " venues.\n";
 		return  result;
+	}
+	
+	public int countVenues() {
+		for(Team t : this.Teams) {
+			Venues.add(t.getVenue());
+		}
+		return Venues.size();
 	}
 	
 	

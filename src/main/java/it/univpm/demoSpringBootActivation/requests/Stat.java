@@ -49,7 +49,7 @@ public class Stat implements Directories{
 	 */
 	public static String returnVenues() throws IOException {
 		League newLeague = JsonParser.parseLeague(LEAGUE_DIR);
-		return newLeague.countVenues();
+		return newLeague.toStringVenues();
 	}
 	/**
 	 * Funzione che recupera e stampa tutti gli stadi della Serie A contando quante sqaudre diverse giocano

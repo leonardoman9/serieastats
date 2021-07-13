@@ -16,7 +16,7 @@ public class NoNationalityException extends IOException {
 	 * Identificatore univoco dell'eccezione
 	 * @see Exception#serialVersionUID
 	 */
-	//private static final long serialVersionUID = -9204615679004044262L;
+	private static final long serialVersionUID = -9204615679004044262L;
 	/**
 	 * Construttore per la classe NoNationalityException
 	 */
