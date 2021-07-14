@@ -63,7 +63,7 @@ Spiegazione dei termini chiave maggiormente utilizzati in questo progetto.
 
 ## Diagramma dei casi d'uso
 <p>
-  <img src="https://github.com/leonardoman9/programmoggetti/blob/master/src/main/resources/UML/Use%20Cases%20Diagram/usecases.PNG?raw=true" align="middle">
+  <img src="https://github.com/leonardoman9/programmoggetti/blob/master/src/main/resources/UML/Use%20Cases%20Diagram/usecases.png?raw=true" align="middle">
     <h6 align="center">
       Casi d'uso
       </h6>
