@@ -11,6 +11,9 @@ ed effettuare statistiche e filtri.
 1. [Glossario](#glossario)
 1. [Installazione](#installazione)
 1. [Diagrammi UML](#UML)
+    1. [Casi d'uso](#diagramma-dei-casi-duso)
+    1. [Classi](#diagramma-delle-classi)
+    1. [Sequenze](#diagramma-delle-sequenze)
 1. [Funzionamento](#funzionamento)
 1. [Struttura](#struttura)
 1. [Utilizzo](#utilizzo)
@@ -25,64 +28,108 @@ ed effettuare statistiche e filtri.
 
 ***
 # Glossario
+Spiegazione dei termini chiave maggiormente utilizzati in questo progetto.
+
 | Termine utilizzato  | Significato |
 | ------------- |:-------------:|
-| Competition         | Evento calcistico composto da più partite nella sua                         definizione più generale (Capmionato, Coppe, ecc                           ...)    |
+| Competition         | Evento calcistico composto da più partite nella sua                         definizione più generale (Campionato, Coppe, ecc...)    |
 | League      | Tipo di Competition, caratterizzato da un numero                           predefinito di partite (giornate), giocato da un numero di                 Team che non possono essere squalificati     |
 | Area      | Luogo geografico di svolgimento di una Competition    |
 | Team      | Insieme di Players, fa parte di una League e compete con altri Team, ha varie caratteristiche come nome lungo, nome corto,  ID, nome abbreviato, Url del logo societario, numero di telefono, indirizzo email, indirizzo web, indirizzo stradale della sede, anno di fondazione, colori societari. |
 |Season | Rappresenta l'intervallo temporale in cui si svolge una                      Competition, e la squadra vincente di quella edizione di Competition (se esiste)
 |WinnerTeam | Team che ha vinto l'ultima Season di una Competition|
 |Player     | Componente di una squadra, ha varie caratteristiche come nome, cognome, nome completo, data di nascita, nazionalità, posizione.|
-|Scorer     | Sottoclasse di player, rappresenta un player che ha segnato almeno un gol
+|Scorer     | Sottoclasse di player, rappresenta un player che ha segnato almeno un gol|
+|Young Scorer     | Scorer con età minore di 28 anni |
 |Position   | Ruolo di un giocatore (Attacker, Midfielder, Defender o Goalkeeper)|
 |Nazionalità | L'appartenenza a una nazione come entità etnica |
 |Venue      | Luogo di svolgimento delle partite "in casa" di un Team (stadio)|
 |Short Name | Il nome di una squadra "corto" (esempio: "Inter") | 
-| Long Name | Il nome di una squadra "lungo" (esempio: "FC Internazionale Milano)|
+| Long Name | Il nome di una squadra "lungo" (esempio: "FC Internazionale Milano")|
 
 # Installazione
-1. Clonare il repository (o scaricare e scompattare lo zip)
-```
-$ git clone https://github.com/leonardoman9/programmoggetti
-```
-1. Importare il progetto con Eclipse/IntelliJ
+* Clonare il repository (o scaricare e scompattare lo zip)
+    ```
+    $ git clone https://github.com/leonardoman9/programmoggetti
+    ```
+* Importare il progetto con Eclipse
 > File --> Import --> Existing Maven Project
 >
-1.Avviare DemoSpringBootActivationApplication.java come Spring Boot App
+* Avviare DemoSpringBootActivationApplication.java come Spring Boot App
 
-1. Eseguire le richieste sotto elencate  all'indirizzo http://localhost:8080.
+* Eseguire le richieste sotto elencate  all'indirizzo http://localhost:8080.
 
 # 3. UML
-## Diagramma delle classi
 
 ## Diagramma dei casi d'uso
+<p>
+  <img src="https://github.com/leonardoman9/programmoggetti/blob/master/src/main/resources/UML/Use%20Cases%20Diagram/usecases.PNG?raw=true" align="middle">
+    <h6 align="center">
+      Casi d'uso
+      </h6>
+  </img>
+ </p>
+
+## Diagramma delle classi
+<p>
+  <img src="https://github.com/leonardoman9/programmoggetti/blob/master/src/main/resources/UML/Class%20Diagram/Main.PNG?raw=true" align="middle">
+    <h6 align="center">
+      Main
+      </h6>
+  </img>
+  
+  <img src="https://github.com/leonardoman9/programmoggetti/blob/master/src/main/resources/UML/Class%20Diagram/Controller_Request.PNG?raw=true" align="middle">
+    <h6 align="center">
+      Package Controller
+      </h6>
+  </img>
+  
+   <img src="https://github.com/leonardoman9/programmoggetti/blob/master/src/main/resources/UML/Class%20Diagram/Model.PNG?raw=true" align="middle">
+    <h6 align="center">
+      Package Model
+      </h6>
+  </img>
+  
+  <img src="https://github.com/leonardoman9/programmoggetti/blob/master/src/main/resources/UML/Class%20Diagram/Utilities.PNG?raw=true" align="middle">
+    <h6 align="center">
+      Package Utilities
+      </h6>
+  </img>
+  <img src="https://github.com/leonardoman9/programmoggetti/blob/master/src/main/resources/UML/Class%20Diagram/Ecxeptions.PNG?raw=true" align="middle">
+    <h6 align="center">
+      Package Exceptions
+      </h6>
+  </img>
+  
+  
+</p>
 
 ## Diagramma delle sequenze
 
 # Funzionamento
-Il programma, per prima, cosa effettua un download delle risorse necessarie tramite richieste `GET`:
-* Vengono effettuate richieste alle API per ottenere dei JSON contenenti informazioni riguardanti la "League" Serie A e gli "Scorers" della serie A:\
-Dato l'url dell'API a cui effettuare la richiesta, tramite la classe `Dataset` si effettua il download in formato .json.\
+Il programma, per prima cosa, effettua un download delle risorse necessarie tramite richieste `GET`:
+* Vengono effettuate richieste alle API per ottenere dei JSON contenenti informazioni riguardanti la ["League"](#glossario) Serie A e gli ["Scorers"](#glossario) della serie A:\
+Dato l'url dell'API a cui effettuare la richiesta, tramite la classe [`Dataset`](#struttura) si effettua il download in formato .json.\
 Queste due richieste sono effettuate ogni volta che l'applicazione viene lanciata, così da avere ogni volta un dataset \
 aggiornato su cui poi applicare statistiche e filtri.
 * L'applicazione effettua una connessione col server utilizzando la nostra auth-key gratuita: \
 Ciò comporta delle limitazioni nel DataSet: utilizzando un account gratuito, non è possibile \
-avere alcuni dati necessari per le specifiche del progetto (tutti i player di un team): per ovviare \
-a questo problema, abbiamo effettuato le statistiche e i filtri non su i Player, ma sugli Scorer, \
-che invece venivano forniti integralmente nonostante la nostra autenticazione gratuita.
+avere alcuni dati necessari per le specifiche del progetto (tutti i [player](#glossario) di un [team](#glossario)): per ovviare \
+a questo problema, abbiamo effettuato le statistiche e i filtri non su i [Player](#glossario), ma sugli [Scorer](#glossario), \
+che invece venivano forniti integralmente nonostante la nostra autenticazione gratuita.x
 * Le string JSON recuperate dalle API vengono salvati in due file `league.json` e `scorers.json`, \
 presenti nella directory `src/main/resources/data/` dell'applicazione.
 * Successivamente vengono parsati i due file json in due classi
 opportunamente create \
-per memorizzare i dati e lavorarci in modo più semplice e efficiente.
+per memorizzare i dati e lavorarci in modo più semplice ed efficiente (ed evitare di lanciare una richiesta a football-data.org ad ogni statistica o filtro).
 * Il risultato dell'avvio del programma saranno quindi due file: 
-    1. `league.json`, che contiene informazioni sulla League Serie A e un array di Team partecipanti;
+    1. `league.json`, che contiene informazioni sulla [League](#glossario) Serie A e un array di [Team](#glossario) partecipanti;
     1. `scorers.json`, che contiene informazioni su tutti i marcatori della Serie A
 * Una volta ottenuti i due json, inizia l'effettiva interazione dell'utente con l'applicazione, che, \
 tramite applicazioni come Postman che permettono di effettuare chiamate API (o comuni browser), può \
 seguire una delle rotte predefinite, visualizzabili più avanti in questo Readme (o nella documentazione Javadoc).
-* Le richieste effettuabili sono contenute nelle classi del package Requests, divise tra Requests, Stat e Filters.
+* Le richieste effettuabili sono contenute nelle classi del package [Requests](#glossario), divise tra [Requests](#glossario), [Stat](#glossario) e [Filters](#glossario).
+* L'utente potrà scegliere, a piacere, quale statistica o filtro effettuare, inserendo i parametri necessari come indicato nella tabella sottostante (vedi [Utilizzo](#utilizzo)).
 
 # Struttura
 
@@ -122,6 +169,10 @@ seguire una delle rotte predefinite, visualizzabili più avanti in questo Readme
 # Utilizzo
 Una volta avviata l'applicazione, ad ogni diversa rotta corrisponde una statistica o un filtro, o una richiesta da visualizzare a video.    
 Inoltre, nella root del progetto, è disponibile una Collection Postman contenente tutte le richieste che è possibile effettuare. 
+Per utilizzare la Collection, da Postman:
+> File --> Import --> Upload --> .../Postman Collection/Progetto.postman_collection.json
+
+Selezionare la richiesta desiderata tra quelle visualizzate ed inserire i parametri necessari (o utilizzare quelli di default).
 <p>
   <img src="https://github.com/leonardoman9/programmoggetti/blob/master/src/main/resources/images/postmancollection.png?raw=true">
     <h6 align="center">
@@ -136,9 +187,9 @@ In questo caso, il tipo di ritorno sarà un Oggetto diverso da una Stringa.
 
 | Rotta | Parametri | Output|
 |-------|-----------|:-------:|
-|`/league`   |    `?showTeams=true` o  `?showTeams=false`| Mostra informazioni riguardanti la Serie A, `showTeams=true` per mostrare anche le squadre, `?showTeams=false` altrimenti.|
+|`/league`   |    `?showTeams=true` o  `?showTeams=false` (default: `true`)| Mostra informazioni riguardanti la Serie A, `showTeams=true` per mostrare anche le squadre, `?showTeams=false` altrimenti. |
 `/leagueScorers` | Nessuno | Mostra tutti i marcatori della Serie A|
-|`/team` | `?name={name}` | Mostra informazioni riguardo alla squadra indicata (utilizzare lo short name)
+|`/team` | `?name={name}` default: `Roma`| Mostra informazioni riguardo alla squadra indicata (utilizzare lo short name)
 ## Statistiche
 
 In questo caso, il tipo di ritorno sarà una Stringa.
@@ -147,11 +198,11 @@ In questo caso, il tipo di ritorno sarà una Stringa.
 |-------|-----------|:------:|
 |`/venues`|Nessuno | Mostra i nomi degli stadi delle partite di Serie A.|
 |`/teamsForEachVenue` | Nessuno| Mostra tutti gli stadi e il numero di squadra che giocano in ognuno di essi le partite "in casa"|
-|`/foundedAfter`|`?year={year}` | Mostra tutte le squadre fondate dopo un certo anno |
-|`/teamScorers` | `?team={longName}` | Mostra tutti i marcatori di una certa squadra |
-|`/teamNationalities` | `?team={longName}` | Mostra tutte le nazionalità di cui fanno parte i marcatori di una squadra |
-|`/countNationalities` | `?team={longName}` | Conta tutte le nazionalità di cui fanno parte i marcatori di una squadra |
-|`/youngScorers` | `?team={longName}` | Mostra tutti i marcatori di una squadra con età minore di 28 anni |
+|`/foundedAfter`|`?year={year}` default: `1800`| Mostra tutte le squadre fondate dopo un certo anno |
+|`/teamScorers` | `?team={longName}` default: `FC Internazionale Milano`| Mostra tutti i marcatori di una certa squadra |
+|`/teamNationalities` | `?team={longName}` default: `FC Internazionale Milano`| Mostra tutte le nazionalità di cui fanno parte i marcatori di una squadra |
+|`/countNationalities` | `?team={longName}` default: `FC Internazionale Milano`| Conta tutte le nazionalità di cui fanno parte i marcatori di una squadra |
+|`/youngScorers` | `?team={longName}` default: `FC Internazionale Milano`| Mostra tutti i marcatori di una squadra con età minore di 28 anni |
 
 ## Filtri
 
@@ -159,10 +210,10 @@ In questo caso, il tipo di ritorno sarà una Stringa.
 
 | Rotta | Parametri | Output |
 |-------|-----------|:------:|
-|`/startsWith` | `?letter={letter}` | Mostra tutte le squadre il cui nome completo inizia per una certa lettera |
-|`/foundedIn` | `?year={year}` | Mostra tutte le squadre fondate in un certo anno |
-|`/nationalitiesForTeam` | `?team={longName}&?nationality={nationality}` | Mostra tutti i giocatori di una o più nazionalità di una squadra, a scelta dell'utente. |
-|`/scorersForPosition` | `?team={longName}&?position={position}` | Mostra tutti i marcatori di un ruolo di una squadra a scelta dell'utente|
+|`/startsWith` | `?letter={letter}` default: `f`| Mostra tutte le squadre il cui nome completo inizia per una certa lettera |
+|`/foundedIn` | `?year={year}` default: `1902`| Mostra tutte le squadre fondate in un certo anno |
+|`/nationalitiesForTeam` | `?team={longName}&?nationality={nationality}` default: `FC Internazionale Milano`| Mostra tutti i giocatori di una o più nazionalità di una squadra, a scelta dell'utente. |
+|`/scorersForPosition` | `?team={longName}&?position={position}` default: `FC Internaizonale Milano`, `Attacker`| Mostra tutti i marcatori di un ruolo di una squadra a scelta dell'utente|
 
 # Esempi
 <h6>Richiesta /league </h6>
@@ -403,11 +454,15 @@ In questo caso, il tipo di ritorno sarà una Stringa.
 </p>
 
 # JavaDoc
+Tutte le classi sono state estensivamente commentate, e la documentazione JavaDoc è presente all'interno di questa repository (`/doc`).
 
 # Test
-
+E' presente un package di Testing, la cui classe `TestLeague.java` è costruita per verificare il corretto funzionamento dei seguenti metodi della classe `League`:
+* `lookForId`: Che serve per recuperare l'id di una squadra a partire dal suo nome;
+* `countVenues`: Che serve per contare i "venues" della Serie A dopo averli raccolti in un HashSet.
 # Software e Risorse Utilizzate
-* [Eclipse IDE](https://www.eclipse.org/ide/): Ambiente di Sviluppo
+* [GitHub Desktop](https://desktop.github.com): Client GitHub desktop per il versioning con Git
+* [Eclipse IDE](https://www.eclipse.org/ide/): Ambiente di Sviluppo Java
 * [Spring Boot](https://spring.io/projects/spring-boot): Framework per lo sviluppo di applicazioni Web in Java
 * [Postman](https://www.postman.com): Software di sviluppo API, permette di testare, modificare e costruire API, realizzando richieste con diversi metodi, header, autenticazioni, eccetera. 
 * [Maven](https://maven.apache.org): Framework di gestione di progetti software basati su Java, permette di controllare librerie Java e plug-in Maven dai vari repository definiti scaricandoli in locale o in un repository centralizzato lato sviluppo.
