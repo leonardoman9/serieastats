@@ -135,7 +135,7 @@ I file dei diagrammi UML sono localizzati in `programmoggetti/src/main/resources
 </p>
 <p>
     <img src="https://github.com/leonardoman9/programmoggetti/blob/master/src/main/resources/UML/Sequence%20Diagram/Stat/foundedAfter.PNG?raw=true" align="middle">
-    <h6 align="center">/foundAfter</h6>
+    <h6 align="center">/foundedAfter</h6>
     </img>
 </p>
 <p>
