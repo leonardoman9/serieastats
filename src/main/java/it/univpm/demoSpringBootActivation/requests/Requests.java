@@ -23,7 +23,7 @@ public class Requests implements Directories{
 	public static League returnLeague()  {
 		League  newLeague = new League();
 		try {
-		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/teams");	
+		String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/teams?season=2020");	
 		FileInputOutput.toFile(result, LEAGUE_DIR);
 		newLeague = JsonParser.parseLeague(LEAGUE_DIR);
 		return newLeague;
@@ -43,7 +43,7 @@ public class Requests implements Directories{
 	public static Scorers returnLeagueScorers()  {
 		Scorers scorers = new Scorers();
 		try {
-			String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/scorers?limit=285");
+			String result = Dataset.download("https://api.football-data.org/v2/competitions/SA/scorers?season=2020&limit=285");
 				FileInputOutput.toFile(result, SCORERS_DIR);
 				scorers =  JsonParser.parseScorers(SCORERS_DIR);
 			}catch (UnknownHostException e1) {

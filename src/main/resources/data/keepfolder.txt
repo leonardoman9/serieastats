@@ -1,0 +1,3 @@
+What is my purpose?
+
+To stop git from ignoring me

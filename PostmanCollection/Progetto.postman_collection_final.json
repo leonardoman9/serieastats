@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2a5108ba-9708-4f25-be33-a56a11f3e4c3",
+		"_postman_id": "969f6d90-4138-4585-8af4-348244e69398",
 		"name": "Progetto",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -32,19 +32,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/leagueScorers?team",
+							"raw": "localhost:8080/leagueScorers",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"leagueScorers"
-							],
-							"query": [
-								{
-									"key": "team",
-									"value": null
-								}
 							]
 						}
 					},
@@ -90,7 +84,7 @@
 							"query": [
 								{
 									"key": "team",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -114,7 +108,7 @@
 							"query": [
 								{
 									"key": "year",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -138,7 +132,7 @@
 							"query": [
 								{
 									"key": "team",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -162,7 +156,7 @@
 							"query": [
 								{
 									"key": "team",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -175,23 +169,23 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/nationalitesForTeam?team",
+							"raw": "localhost:8080/nationalitiesForTeam?team",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"nationalitesForTeam"
+								"nationalitiesForTeam"
 							],
 							"query": [
 								{
-									"key": "team",
-									"value": null
+									"key": "",
+									"value": "",
+									"disabled": true
 								},
 								{
-									"key": "",
-									"value": null,
-									"disabled": true
+									"key": "team",
+									"value": null
 								}
 							]
 						}
@@ -215,7 +209,7 @@
 							"query": [
 								{
 									"key": "team",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -244,7 +238,7 @@
 							"query": [
 								{
 									"key": "team",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -268,7 +262,7 @@
 							"query": [
 								{
 									"key": "letter",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -292,7 +286,7 @@
 							"query": [
 								{
 									"key": "year",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -316,11 +310,11 @@
 							"query": [
 								{
 									"key": "team",
-									"value": null
+									"value": ""
 								},
 								{
 									"key": "nationality",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -333,13 +327,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/ScorersForPosition?team&position",
+							"raw": "localhost:8080/scorersForPosition?team&position",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"ScorersForPosition"
+								"scorersForPosition"
 							],
 							"query": [
 								{
